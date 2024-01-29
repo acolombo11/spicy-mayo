@@ -1,6 +1,9 @@
 package eu.acolombo.work.calendar.features.events
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.DraggableState
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
@@ -118,6 +121,16 @@ internal fun EventsScreen(
                     } else {
                         LazyColumn(
                             modifier = Modifier
+                                .draggable(
+                                    orientation = Orientation.Horizontal,
+                                    state = DraggableState {
+                                        when {
+                                            it < 0 && uiState.input == Today -> onInputChange(Tomorrow)
+                                            it > 0 && uiState.input == Tomorrow -> onInputChange(Today)
+                                            it > 0 && uiState.input is Date -> onInputChange(Tomorrow)
+                                        }
+                                    },
+                                )
                                 .padding(horizontal = Spacing.S)
                                 .fillMaxSize()
                                 .clip(MaterialTheme.shapes.medium)
