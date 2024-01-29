@@ -34,6 +34,7 @@ class EventsViewModel(
         onBufferOverflow = BufferOverflow.DROP_OLDEST,
     )
 
+    @Suppress("USELESS_CAST")
     val uiState: StateFlow<EventsViewState> = _input.flatMapLatest { (input, showSnackbar) ->
         eventsRepository.getEvents(input.date).map { events ->
             EventsViewState.Success(
@@ -85,3 +86,4 @@ class EventsViewModel(
         _input.emit(_input.replayCache.last())
     }
 }
+
