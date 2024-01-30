@@ -63,16 +63,16 @@ private val typography: Typography
     @Composable
     get() = MaterialTheme.typography.copy(
         displayLarge = MaterialTheme.typography.displayLarge.copy(
-            fontFamily = spaceGroteskFamily,
+            fontFamily = spaceMonoFamily,
             fontWeight = FontWeight.Bold,
             fontSize = 72.sp,
         ),
         displayMedium = MaterialTheme.typography.displayMedium.copy(
-            fontFamily = spaceGroteskFamily,
+            fontFamily = spaceMonoFamily,
             fontWeight = FontWeight.Bold,
         ),
         displaySmall = MaterialTheme.typography.displaySmall.copy(
-            fontFamily = spaceGroteskFamily,
+            fontFamily = spaceMonoFamily,
         ),
         headlineLarge = MaterialTheme.typography.headlineLarge.copy(
             fontFamily = spaceMonoFamily,
