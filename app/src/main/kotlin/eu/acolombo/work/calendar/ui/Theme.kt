@@ -65,7 +65,7 @@ private val typography: Typography
         displayLarge = MaterialTheme.typography.displayLarge.copy(
             fontFamily = spaceMonoFamily,
             fontWeight = FontWeight.Bold,
-            fontSize = 64.sp,
+            fontSize = 58.sp,
         ),
         displayMedium = MaterialTheme.typography.displayMedium.copy(
             fontFamily = spaceMonoFamily,
