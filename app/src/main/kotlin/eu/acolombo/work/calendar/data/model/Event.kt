@@ -23,7 +23,7 @@ data class LocalEvent(
     val attendees: List<String>,
 )
 
-fun Event.toLocalEvent() : LocalEvent = LocalEvent(
+fun Event.toLocalEvent(): LocalEvent = LocalEvent(
     summary = summary,
     start = start.toLocalTime(),
     end = end.toLocalTime(),
@@ -31,4 +31,4 @@ fun Event.toLocalEvent() : LocalEvent = LocalEvent(
     attendees = attendees,
 )
 
-private fun Instant.toLocalTime() : LocalTime = toLocalDateTime(TimeZone.currentSystemDefault()).time
+private fun Instant.toLocalTime(): LocalTime = toLocalDateTime(TimeZone.currentSystemDefault()).time

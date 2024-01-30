@@ -64,9 +64,12 @@ private val typography: Typography
     get() = MaterialTheme.typography.copy(
         displayLarge = MaterialTheme.typography.displayLarge.copy(
             fontFamily = spaceGroteskFamily,
+            fontWeight = FontWeight.Bold,
+            fontSize = 72.sp,
         ),
         displayMedium = MaterialTheme.typography.displayMedium.copy(
             fontFamily = spaceGroteskFamily,
+            fontWeight = FontWeight.Bold,
         ),
         displaySmall = MaterialTheme.typography.displaySmall.copy(
             fontFamily = spaceGroteskFamily,
@@ -81,12 +84,12 @@ private val typography: Typography
         headlineMedium = MaterialTheme.typography.headlineMedium.copy(
             fontFamily = spaceMonoFamily,
             fontWeight = FontWeight.Bold,
-            fontSize = 28.sp,
             lineHeight = 20.sp,
             letterSpacing = -.5.sp,
         ),
         headlineSmall = MaterialTheme.typography.headlineSmall.copy(
             fontFamily = spaceMonoFamily,
+            fontWeight = FontWeight.Normal,
             letterSpacing = -.5.sp,
         ),
         titleLarge = MaterialTheme.typography.titleLarge.copy(
@@ -109,7 +112,7 @@ private val typography: Typography
         ),
         labelLarge = MaterialTheme.typography.labelLarge.copy(
             fontFamily = spaceGroteskFamily,
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.SemiBold,
         ),
         labelMedium = MaterialTheme.typography.labelMedium.copy(
             fontFamily = spaceGroteskFamily,
@@ -118,6 +121,5 @@ private val typography: Typography
         ),
         labelSmall = MaterialTheme.typography.labelSmall.copy(
             fontFamily = spaceGroteskFamily,
-            fontWeight = FontWeight.SemiBold,
         ),
     )

@@ -80,9 +80,8 @@ internal fun EventsScreen(
     val snackbarMessage = stringResource(id = R.string.alert_done_for_the_day)
     val snackbarOwner = LocalLifecycleOwner.current
 
-    val contentHeight = 300.dp
+    val contentHeight = 200.dp
 
-    // TODO add swipe right / left on box to change day
     BoxWithConstraints(modifier = Modifier.background(color = MaterialTheme.colorScheme.primaryContainer)) {
         BottomSheetScaffold(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -90,7 +89,8 @@ internal fun EventsScreen(
                 TimeInformation(
                     modifier = Modifier
                         .padding(it)
-                        .height(contentHeight),
+                        .height(contentHeight)
+                        .fillMaxWidth(),
                     update = (uiState as? Success)?.update,
                 )
             },
@@ -108,62 +108,68 @@ internal fun EventsScreen(
                 )
             },
             sheetContent = {
-                when (uiState) {
-                    is Success -> if (uiState.events.isEmpty()) {
-                        // TODO it would be cool to resize the column1 when expanding and add vertical arrangement
-                        IllustrationWithDescription(
-                            illustration = Meditation(
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .draggable(
+                            orientation = Orientation.Horizontal,
+                            state = DraggableState {
+                                when {
+                                    it < 0 && uiState.input == Today -> onInputChange(Tomorrow)
+                                    it > 0 && uiState.input == Tomorrow -> onInputChange(Today)
+                                    it > 0 && uiState.input is Date -> onInputChange(Tomorrow)
+                                }
+                            },
+                        )
+                ) {
+                    when (uiState) {
+                        is Success -> if (uiState.events.isEmpty()) {
+                            // TODO It would be cool to resize the column1 when expanding and add vertical arrangement
+                            IllustrationWithDescription(
+                                illustration = Meditation(
+                                    fill = MaterialTheme.colorScheme.secondaryContainer,
+                                    stroke = MaterialTheme.colorScheme.onSecondaryContainer,
+                                ),
+                                description = stringResource(R.string.description_empty),
+                            )
+                        } else {
+                            LazyColumn(
+                                modifier = Modifier
+                                    .padding(horizontal = Spacing.S)
+                                    .fillMaxSize()
+                                    .clip(MaterialTheme.shapes.medium)
+                                    .background(MaterialTheme.colorScheme.background),
+                            ) {
+                                items(items = uiState.events) {
+                                    EventItem(
+                                        event = it,
+                                        modifier = Modifier.padding(bottom = Spacing.S),
+                                    )
+                                }
+                            }
+                        }
+
+                        is Loading -> Box(
+                            modifier = Modifier.fillMaxWidth(),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            LoadingIndicator(circleColor = MaterialTheme.colorScheme.primary)
+                            if (uiState.showSnackbar) {
+                                LaunchedEffect(snackbarOwner.lifecycle) {
+                                    snackbarHostState.showSnackbar(message = snackbarMessage)
+                                }
+                            }
+                        }
+
+                        is Error -> IllustrationWithDescription(
+                            illustration = Computer(
                                 fill = MaterialTheme.colorScheme.secondaryContainer,
                                 stroke = MaterialTheme.colorScheme.onSecondaryContainer,
                             ),
-                            description = stringResource(R.string.description_empty),
+                            description = uiState.message
+                                ?: stringResource(R.string.description_error),
                         )
-                    } else {
-                        LazyColumn(
-                            modifier = Modifier
-                                .draggable(
-                                    orientation = Orientation.Horizontal,
-                                    state = DraggableState {
-                                        when {
-                                            it < 0 && uiState.input == Today -> onInputChange(Tomorrow)
-                                            it > 0 && uiState.input == Tomorrow -> onInputChange(Today)
-                                            it > 0 && uiState.input is Date -> onInputChange(Tomorrow)
-                                        }
-                                    },
-                                )
-                                .padding(horizontal = Spacing.S)
-                                .fillMaxSize()
-                                .clip(MaterialTheme.shapes.medium)
-                                .background(MaterialTheme.colorScheme.background),
-                        ) {
-                            items(items = uiState.events) {
-                                EventItem(
-                                    event = it,
-                                    modifier = Modifier.padding(bottom = Spacing.S),
-                                )
-                            }
-                        }
                     }
-
-                    is Loading -> Box(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        LoadingIndicator(circleColor = MaterialTheme.colorScheme.primary)
-                        if (uiState.showSnackbar) {
-                            LaunchedEffect(snackbarOwner.lifecycle) {
-                                snackbarHostState.showSnackbar(message = snackbarMessage)
-                            }
-                        }
-                    }
-
-                    is Error -> IllustrationWithDescription(
-                        illustration = Computer(
-                            fill = MaterialTheme.colorScheme.secondaryContainer,
-                            stroke = MaterialTheme.colorScheme.onSecondaryContainer,
-                        ),
-                        description = uiState.message ?: stringResource(R.string.description_error),
-                    )
                 }
             },
         )

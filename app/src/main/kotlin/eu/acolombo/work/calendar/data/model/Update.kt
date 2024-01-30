@@ -14,8 +14,3 @@ data class Update(private val date: Instant) {
     ).time
 }
 
-enum class Offices(val zoneId: String) {
-    Valencia(zoneId = "Europe/Madrid"),
-    Dublin(zoneId = "Europe/Dublin"),
-}
-

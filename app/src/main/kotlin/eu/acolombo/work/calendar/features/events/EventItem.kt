@@ -17,9 +17,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import eu.acolombo.work.calendar.R
 import eu.acolombo.work.calendar.data.model.Event
 import eu.acolombo.work.calendar.data.model.LocalEvent
 import eu.acolombo.work.calendar.data.model.toLocalEvent
@@ -62,7 +64,7 @@ internal fun EventItem(
             ) {
                 LabeledTime(
                     localTime = event.start,
-                    label = "Start",
+                    label = stringResource(R.string.label_start),
                     alignment = Alignment.Start,
                 )
                 Text(
@@ -77,7 +79,7 @@ internal fun EventItem(
                 )
                 LabeledTime(
                     localTime = event.end,
-                    label = "End",
+                    label = stringResource(R.string.label_end),
                     alignment = Alignment.End,
                 )
             }
@@ -102,7 +104,7 @@ private fun LabeledTime(
             else -> TextAlign.Center
         }
         Text(
-            text = localTime.toString().substring(0..4),
+            text = localTime.toString().substring(0, 5),
             style = MaterialTheme.typography.headlineMedium,
             textAlign = textAlign,
         )

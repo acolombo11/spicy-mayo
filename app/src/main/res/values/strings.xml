@@ -8,4 +8,6 @@
     <string name="title_last_update">Last Update</string>
     <string name="description_empty">Yay! No events on this day!</string>
     <string name="description_error">An error occurred!</string>
+    <string name="label_start">Start</string>
+    <string name="label_end">End</string>
 </resources>
