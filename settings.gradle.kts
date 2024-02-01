@@ -15,3 +15,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "spicy-mayo"
 include(":app")
+include("feature:events:screen")
+include("feature:events:data")
+include("design:theme")
+include("design:illustrations")
