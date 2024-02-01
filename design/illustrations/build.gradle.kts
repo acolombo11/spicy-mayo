@@ -30,6 +30,7 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
+
     implementation("androidx.compose.foundation:foundation-android:1.6.0")
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.6.0")
