@@ -12,11 +12,12 @@ function doGet(e) {
                 singleEvents: true,
                 orderBy: 'startTime',
             });
+            console.log('Response: ', response);
             const events = response.items.map(event => ({
                 start: event.start.dateTime,
                 end: event.end.dateTime,
                 summary: event.summary,
-                attendees: event.attendees.map((attendee) => extractNameFromFrescoEmail(attendee.email)),
+                attendees: event.attendees?.map((attendee) => extractNameFromFrescoEmail(attendee.email)),
             }));
             return ContentService.createTextOutput(JSON.stringify(events)).setMimeType(ContentService.MimeType.JSON);
         } catch (err) {

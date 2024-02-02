@@ -8,5 +8,5 @@ data class Event(
     val summary: String,
     val start: Instant,
     val end: Instant,
-    val attendees: List<String>,
+    val attendees: List<String> = emptyList(),
 )
