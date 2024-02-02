@@ -14,6 +14,9 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "spicy-mayo"
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 include(":app")
 include("feature:events:screen")
 include("feature:events:data")

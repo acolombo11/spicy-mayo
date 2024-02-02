@@ -1,6 +1,6 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -35,7 +35,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.7"
     }
     packaging {
         resources {
@@ -45,8 +45,8 @@ android {
 }
 
 dependencies {
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(project(":feature:events:screen"))
+    implementation(projects.feature.events.screen)
+    implementation(projects.design.theme)
 
-    implementation(project(":design:theme"))
+    implementation(libs.androidx.activity.compose)
 }
