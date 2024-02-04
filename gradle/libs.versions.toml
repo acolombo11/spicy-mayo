@@ -2,7 +2,7 @@
 activityCompose = "1.8.2"
 androidGradlePlugin = "8.2.2" # plugin
 androidTools = "31.2.2" # to be updated together with AGP above
-androidxComposeBom = "2023.08.00"
+androidxComposeBom = "2024.01.00"
 androidxCore = "1.12.0"
 androidxComposeCompiler = "1.5.7" # build.gradle
 androidxLifecycle = "2.7.0"
