@@ -13,7 +13,13 @@ data class Event(
     val end: LocalTime,
     val duration: Duration,
     val attendees: List<String>,
-)
+    val type: Type?,
+) {
+    enum class Type(val value: String) {
+        Default("default"),
+        OutOfOffice("outOfOffice"),
+    }
+}
 
 fun DataEvent.toLocalEvent(): Event = Event(
     summary = summary,
@@ -21,6 +27,7 @@ fun DataEvent.toLocalEvent(): Event = Event(
     end = end.toLocalTime(),
     duration = end - start,
     attendees = attendees,
+    type = Event.Type.entries.find { it.value == type },
 )
 
 private fun Instant.toLocalTime(): LocalTime = toLocalDateTime(TimeZone.currentSystemDefault()).time

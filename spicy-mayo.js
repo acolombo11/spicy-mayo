@@ -18,6 +18,7 @@ function doGet(e) {
                 end: event.end.dateTime,
                 summary: event.summary,
                 attendees: event.attendees?.map((attendee) => extractNameFromFrescoEmail(attendee.email)),
+                type: event.eventType,
             }));
             return ContentService.createTextOutput(JSON.stringify(events)).setMimeType(ContentService.MimeType.JSON);
         } catch (err) {

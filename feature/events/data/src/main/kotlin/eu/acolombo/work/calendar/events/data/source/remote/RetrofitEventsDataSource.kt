@@ -13,7 +13,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val SECRET_DEPLOYMENT_ID =
-    "AKfycbzcS6_biq2cAY5HAB36DJ4VeBYgBltOcpfX4Jrqaoqok3qQLBkuZgpTR1kQ0KVg9wXD"
+    "AKfycbwTdZTQzzt8NorsDcvUKDfQ0t2co_bXpxueEDHMQAek8fR38zkmunpDQbaEYe3KYAwE"
 private const val SECRET_KEY =
     "ryXExF2T\$UNomSk%eCCUFYaN@ymU3KGjWLbC^yQcKDFjc54DHySVAW6kF%7k"
 

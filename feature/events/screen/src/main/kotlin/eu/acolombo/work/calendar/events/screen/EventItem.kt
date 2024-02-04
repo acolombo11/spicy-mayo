@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -37,8 +39,20 @@ import kotlin.time.toDuration
 internal fun EventItem(
     event: Event,
     modifier: Modifier = Modifier,
+    containerColor: Color = when (event.type) {
+        Event.Type.Default -> MaterialTheme.colorScheme.surfaceVariant
+        else -> MaterialTheme.colorScheme.primary
+    },
+    primaryColor: Color = when (event.type) {
+        Event.Type.Default -> MaterialTheme.colorScheme.primary
+        else -> MaterialTheme.colorScheme.surfaceVariant
+    },
 ) {
-    Card(modifier = modifier, shape = MaterialTheme.shapes.extraLarge) {
+    Card(
+        modifier = modifier,
+        colors = CardDefaults.cardColors(containerColor = containerColor),
+        shape = MaterialTheme.shapes.extraLarge,
+    ) {
         Column(modifier = Modifier.padding(horizontal = Spacing.L, vertical = Spacing.M)) {
             Text(
                 modifier = Modifier.fillMaxWidth(.6f),
@@ -70,11 +84,11 @@ internal fun EventItem(
                 Text(
                     modifier = Modifier
                         .clip(shape = CircleShape)
-                        .background(MaterialTheme.colorScheme.primary)
+                        .background(primaryColor)
                         .padding(horizontal = Spacing.M, vertical = Spacing.S),
                     text = event.duration.toString(DurationUnit.MINUTES),
                     style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onPrimary,
+                    color = containerColor,
                     maxLines = 1,
                 )
                 LabeledTime(
@@ -126,6 +140,7 @@ fun EventItemPreview() {
                 start = Clock.System.now(),
                 end = Clock.System.now().plus(1L.toDuration(DurationUnit.HOURS)),
                 attendees = listOf("Mark", "john"),
+                type = "default",
             ).toLocalEvent()
         )
     }
