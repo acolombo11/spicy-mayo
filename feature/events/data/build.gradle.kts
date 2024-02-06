@@ -24,6 +24,15 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    defaultConfig {
+        buildConfigField("String", "SPICY_DEPLOY_ID", project.properties["SPICY_DEPLOY_ID"].toString())
+        buildConfigField("String", "SPICY_QUERY_KEY", project.properties["SPICY_QUERY_KEY"].toString())
+    }
 }
 
 dependencies {
