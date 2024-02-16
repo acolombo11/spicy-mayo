@@ -7,9 +7,9 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 internal interface EventsApi {
-    @GET(value = "${BuildConfig.SPICY_DEPLOY_ID}/exec")
+    @GET(value = "${BuildConfig.spicyDeployId}/exec")
     suspend fun getEvents(
         @Query("date") date: LocalDate,
-        @Query("key") apiKey: String = BuildConfig.SPICY_QUERY_KEY,
+        @Query("key") apiKey: String = BuildConfig.spicyApiKey,
     ): List<Event>
 }

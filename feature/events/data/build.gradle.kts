@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.google.secrets.gradle)
 }
 
 android {
@@ -24,14 +25,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
     buildFeatures {
         buildConfig = true
-    }
-
-    defaultConfig {
-        buildConfigField("String", "SPICY_DEPLOY_ID", project.properties["SPICY_DEPLOY_ID"].toString())
-        buildConfigField("String", "SPICY_QUERY_KEY", project.properties["SPICY_QUERY_KEY"].toString())
     }
 }
 
