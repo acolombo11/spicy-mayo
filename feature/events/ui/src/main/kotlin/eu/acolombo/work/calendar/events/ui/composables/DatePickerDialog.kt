@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package eu.acolombo.work.calendar.events.screen.composables
+package eu.acolombo.work.calendar.events.ui.composables
 
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults

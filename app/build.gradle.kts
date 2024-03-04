@@ -45,7 +45,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.feature.events.screen)
+    implementation(projects.feature.events.ui)
     implementation(projects.design.theme)
 
     implementation(libs.androidx.activity.compose)

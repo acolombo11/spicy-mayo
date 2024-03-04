@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.screen
+package eu.acolombo.work.calendar.events.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.DraggableState
@@ -15,8 +15,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SheetValue
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.rememberBottomSheetScaffoldState
+import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -32,20 +35,19 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import eu.acolombo.work.calendar.design.illustrations.Computer
 import eu.acolombo.work.calendar.design.illustrations.Meditation
-import eu.acolombo.work.calendar.events.screen.EventsViewState.Error
-import eu.acolombo.work.calendar.events.screen.EventsViewState.Loading
-import eu.acolombo.work.calendar.events.screen.EventsViewState.Success
-import eu.acolombo.work.calendar.events.screen.EventsFilter.Date
-import eu.acolombo.work.calendar.events.screen.EventsFilter.Today
-import eu.acolombo.work.calendar.events.screen.EventsFilter.Tomorrow
-import eu.acolombo.work.calendar.events.screen.composables.DatePickerDialog
-import eu.acolombo.work.calendar.events.screen.composables.IllustrationWithDescription
-import eu.acolombo.work.calendar.events.screen.composables.FiltersRow
-import eu.acolombo.work.calendar.events.screen.composables.LoadingIndicator
-import eu.acolombo.work.calendar.events.screen.composables.TimeInformation
-import eu.acolombo.work.calendar.events.screen.composables.rememberDatePickerState
-import eu.acolombo.work.calendar.events.ui.R
 import eu.acolombo.work.calendar.design.theme.Spacing
+import eu.acolombo.work.calendar.events.ui.EventsFilter.Date
+import eu.acolombo.work.calendar.events.ui.EventsFilter.Today
+import eu.acolombo.work.calendar.events.ui.EventsFilter.Tomorrow
+import eu.acolombo.work.calendar.events.ui.EventsViewState.Error
+import eu.acolombo.work.calendar.events.ui.EventsViewState.Loading
+import eu.acolombo.work.calendar.events.ui.EventsViewState.Success
+import eu.acolombo.work.calendar.events.ui.composables.DatePickerDialog
+import eu.acolombo.work.calendar.events.ui.composables.FiltersRow
+import eu.acolombo.work.calendar.events.ui.composables.IllustrationWithDescription
+import eu.acolombo.work.calendar.events.ui.composables.LoadingIndicator
+import eu.acolombo.work.calendar.events.ui.composables.TimeInformation
+import eu.acolombo.work.calendar.events.ui.composables.rememberDatePickerState
 
 @Composable
 fun EventsRoute(
@@ -76,13 +78,13 @@ internal fun EventsScreen(
         )
     }
 
-    val snackbarHostState = remember { SnackbarHostState() }
-    val snackbarMessage = stringResource(id = R.string.alert_done_for_the_day)
-    val snackbarOwner = LocalLifecycleOwner.current
+    val snackHostState = remember { SnackbarHostState() }
+    val snackMessage = stringResource(id = R.string.alert_done_for_the_day)
+    val snackOwner = LocalLifecycleOwner.current
 
     val contentHeight = 200.dp
 
-    BoxWithConstraints(modifier = Modifier.background(color = MaterialTheme.colorScheme.primaryContainer)) {
+    BoxWithConstraints {
         BottomSheetScaffold(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             content = {
@@ -94,7 +96,12 @@ internal fun EventsScreen(
                     update = (uiState as? Success)?.update,
                 )
             },
-            snackbarHost = { SnackbarHost(snackbarHostState) },
+            scaffoldState = rememberBottomSheetScaffoldState(
+                bottomSheetState = rememberStandardBottomSheetState(
+                    confirmValueChange = { it != SheetValue.Hidden }
+                )
+            ),
+            snackbarHost = { SnackbarHost(snackHostState) },
             sheetPeekHeight = maxHeight - contentHeight,
             sheetTonalElevation = 0.dp,
             sheetShadowElevation = 0.dp,
@@ -112,6 +119,7 @@ internal fun EventsScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .draggable(
+                            // TODO: Change to ViewPager
                             orientation = Orientation.Horizontal,
                             state = DraggableState {
                                 when {
@@ -155,8 +163,8 @@ internal fun EventsScreen(
                         ) {
                             LoadingIndicator(circleColor = MaterialTheme.colorScheme.primary)
                             if (uiState.showSnackbar) {
-                                LaunchedEffect(snackbarOwner.lifecycle) {
-                                    snackbarHostState.showSnackbar(message = snackbarMessage)
+                                LaunchedEffect(snackOwner.lifecycle) {
+                                    snackHostState.showSnackbar(message = snackMessage)
                                 }
                             }
                         }

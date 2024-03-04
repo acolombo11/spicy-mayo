@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package eu.acolombo.work.calendar.events.screen.composables
+package eu.acolombo.work.calendar.events.ui.composables
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import eu.acolombo.work.calendar.events.screen.EventsFilter
+import eu.acolombo.work.calendar.events.ui.EventsFilter
 import eu.acolombo.work.calendar.events.ui.R
 import eu.acolombo.work.calendar.design.theme.Spacing
 import eu.acolombo.work.calendar.design.theme.WorkCalendarTheme

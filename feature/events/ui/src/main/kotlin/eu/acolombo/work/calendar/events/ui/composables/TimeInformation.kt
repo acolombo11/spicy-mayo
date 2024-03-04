@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.screen.composables
+package eu.acolombo.work.calendar.events.ui.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import eu.acolombo.work.calendar.events.data.model.Offices
-import eu.acolombo.work.calendar.events.screen.model.Update
+import eu.acolombo.work.calendar.events.ui.model.Update
 import eu.acolombo.work.calendar.events.ui.R
 import eu.acolombo.work.calendar.design.theme.Spacing
 import kotlinx.datetime.LocalTime
@@ -51,7 +51,7 @@ fun TimeInformation(
         Divider(
             modifier = Modifier
                 .fillMaxHeight(.4f)
-                .width(1.dp),
+                .width(1.5.dp),
             color = MaterialTheme.colorScheme.onPrimaryContainer,
         )
         Column(
@@ -59,7 +59,7 @@ fun TimeInformation(
             modifier = Modifier
                 .weight(.4f)
                 .fillMaxHeight()
-                .padding(Spacing.L),
+                .padding(Spacing.XL),
         ) {
             Offices.entries.forEach {
                 Text(

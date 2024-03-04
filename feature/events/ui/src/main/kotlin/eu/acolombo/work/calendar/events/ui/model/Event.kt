@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.screen.model
+package eu.acolombo.work.calendar.events.ui.model
 
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalTime

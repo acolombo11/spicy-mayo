@@ -1,6 +1,6 @@
-package eu.acolombo.work.calendar.events.screen
+package eu.acolombo.work.calendar.events.ui
 
-import eu.acolombo.work.calendar.events.screen.extensions.now
+import eu.acolombo.work.calendar.events.ui.extensions.now
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.plus

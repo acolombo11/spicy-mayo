@@ -64,12 +64,10 @@ private val typography: Typography
     get() = MaterialTheme.typography.copy(
         displayLarge = MaterialTheme.typography.displayLarge.copy(
             fontFamily = spaceMonoFamily,
-            fontWeight = FontWeight.Bold,
             fontSize = 58.sp,
         ),
         displayMedium = MaterialTheme.typography.displayMedium.copy(
             fontFamily = spaceMonoFamily,
-            fontWeight = FontWeight.Bold,
         ),
         displaySmall = MaterialTheme.typography.displaySmall.copy(
             fontFamily = spaceMonoFamily,

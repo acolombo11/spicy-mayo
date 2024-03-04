@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.screen
+package eu.acolombo.work.calendar.events.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -23,10 +23,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import eu.acolombo.work.calendar.events.screen.model.Event
-import eu.acolombo.work.calendar.events.screen.model.toLocalEvent
+import eu.acolombo.work.calendar.events.ui.model.Event
+import eu.acolombo.work.calendar.events.ui.model.toLocalEvent
 import eu.acolombo.work.calendar.events.data.model.Event as DataEvent
-import eu.acolombo.work.calendar.events.ui.R
 import eu.acolombo.work.calendar.design.theme.Spacing
 import eu.acolombo.work.calendar.design.theme.WorkCalendarTheme
 import kotlinx.datetime.Clock
@@ -43,7 +42,7 @@ internal fun EventItem(
         Event.Type.Default -> MaterialTheme.colorScheme.surfaceVariant
         else -> MaterialTheme.colorScheme.primary
     },
-    primaryColor: Color = when (event.type) {
+    accentColor: Color = when (event.type) {
         Event.Type.Default -> MaterialTheme.colorScheme.primary
         else -> MaterialTheme.colorScheme.surfaceVariant
     },
@@ -84,7 +83,7 @@ internal fun EventItem(
                 Text(
                     modifier = Modifier
                         .clip(shape = CircleShape)
-                        .background(primaryColor)
+                        .background(accentColor)
                         .padding(horizontal = Spacing.M, vertical = Spacing.S),
                     text = event.duration.toString(DurationUnit.MINUTES),
                     style = MaterialTheme.typography.labelMedium,

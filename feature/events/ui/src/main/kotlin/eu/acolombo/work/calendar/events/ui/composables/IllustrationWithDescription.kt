@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.screen.composables
+package eu.acolombo.work.calendar.events.ui.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column

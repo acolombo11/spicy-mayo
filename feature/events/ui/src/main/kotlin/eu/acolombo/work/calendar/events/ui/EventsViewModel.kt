@@ -1,14 +1,14 @@
-package eu.acolombo.work.calendar.events.screen
+package eu.acolombo.work.calendar.events.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import eu.acolombo.work.calendar.events.data.source.DefaultEventsRepository
 import eu.acolombo.work.calendar.events.data.source.EventsRepository
-import eu.acolombo.work.calendar.events.screen.EventsFilter.Date
-import eu.acolombo.work.calendar.events.screen.EventsFilter.Today
-import eu.acolombo.work.calendar.events.screen.EventsFilter.Tomorrow
-import eu.acolombo.work.calendar.events.screen.model.Update
-import eu.acolombo.work.calendar.events.screen.model.toLocalEvent
+import eu.acolombo.work.calendar.events.ui.EventsFilter.Date
+import eu.acolombo.work.calendar.events.ui.EventsFilter.Today
+import eu.acolombo.work.calendar.events.ui.EventsFilter.Tomorrow
+import eu.acolombo.work.calendar.events.ui.model.Update
+import eu.acolombo.work.calendar.events.ui.model.toLocalEvent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
