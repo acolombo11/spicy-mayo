@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerSize
@@ -89,13 +90,19 @@ internal fun EventsScreen(
         BottomSheetScaffold(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             content = {
-                TimeInformation(
-                    modifier = Modifier
-                        .padding(it)
-                        .height(contentHeight)
-                        .fillMaxWidth(),
-                    update = (uiState as? Success)?.update,
-                )
+                Box(
+                    contentAlignment = Alignment.TopCenter,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    TimeInformation(
+                        modifier = Modifier
+                            .padding(it)
+                            .height(contentHeight)
+                            .widthIn(max = 640.dp) // androidx.compose.material3.BottomSheetMaxWidth
+                            .fillMaxWidth(),
+                        update = (uiState as? Success)?.update,
+                    )
+                }
             },
             scaffoldState = rememberBottomSheetScaffoldState(
                 bottomSheetState = rememberStandardBottomSheetState(
@@ -133,7 +140,7 @@ internal fun EventsScreen(
                 ) {
                     when (uiState) {
                         is Success -> if (uiState.events.isEmpty()) {
-                            // TODO: It would be cool to resize the column1 when expanding and add vertical arrangement, or maybe just use something similar to xml coordinator layout
+                            // TODO: It would be cool to resize the column when expanding and add vertical arrangement, or maybe just use something similar to xml coordinator layout
                             IllustrationWithDescription(
                                 illustration = Meditation(
                                     fill = MaterialTheme.colorScheme.secondaryContainer,
