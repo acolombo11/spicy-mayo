@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -145,7 +146,12 @@ internal fun EventsScreen(
                                 modifier = Modifier
                                     .padding(horizontal = Spacing.S)
                                     .fillMaxSize()
-                                    .clip(MaterialTheme.shapes.medium)
+                                    .clip(
+                                        MaterialTheme.shapes.medium.copy(
+                                            bottomStart = CornerSize(0.dp),
+                                            bottomEnd = CornerSize(0.dp),
+                                        )
+                                    )
                                     .background(MaterialTheme.colorScheme.background),
                             ) {
                                 items(items = uiState.events) {
