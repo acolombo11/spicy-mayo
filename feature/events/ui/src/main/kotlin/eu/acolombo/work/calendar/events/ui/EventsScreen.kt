@@ -49,7 +49,7 @@ import eu.acolombo.work.calendar.events.ui.composables.FiltersRow
 import eu.acolombo.work.calendar.events.ui.composables.IllustrationWithDescription
 import eu.acolombo.work.calendar.events.ui.composables.LoadingIndicator
 import eu.acolombo.work.calendar.events.ui.composables.TimeInformation
-import eu.acolombo.work.calendar.events.ui.composables.rememberDatePickerState
+import eu.acolombo.work.calendar.events.ui.composables.rememberDatePicker
 
 @Composable
 fun EventsRoute(
@@ -71,7 +71,7 @@ internal fun EventsScreen(
 ) {
     val showDialog = remember { mutableStateOf(false) }
 
-    val datePickerState = rememberDatePickerState(uiState.input.date)
+    val datePickerState = rememberDatePicker(uiState.input.date)
     if (showDialog.value) {
         DatePickerDialog(
             datePickerState = datePickerState,

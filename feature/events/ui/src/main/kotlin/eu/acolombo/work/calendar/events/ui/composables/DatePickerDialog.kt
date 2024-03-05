@@ -10,8 +10,8 @@ import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.res.stringResource
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
@@ -52,18 +52,18 @@ internal fun DatePickerDialog(
 }
 
 @Composable
-fun rememberDatePickerState(date: LocalDate): DatePickerState =
-    rememberSaveable(date, saver = DatePickerState.Saver()) {
-        val selectedMillis = date
-            .atTime(9, 0, 0, 0)
-            .toInstant(TimeZone.currentSystemDefault())
-            .toEpochMilliseconds()
+fun rememberDatePicker(date: LocalDate): DatePickerState {
+    val selectedMillis = date
+        .atTime(9, 0, 0, 0)
+        .toInstant(TimeZone.currentSystemDefault())
+        .toEpochMilliseconds()
+    return rememberDatePickerState(
+        initialSelectedDateMillis = selectedMillis,
+        initialDisplayedMonthMillis = selectedMillis,
+        yearRange = DatePickerDefaults.YearRange,
+        initialDisplayMode = DisplayMode.Picker,
+    )
+}
 
-        DatePickerState(
-            initialSelectedDateMillis = selectedMillis,
-            initialDisplayedMonthMillis = selectedMillis,
-            yearRange = DatePickerDefaults.YearRange,
-            initialDisplayMode = DisplayMode.Picker,
-        )
-    }
+
 
