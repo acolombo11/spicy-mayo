@@ -9,4 +9,5 @@
     <string name="description_error">An error occurred!</string>
     <string name="label_start">Start</string>
     <string name="label_end">End</string>
+    <string name="label_duration_all_day">All day</string>
 </resources>

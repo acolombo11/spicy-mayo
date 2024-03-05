@@ -1,6 +1,6 @@
 [versions]
 activityCompose = "1.8.2"
-androidGradlePlugin = "8.2.2" # plugin
+androidGradlePlugin = "8.3.0" # plugin
 androidTools = "31.2.2" # to be updated together with AGP above
 androidxComposeBom = "2024.01.00"
 androidxCore = "1.12.0"

@@ -77,7 +77,7 @@ class EventsViewModel(
     private fun checkEndOfTheDay() = viewModelScope.launch {
         val state = uiState.filterIsInstance<EventsViewState.Success>().first()
         state.events.lastOrNull()
-            ?.takeIf { it.end < state.update.latest }
+            ?.takeIf { it.end != null && it.end < state.update.latest }
             ?.let { onInputChange(selection = Tomorrow, showSnackbar = true) }
     }
 

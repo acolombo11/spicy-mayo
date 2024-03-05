@@ -9,8 +9,8 @@ import eu.acolombo.work.calendar.events.data.model.Event as DataEvent
 
 data class Event(
     val summary: String,
-    val start: LocalTime,
-    val end: LocalTime,
+    val start: LocalTime?,
+    val end: LocalTime?,
     val duration: Duration,
     val attendees: List<String>,
     val type: Type?,
@@ -22,10 +22,10 @@ data class Event(
 }
 
 fun DataEvent.toLocalEvent(): Event = Event(
-    summary = summary,
-    start = start.toLocalTime(),
-    end = end.toLocalTime(),
-    duration = end - start,
+    summary = summary.orEmpty(),
+    start = start?.toLocalTime(),
+    end = end?.toLocalTime(),
+    duration = start?.let { start -> end?.let { end -> end - start } } ?: Duration.INFINITE,
     attendees = attendees,
     type = Event.Type.entries.find { it.value == type },
 )

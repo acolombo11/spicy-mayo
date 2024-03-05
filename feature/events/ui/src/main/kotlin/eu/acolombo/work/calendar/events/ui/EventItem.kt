@@ -6,6 +6,7 @@ import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
@@ -23,28 +24,31 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import eu.acolombo.work.calendar.events.ui.model.Event
-import eu.acolombo.work.calendar.events.ui.model.toLocalEvent
-import eu.acolombo.work.calendar.events.data.model.Event as DataEvent
 import eu.acolombo.work.calendar.design.theme.Spacing
 import eu.acolombo.work.calendar.design.theme.WorkCalendarTheme
+import eu.acolombo.work.calendar.events.ui.model.Event
+import eu.acolombo.work.calendar.events.ui.model.toLocalEvent
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalTime
+import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
+import eu.acolombo.work.calendar.events.data.model.Event as DataEvent
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun EventItem(
     event: Event,
     modifier: Modifier = Modifier,
-    containerColor: Color = when (event.type) {
-        Event.Type.Default -> MaterialTheme.colorScheme.surfaceVariant
-        else -> MaterialTheme.colorScheme.primary
-    },
-    accentColor: Color = when (event.type) {
-        Event.Type.Default -> MaterialTheme.colorScheme.primary
+    containerColor: Color = when {
+        event.type != Event.Type.Default -> MaterialTheme.colorScheme.primary
+        event.duration == Duration.INFINITE -> MaterialTheme.colorScheme.secondary
         else -> MaterialTheme.colorScheme.surfaceVariant
+    },
+    accentColor: Color = when {
+        event.type != Event.Type.Default -> MaterialTheme.colorScheme.surfaceVariant
+        event.duration == Duration.INFINITE -> MaterialTheme.colorScheme.secondaryContainer
+        else -> MaterialTheme.colorScheme.primary
     },
 ) {
     Card(
@@ -75,26 +79,34 @@ internal fun EventItem(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                LabeledTime(
-                    localTime = event.start,
-                    label = stringResource(R.string.label_start),
-                    alignment = Alignment.Start,
-                )
+                event.start?.let {
+                    LabeledTime(
+                        localTime = event.start,
+                        label = stringResource(R.string.label_start),
+                        alignment = Alignment.Start,
+                    )
+                } ?: Spacer(modifier = Modifier.weight(1f))
                 Text(
                     modifier = Modifier
                         .clip(shape = CircleShape)
                         .background(accentColor)
                         .padding(horizontal = Spacing.M, vertical = Spacing.S),
-                    text = event.duration.toString(DurationUnit.MINUTES),
+                    text = if (event.duration == Duration.INFINITE) {
+                        stringResource(R.string.label_duration_all_day)
+                    } else {
+                        event.duration.toString(DurationUnit.MINUTES)
+                    },
                     style = MaterialTheme.typography.labelMedium,
                     color = containerColor,
                     maxLines = 1,
                 )
-                LabeledTime(
-                    localTime = event.end,
-                    label = stringResource(R.string.label_end),
-                    alignment = Alignment.End,
-                )
+                event.end?.let {
+                    LabeledTime(
+                        localTime = event.end,
+                        label = stringResource(R.string.label_end),
+                        alignment = Alignment.End,
+                    )
+                } ?: Spacer(modifier = Modifier.weight(1f))
             }
         }
     }
