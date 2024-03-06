@@ -79,9 +79,9 @@ internal fun EventItem(
                 style = MaterialTheme.typography.bodySmall,
             )
             Row(
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth(),
             ) {
                 event.start?.let {
                     LabeledTime(

@@ -1,27 +1,20 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package eu.acolombo.work.calendar.events.ui.composables
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.twotone.CalendarToday
-import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eu.acolombo.work.calendar.events.ui.EventsFilter
 import eu.acolombo.work.calendar.events.ui.R
@@ -56,13 +49,6 @@ internal fun FiltersRow(
                     modifier = Modifier.padding(start = Spacing.S),
                     selected = true,
                     onClick = { showDatePicker() },
-//                    trailingIcon = {
-//                        Icon(
-//                            modifier = Modifier.size(18.dp),
-//                            imageVector = Icons.TwoTone.Autorenew,
-//                            contentDescription = null,
-//                        )
-//                    }
                 )
             }
         }
@@ -80,7 +66,6 @@ internal fun FiltersRow(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SpicyFilterChip(
     label: String,
@@ -97,32 +82,6 @@ private fun SpicyFilterChip(
         shape = MaterialTheme.shapes.extraLarge,
         trailingIcon = trailingIcon,
     )
-}
-
-@Composable
-private fun MayoFilterChip(
-    label: String,
-    modifier: Modifier = Modifier,
-    selected: Boolean = false,
-    onClick: () -> Unit,
-    trailingIcon: @Composable (() -> Unit)? = null,
-) {
-    if (selected) {
-        Button(
-            modifier = modifier,
-            onClick = onClick,
-        ) {
-            Text(text = label, fontSize = 16.sp)
-        }
-    } else {
-        OutlinedButton(
-            modifier = modifier,
-            onClick = onClick,
-            border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.outline),
-        ) {
-            Text(text = label, fontSize = 16.sp)
-        }
-    }
 }
 
 @Preview(showBackground = true)

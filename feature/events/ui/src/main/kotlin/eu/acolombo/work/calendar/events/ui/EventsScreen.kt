@@ -169,7 +169,7 @@ internal fun EventsScreen(
                             contentAlignment = Alignment.Center,
                         ) {
                             LoadingIndicator(circleColor = MaterialTheme.colorScheme.primary)
-                            if (uiState.showSnackbar) {
+                            if (uiState.showSnack) {
                                 LaunchedEffect(snackOwner.lifecycle) {
                                     snackHostState.showSnackbar(message = snackMessage)
                                 }
