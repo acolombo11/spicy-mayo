@@ -16,9 +16,9 @@ Since the backend needs to be setup on the acount of the Google Calendar to be v
     <th>Empty</th>
   </tr>
   <tr>
-    <td><img src="docs/screenshot-1.png"/></td>
-    <td><img src="docs/screenshot-2.png"/></td>
-    <td><img src="docs/screenshot-3.png"/></td>
+    <td><img src="docs/screenshot-1.png" width="270px"/></td>
+    <td><img src="docs/screenshot-2.png" width="270px"/></td>
+    <td><img src="docs/screenshot-3.png" width="270px"/></td>
   </tr>
 </table> 
 
