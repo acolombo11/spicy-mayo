@@ -17,11 +17,9 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SheetValue
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.rememberBottomSheetScaffoldState
-import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -104,11 +102,7 @@ internal fun EventsScreen(
                     )
                 }
             },
-            scaffoldState = rememberBottomSheetScaffoldState(
-                bottomSheetState = rememberStandardBottomSheetState(
-                    confirmValueChange = { it != SheetValue.Hidden }
-                )
-            ),
+            scaffoldState = rememberBottomSheetScaffoldState(),
             snackbarHost = { SnackbarHost(snackHostState) },
             sheetPeekHeight = maxHeight - contentHeight,
             sheetTonalElevation = 0.dp,
