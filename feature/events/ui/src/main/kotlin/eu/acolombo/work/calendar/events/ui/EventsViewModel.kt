@@ -60,25 +60,25 @@ class EventsViewModel(
 
     fun onInputChange(
         selection: EventsFilter,
-    ) = onInputChange(selection = selection, showSnackbar = false)
+    ) = onInputChange(selection = selection, showSnack = false)
 
     private fun onInputChange(
         selection: EventsFilter,
-        showSnackbar: Boolean,
+        showSnack: Boolean,
     ) = viewModelScope.launch {
         val input = when ((selection as? Date)?.date) {
             Today.date -> Today
             Tomorrow.date -> Tomorrow
             else -> selection
         }
-        _input.emit(input to showSnackbar)
+        _input.emit(input to showSnack)
     }
 
     private fun checkEndOfTheDay() = viewModelScope.launch {
         val state = uiState.filterIsInstance<EventsViewState.Success>().first()
         state.events.lastOrNull()
             ?.takeIf { it.end != null && it.end < state.update.latest }
-            ?.let { onInputChange(selection = Tomorrow, showSnackbar = true) }
+            ?.let { onInputChange(selection = Tomorrow, showSnack = true) }
     }
 
     // TODO Add refresh in ui
