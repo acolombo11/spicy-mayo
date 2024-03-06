@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import eu.acolombo.work.calendar.design.illustrations.Illustration
 import eu.acolombo.work.calendar.design.theme.Spacing
 
@@ -18,8 +19,8 @@ fun IllustrationWithDescription(
     description: String,
 ) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
             modifier = Modifier.fillMaxWidth(.65f),
@@ -27,8 +28,11 @@ fun IllustrationWithDescription(
             contentDescription = illustration.image.name,
         )
         Text(
+            modifier = Modifier
+                .padding(Spacing.M)
+                .fillMaxSize(),
             text = description,
-            modifier = Modifier.padding(Spacing.M),
+            textAlign = TextAlign.Center,
         )
     }
 }
