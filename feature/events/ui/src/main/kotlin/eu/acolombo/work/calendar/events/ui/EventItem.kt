@@ -40,20 +40,22 @@ import eu.acolombo.work.calendar.events.data.model.Event as DataEvent
 internal fun EventItem(
     event: Event,
     modifier: Modifier = Modifier,
-    containerColor: Color = when {
-        event.type != Event.Type.Default -> MaterialTheme.colorScheme.primary
-        event.duration == Duration.INFINITE -> MaterialTheme.colorScheme.secondary
-        else -> MaterialTheme.colorScheme.surfaceVariant
-    },
-    accentColor: Color = when {
-        event.type != Event.Type.Default -> MaterialTheme.colorScheme.surfaceVariant
-        event.duration == Duration.INFINITE -> MaterialTheme.colorScheme.secondaryContainer
-        else -> MaterialTheme.colorScheme.primary
-    },
+    colors: EventItemColors = EventItemColors(
+        containerColor = when {
+            event.type != Event.Type.Default -> MaterialTheme.colorScheme.primary
+            event.duration == Duration.INFINITE -> MaterialTheme.colorScheme.secondary
+            else -> MaterialTheme.colorScheme.surfaceVariant
+        },
+        accentColor = when {
+            event.type != Event.Type.Default -> MaterialTheme.colorScheme.surfaceVariant
+            event.duration == Duration.INFINITE -> MaterialTheme.colorScheme.secondaryContainer
+            else -> MaterialTheme.colorScheme.primary
+        },
+    ),
 ) {
     Card(
         modifier = modifier,
-        colors = CardDefaults.cardColors(containerColor = containerColor),
+        colors = CardDefaults.cardColors(containerColor = colors.containerColor),
         shape = MaterialTheme.shapes.extraLarge,
     ) {
         Column(modifier = Modifier.padding(horizontal = Spacing.L, vertical = Spacing.M)) {
@@ -63,6 +65,7 @@ internal fun EventItem(
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 2,
                 minLines = 2,
+                color = colors.onContainerColor,
                 style = MaterialTheme.typography.headlineLarge,
             )
             Text(
@@ -72,6 +75,7 @@ internal fun EventItem(
                     .alpha(.5f),
                 text = event.attendees.joinToString(),
                 maxLines = 1,
+                color = colors.onContainerColor,
                 style = MaterialTheme.typography.bodySmall,
             )
             Row(
@@ -84,12 +88,13 @@ internal fun EventItem(
                         localTime = event.start,
                         label = stringResource(R.string.label_start),
                         alignment = Alignment.Start,
+                        color = colors.onContainerColor,
                     )
                 } ?: Spacer(modifier = Modifier.weight(1f))
                 Text(
                     modifier = Modifier
                         .clip(shape = CircleShape)
-                        .background(accentColor)
+                        .background(colors.accentColor)
                         .padding(horizontal = Spacing.M, vertical = Spacing.S),
                     text = if (event.duration == Duration.INFINITE) {
                         stringResource(R.string.label_duration_all_day)
@@ -97,7 +102,7 @@ internal fun EventItem(
                         event.duration.toString(DurationUnit.MINUTES)
                     },
                     style = MaterialTheme.typography.labelMedium,
-                    color = containerColor,
+                    color = colors.onAccentColor,
                     maxLines = 1,
                 )
                 event.end?.let {
@@ -105,6 +110,7 @@ internal fun EventItem(
                         localTime = event.end,
                         label = stringResource(R.string.label_end),
                         alignment = Alignment.End,
+                        color = colors.onContainerColor,
                     )
                 } ?: Spacer(modifier = Modifier.weight(1f))
             }
@@ -118,6 +124,7 @@ private fun LabeledTime(
     label: String,
     alignment: Alignment.Horizontal,
     modifier: Modifier = Modifier,
+    color: Color = Color.Unspecified,
 ) {
     Column(
         horizontalAlignment = alignment,
@@ -130,16 +137,25 @@ private fun LabeledTime(
         }
         Text(
             text = localTime.toString().substring(0, 5),
+            color = color,
             style = MaterialTheme.typography.headlineMedium,
             textAlign = textAlign,
         )
         Text(
             text = label,
+            color = color,
             style = MaterialTheme.typography.labelMedium,
             textAlign = textAlign,
         )
     }
 }
+
+data class EventItemColors(
+    val containerColor: Color,
+    val accentColor: Color,
+    val onContainerColor: Color = Color.Unspecified,
+    val onAccentColor: Color = containerColor,
+)
 
 @Preview(showBackground = true)
 @Composable
