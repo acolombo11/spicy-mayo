@@ -1,6 +1,7 @@
 # spicy-mayo
 
-Android app to check a Google Calendar without the need to add its Google account to the phone. Account authentication managed through a simple Google Apps Script backend.
+Android app to check a Google Calendar without the need to add its Google account to the phone.
+Account authentication managed through a simple Google Apps Script backend.
 
 Its main use-case is to check Today, Tomorrow or any other specific day of your work calendar, without adding your work account to your phone.
 
