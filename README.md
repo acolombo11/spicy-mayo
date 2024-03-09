@@ -27,8 +27,8 @@ The screenshots are displaying different themes following the Material You user 
 ## How to setup
 
 1. Using the Google account of the calendar to be accessed, create a new project on [Google Apps Script](https://script.google.com/home)
-2. In the **Services** tab, add the <i>Google Calendar API</i> to the project
-3. Copy the content of [spicy-mayo.js](spicy-mayo.js) to the default file already open in the editor
+2. In the **Services** tab, add **Google Calendar API** to the project
+3. Copy the content of [spicy-mayo.js](spicy-mayo.js) to the default file in the editor
 4. Generate a random string or use a password of choice to fill the `spicyApiKey` const, then save the project
 5. Deploy the script as **"type"** <i>Web App</i>, choosing to **"execute as"** <i>Me <sub><sup>(email)</sup></sub></i>, with **"Who has access"** to <i>Anyone</i>
 6. Add the obtained Deployment ID and the Api key generated previously to your `~\.gradle\local.properties` file:
