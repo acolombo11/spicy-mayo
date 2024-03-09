@@ -9,7 +9,7 @@ Since the backend needs to be setup on the acount of the Google Calendar to be v
 
 ### Screenshots
 
-The screenshots are displaying different themes following the Material You user colors, the vector illustrations made by [freepik](https://www.freepik.com/free-vector/hand-drawn-people-doodle-illustration_126362575.htm) and transformed to compose `ImageVector`s using [the svg-to-compose plugin](https://plugins.jetbrains.com/plugin/18619-svg-to-compose) for Android Studio, and the three different types of day that can be shown (today, tomorrow or a specific date).
+The screenshots are displaying different themes following the Material You user colors, the vector illustrations designed by [freepik](https://www.freepik.com/free-vector/hand-drawn-people-doodle-illustration_126362575.htm) and transformed to compose `ImageVector`s using [the svg-to-compose plugin](https://plugins.jetbrains.com/plugin/18619-svg-to-compose) for Android Studio, and the three different types of day that can be shown (today, tomorrow or a specific date) with the three different states the screen can be in (w/ events, empty state, error state).
 
  <table>
   <tr>
