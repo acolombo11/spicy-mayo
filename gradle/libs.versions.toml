@@ -1,12 +1,15 @@
 [versions]
+minSdk = "24"
+targetSdk = "34"
+compileSdk = "34"
 activityCompose = "1.8.2"
 androidGradlePlugin = "8.3.0" # plugin
 androidTools = "31.2.2" # to be updated together with AGP above
-androidxComposeBom = "2024.02.01"
+androidxComposeBom = "2024.02.02"
 androidxCore = "1.12.0"
-androidxComposeCompiler = "1.5.7" # build.gradle
+androidxComposeCompiler = "1.5.8" # build.gradle
 androidxLifecycle = "2.7.0"
-kotlin = "1.9.21" # plugin
+kotlin = "1.9.22" # plugin
 kotlinxCoroutines = "1.7.3"
 kotlinxDatetime = "0.5.0"
 kotlinxSerializationJson = "1.6.2"

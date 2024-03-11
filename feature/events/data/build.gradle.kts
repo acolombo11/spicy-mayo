@@ -7,10 +7,10 @@ plugins {
 
 android {
     namespace = "eu.acolombo.work.calendar.events.data"
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = 24
+        minSdk = libs.versions.compileSdk.get().toInt()
     }
 
     buildTypes {
@@ -23,7 +23,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     buildFeatures {
         buildConfig = true

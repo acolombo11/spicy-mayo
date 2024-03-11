@@ -15,10 +15,10 @@ dependencyResolutionManagement {
 
 rootProject.name = "spicy-mayo"
 
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
 include(":app")
 include("feature:events:ui")
 include("feature:events:data")
 include("design:theme")
 include("design:illustrations")
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
