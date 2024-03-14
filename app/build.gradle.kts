@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "eu.acolombo.work.calendar"
-        minSdk = libs.versions.compileSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"

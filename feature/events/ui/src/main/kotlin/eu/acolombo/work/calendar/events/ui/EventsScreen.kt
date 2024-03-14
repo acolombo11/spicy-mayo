@@ -25,9 +25,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -82,7 +84,7 @@ internal fun EventsScreen(
     val snackMessage = stringResource(id = R.string.alert_done_for_the_day)
     val snackOwner = LocalLifecycleOwner.current
 
-    val contentHeight = 200.dp
+    val contentHeight = BackLayerContentHeight
 
     BoxWithConstraints {
         BottomSheetScaffold(
@@ -90,13 +92,13 @@ internal fun EventsScreen(
             content = {
                 Box(
                     contentAlignment = Alignment.TopCenter,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     TimeInformation(
                         modifier = Modifier
                             .padding(it)
                             .height(contentHeight)
-                            .widthIn(max = 640.dp) // androidx.compose.material3.BottomSheetMaxWidth
+                            .widthIn(max = BottomSheetMaxWidth)
                             .fillMaxWidth(),
                         update = (uiState as? Success)?.update,
                     )
@@ -191,3 +193,6 @@ internal fun EventsScreen(
     }
 }
 
+// copy of internal androidx.compose.material3.BottomSheetMaxWidth
+private val BottomSheetMaxWidth = 640.dp
+private val BackLayerContentHeight = 200.dp

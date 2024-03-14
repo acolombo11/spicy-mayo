@@ -35,7 +35,6 @@ fun TimeInformation(
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .weight(.6f)
-                .fillMaxHeight()
                 .padding(Spacing.M),
         ) {
             Text(
@@ -50,7 +49,7 @@ fun TimeInformation(
         }
         VerticalDivider(
             modifier = Modifier
-                .fillMaxHeight(.4f)
+                .padding(vertical = Spacing.XXL)
                 .width(1.5.dp),
             color = MaterialTheme.colorScheme.onPrimaryContainer,
         )
@@ -58,7 +57,6 @@ fun TimeInformation(
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .weight(.4f)
-                .fillMaxHeight()
                 .padding(Spacing.XL),
         ) {
             Offices.entries.forEach {
