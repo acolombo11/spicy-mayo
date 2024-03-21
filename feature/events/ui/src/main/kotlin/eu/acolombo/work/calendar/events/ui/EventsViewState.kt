@@ -1,7 +1,7 @@
 package eu.acolombo.work.calendar.events.ui
 
-import eu.acolombo.work.calendar.events.ui.model.Event
-import eu.acolombo.work.calendar.events.ui.model.Update
+import eu.acolombo.work.calendar.events.domain.model.Event
+import eu.acolombo.work.calendar.events.domain.model.Update
 
 sealed class EventsViewState(val input: EventsFilter) {
     class Loading(input: EventsFilter, val showSnack: Boolean = false) : EventsViewState(input)

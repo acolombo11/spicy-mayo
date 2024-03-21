@@ -1,6 +1,5 @@
-package eu.acolombo.work.calendar.events.ui.model
+package eu.acolombo.work.calendar.events.domain.model
 
-import eu.acolombo.work.calendar.events.data.model.Offices
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone

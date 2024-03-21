@@ -26,14 +26,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import eu.acolombo.work.calendar.design.theme.Spacing
 import eu.acolombo.work.calendar.design.theme.WorkCalendarTheme
-import eu.acolombo.work.calendar.events.ui.model.Event
-import eu.acolombo.work.calendar.events.ui.model.toLocalEvent
+import eu.acolombo.work.calendar.events.domain.model.Event
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
-import eu.acolombo.work.calendar.events.data.model.Event as DataEvent
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -83,9 +83,9 @@ internal fun EventItem(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-                event.start?.let {
+                event.start?.let { start ->
                     LabeledTime(
-                        localTime = event.start,
+                        localTime = start,
                         label = stringResource(R.string.label_start),
                         alignment = Alignment.Start,
                         color = colors.onContainerColor,
@@ -105,9 +105,9 @@ internal fun EventItem(
                     color = colors.onAccentColor,
                     maxLines = 1,
                 )
-                event.end?.let {
+                event.end?.let { end ->
                     LabeledTime(
-                        localTime = event.end,
+                        localTime = end,
                         label = stringResource(R.string.label_end),
                         alignment = Alignment.End,
                         color = colors.onContainerColor,
@@ -162,13 +162,17 @@ data class EventItemColors(
 fun EventItemPreview() {
     WorkCalendarTheme {
         EventItem(
-            DataEvent(
+            Event(
                 summary = "Lorem ipsum dolor sit amet",
-                start = Clock.System.now(),
-                end = Clock.System.now().plus(1L.toDuration(DurationUnit.HOURS)),
+                start = Clock.System.now()
+                    .toLocalDateTime(TimeZone.UTC).time,
+                end = Clock.System.now()
+                    .plus(1L.toDuration(DurationUnit.HOURS))
+                    .toLocalDateTime(TimeZone.UTC).time,
                 attendees = listOf("Mark", "john"),
-                type = "default",
-            ).toLocalEvent()
+                type = Event.Type.Default,
+                duration = 1L.toDuration(DurationUnit.HOURS),
+            )
         )
     }
 }

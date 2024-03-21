@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.ui.model
+package eu.acolombo.work.calendar.events.domain.model
 
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalTime
@@ -18,6 +18,8 @@ data class Event(
     enum class Type(val value: String) {
         Default("default"),
         OutOfOffice("outOfOffice"),
+        WorkingLocation("workingLocation"),
+        FocusTime("focusTime"),
     }
 }
 

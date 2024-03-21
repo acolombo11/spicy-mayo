@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.data.model
+package eu.acolombo.work.calendar.events.domain.model
 
 enum class Offices(val zoneId: String) {
     Madrid(zoneId = "Europe/Madrid"),

@@ -2,13 +2,11 @@ package eu.acolombo.work.calendar.events.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import eu.acolombo.work.calendar.events.data.source.DefaultEventsRepository
-import eu.acolombo.work.calendar.events.data.source.EventsRepository
+import eu.acolombo.work.calendar.events.domain.GetEventsUseCase
+import eu.acolombo.work.calendar.events.domain.model.Update
 import eu.acolombo.work.calendar.events.ui.EventsFilter.Date
 import eu.acolombo.work.calendar.events.ui.EventsFilter.Today
 import eu.acolombo.work.calendar.events.ui.EventsFilter.Tomorrow
-import eu.acolombo.work.calendar.events.ui.model.Update
-import eu.acolombo.work.calendar.events.ui.model.toLocalEvent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -26,7 +24,7 @@ import kotlinx.datetime.Clock
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class EventsViewModel(
-    private val eventsRepository: EventsRepository = DefaultEventsRepository(),
+    getEvents: GetEventsUseCase = GetEventsUseCase(),
 ) : ViewModel() {
 
     private val _input = MutableSharedFlow<Pair<EventsFilter, Boolean>>(
@@ -36,9 +34,9 @@ class EventsViewModel(
 
     @Suppress("USELESS_CAST")
     val uiState: StateFlow<EventsViewState> = _input.flatMapLatest { (input, showSnackbar) ->
-        eventsRepository.getEvents(input.date).map { events ->
+        getEvents(input.date).map { events ->
             EventsViewState.Success(
-                events = events.map { it.toLocalEvent() },
+                events = events,
                 input = input,
                 update = Update(Clock.System.now()),
             ) as EventsViewState
@@ -77,7 +75,7 @@ class EventsViewModel(
     private fun checkEndOfTheDay() = viewModelScope.launch {
         val state = uiState.filterIsInstance<EventsViewState.Success>().first()
         state.events.lastOrNull()
-            ?.takeIf { it.end != null && it.end < state.update.latest }
+            ?.takeIf { it.end?.let { it < state.update.latest } ?: false }
             ?.let { onInputChange(selection = Tomorrow, showSnack = true) }
     }
 

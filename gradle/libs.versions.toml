@@ -17,6 +17,11 @@ squareRetrofit = "2.9.0"
 squareRetrofitKotlinxSerializationJson = "1.0.0"
 squareOkHttp = "4.12.0"
 googleSecretsGradle = "2.0.1"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+appcompat = "1.6.1"
+material = "1.11.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -39,6 +44,11 @@ square-retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", ve
 square-retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "squareRetrofitKotlinxSerializationJson" }
 square-okhttp-core = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "squareOkHttp" }
 square-okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "squareOkHttp" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

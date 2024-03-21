@@ -34,6 +34,7 @@ android {
 
 dependencies {
     implementation(projects.feature.events.data)
+    implementation(projects.feature.events.domain)
     implementation(projects.design.theme)
     implementation(projects.design.illustrations)
 
