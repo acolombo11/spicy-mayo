@@ -96,7 +96,7 @@ internal fun EventItem(
                         .clip(shape = CircleShape)
                         .background(colors.accentColor)
                         .padding(horizontal = Spacing.M, vertical = Spacing.S),
-                    text = if (event.duration == Duration.INFINITE) {
+                    text = if (event.duration >= 1.toDuration(DurationUnit.DAYS)) {
                         stringResource(R.string.label_duration_all_day)
                     } else {
                         event.duration.toString(DurationUnit.MINUTES)
