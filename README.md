@@ -38,4 +38,4 @@ The screenshots are displaying different themes following the Material You user 
 ## Contribute
 
 The project is very specific to my requirements, it could be a lot more generic, so if you need any feature feel free to fork the project and continue by yourself or open a Pull Request.
-Check the repo's [issues](issues) to find some good first issues and other ideas.
+Check the repo's [issues](https://github.com/acolombo11/spicy-mayo/issues) to find some good first issues and other ideas.
