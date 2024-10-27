@@ -1,11 +1,11 @@
 # spicy-mayo
 
-Android app to check a Google Calendar without the need to add its Google account to the phone.
+Multiplatform app to check a Google Calendar without the need to add its Google account to the phone.
 Authentication and data retrieval are managed through a simple Google Apps Script backend.
 
 Its main use-case is to check Today, Tomorrow or a specific day of your work calendar, without adding your work account to your phone.
 
-Since the backend needs to be setup on the acount of the Google Calendar owner, and the app needs to be setup with the your own backend url, it can't be download but it needs to be built as explained in the next section.
+Since the backend needs to be setup on the account of the Google Calendar owner, and the app needs to be setup with the your own backend url, it can't be download but it needs to be built as explained in the next section.
 
 ### Screenshots
 
@@ -42,11 +42,15 @@ The screenshots are displaying different themes following the Material You user 
 
 ## Contribute
 
+Restore after porting to multiplatform
+* [ ] Modules
+* [ ] Gradle Secrets
+
 The project is very specific to my requirements, it could be a lot more generic, so if you need any feature feel free to fork the project and continue by yourself or open a Pull Request. There are a few things I'd like to do which likely I will never get to, because the app fulfills my needs as-is, but which you can help with:
 
-* [ ] Add a dependency injection framework (Koin so the project can be multiplatform) to avoid recomposition for lifecycle events
+* [x] Add a dependency injection framework (Koin so the project can be multiplatform) to avoid recomposition for lifecycle events
 * [ ] Add local cache of the days data, add a ViewPager to scroll between the days and add pull to refresh
-* [ ] Migrate from Retrofit to Ktor and make the project multiplatform
+* [x] Migrate from Retrofit to Ktor and make the project multiplatform
 
 Some other ideas to make the app generic, which you can contribute to:
 
