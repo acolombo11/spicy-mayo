@@ -1,4 +1,4 @@
-rootProject.name = "spicy-mayo-multiplatform"
+rootProject.name = "spicy-mayo"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
