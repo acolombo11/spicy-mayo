@@ -5,6 +5,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Typography
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -12,11 +14,12 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun WorkCalendarTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(), // TODO USe this
-    dynamicColor: Boolean = true,
+    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
     MaterialTheme(
+        colorScheme = dynamicColorScheme
+            ?: if (darkTheme) darkColorScheme() else lightColorScheme(),
         shapes = shapes,
         typography = typography,
         content = content,
@@ -47,18 +50,18 @@ private val typography: Typography
             fontWeight = FontWeight.Bold,
             fontSize = 30.sp,
             lineHeight = 36.sp,
-            letterSpacing = -.5.sp,
+            letterSpacing = (-.5).sp,
         ),
         headlineMedium = MaterialTheme.typography.headlineMedium.copy(
             fontFamily = spaceMonoFamily,
             fontWeight = FontWeight.Bold,
             lineHeight = 20.sp,
-            letterSpacing = -.5.sp,
+            letterSpacing = (-.5).sp,
         ),
         headlineSmall = MaterialTheme.typography.headlineSmall.copy(
             fontFamily = spaceMonoFamily,
             fontWeight = FontWeight.Normal,
-            letterSpacing = -.5.sp,
+            letterSpacing = (-.5).sp,
         ),
         titleLarge = MaterialTheme.typography.titleLarge.copy(
             fontFamily = spaceMonoFamily,
