@@ -31,14 +31,11 @@ The screenshots are displaying different themes following the Material You user 
 3. Copy the content of [spicy-mayo.js](spicy-mayo.js) to the default file in the editor
 4. Generate a random string or use a password of choice to fill the `spicyApiKey` const, then save the project
 5. Deploy the script as **"type"** <i>Web App</i>, choosing to **"execute as"** <i>Me <sub><sup>(email)</sup></sub></i>, with **"Who has access"** to <i>Anyone</i>
-6. Copy the obtained Deployment ID, and the Api key generated previously, to the [secrets.properties](secrets.properties) file in the root of the project
-7. Run `./gradlew assemble` to update the secrets then run the app and enjoy it
+6. Copy the obtained Deployment ID, and the Api key generated previously, to the [secrets.template.properties](secrets.template.properties) file in the root of the project
+7. Remove the template extension from the file, so to have as result the `secrets.properties` file, which is ignored by git not to expose any secrets
+8. Run `./gradlew assemble` to update the secrets then run the app and enjoy it
 
 ## Contribute
-
-Restore after porting to multiplatform
-* [x] Modules
-* [x] Gradle Secrets
 
 The project is very specific to my requirements, it could be a lot more generic, so if you need any feature feel free to fork the project and continue by yourself or open a Pull Request.
 Some ideas to make the app generic, which you can contribute to:
@@ -48,7 +45,5 @@ Some ideas to make the app generic, which you can contribute to:
 
 There are also a few things I'd like to improve which likely I will never get to, because the app fulfills my needs as-is, but which you can help with:
 
-* [x] Add a dependency injection framework (Koin so the project can be multiplatform) to avoid recomposition for lifecycle events
 * [ ] Add local cache of the days data, add a ViewPager to scroll between the days and add pull to refresh
-* [x] Migrate from Retrofit to Ktor and make the project multiplatform
 * [ ] Add iOs Screenshots and Material You Screenshots (light and dark themes)
