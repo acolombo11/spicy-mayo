@@ -8,7 +8,7 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(20)
+    jvmToolchain(libs.versions.module.jdk.get().toInt())
 
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
