@@ -5,13 +5,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import feature.EventsRoute
-import feature.EventsRouteDestination
-import feature.EventsViewModel
+import eu.acolombo.work.calendar.design.theme.WorkCalendarTheme
+import eu.acolombo.work.calendar.events.ui.EventsRoute
+import eu.acolombo.work.calendar.events.ui.EventsRouteDestination
+import eu.acolombo.work.calendar.events.ui.EventsViewModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinContext
 import org.koin.compose.currentKoinScope
-import theme.WorkCalendarTheme
 
 @Composable
 @Preview

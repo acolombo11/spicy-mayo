@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="loading">Loading events...</string>
+    <string name="button_today">Today</string>
+    <string name="button_tomorrow">Tomorrow</string>
+    <string name="description_select_date">Select Date</string>
+    <string name="alert_done_for_the_day">Congrats, no more meetings for the day! Checking tomorrow…</string>
+    <string name="title_last_update">Last Update</string>
+    <string name="description_empty">Yay! No events on this day!</string>
+    <string name="description_error">An error occurred!</string>
+    <string name="label_start">Start</string>
+    <string name="label_end">End</string>
+    <string name="label_duration_all_day">All day</string>
+</resources>

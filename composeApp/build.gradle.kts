@@ -30,6 +30,10 @@ kotlin {
     
     sourceSets {
         commonMain.dependencies {
+            implementation(projects.feature.events.domain)
+            implementation(projects.feature.events.ui)
+            implementation(projects.design.theme)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -40,7 +44,7 @@ kotlin {
 
             api(libs.koin.core)
             implementation(libs.koin.compose)
-            implementation(libs.lifecycle.viewmodel)
+            implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.navigation.compose)
 
             implementation(libs.ktor.client.core)
@@ -51,7 +55,7 @@ kotlin {
             implementation(libs.kotlinx.datetime)
         }
         androidMain.dependencies {
-            implementation(libs.compose.ui.tooling.preview)
+            implementation(libs.androidx.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
 
             implementation(libs.koin.android)
@@ -97,8 +101,8 @@ android {
     buildFeatures {
         compose = true
     }
-    dependencies {
-        debugImplementation(libs.compose.ui.tooling)
-    }
+//    dependencies {
+//        debugImplementation(libs.compose.ui.tooling)
+//    }
 }
 

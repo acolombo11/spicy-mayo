@@ -1,8 +1,5 @@
-import feature.layers.data.source.DefaultEventsRepository
-import feature.layers.data.source.EventsDataSource
-import feature.layers.data.source.EventsRepository
-import feature.layers.data.source.remote.RemoteEventsDataSource
-import feature.layers.domain.GetEventsUseCase
+
+import eu.acolombo.work.calendar.events.di.eventsModules
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
@@ -11,12 +8,13 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.serialization
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 
-private val httpModule = module {
+private val networkModule = module {
     single {
         HttpClient {
             install(ContentNegotiation) {
@@ -35,19 +33,10 @@ private val httpModule = module {
             }
         }
     }
+
+    single<CoroutineDispatcher> {
+        Dispatchers.IO
+    }
 }
 
-private val eventsModule = module {
-    single<EventsDataSource> { (RemoteEventsDataSource(get())) }
-    single<EventsRepository> { DefaultEventsRepository(get(), Dispatchers.IO) }
-}
-
-private val useCasesModule = module {
-    single { GetEventsUseCase(get()) }
-}
-
-val sharedModules = listOf(
-    httpModule,
-    eventsModule,
-    useCasesModule,
-)
+val koinModules = networkModule + eventsModules
