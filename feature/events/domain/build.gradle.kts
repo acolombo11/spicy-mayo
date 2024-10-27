@@ -8,19 +8,10 @@ plugins {
 
 kotlin {
     jvmToolchain(libs.versions.module.jdk.get().toInt())
-
-    androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_20)
-        }
-    }
-
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64(),
-    )
+    androidTarget { compilerOptions { jvmTarget.set(JvmTarget.JVM_20) } }
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     sourceSets {
         commonMain.dependencies {
