@@ -56,6 +56,9 @@ internal class FakeEventsDataSource(
      * The startDate parameter of the function should have a default value of the current day LocalData, also please use trailing commas everywhere
      *   +
      * Make it a map where the key is the date and the value is the list of events for that day
+     *
+     *
+     * At last I added summariesOutOfOffice and slightly modified ChatGPT logic just cause I wanted to add emojis and have a little fun
      */
     private fun generateRandomEvents(
         startDate: LocalDate = LocalDate.now(),
@@ -70,10 +73,10 @@ internal class FakeEventsDataSource(
             "Olivia", "Lucas", "Sophia", "Amir", "Ella", "Noah",
         )
         val summariesOutOfOffice = listOf(
-            "Lunch with kids \uD83C\uDF5D",
-            "Picnic with friends \uD83E\uDDFA",
+            "Lunch \uD83C\uDF5D",
+            "Picnic \uD83E\uDDFA",
             "Gym Break \uD83D\uDCAA",
-            "Free Palestine \uD83C\uDF49",
+            "Free \uD83C\uDF49 Palestine",
         )
 
         val timeZone = TimeZone.currentSystemDefault()
@@ -136,22 +139,16 @@ internal class FakeEventsDataSource(
                 )
             }
 
-            // Add an out-of-office event that happens almost every day
-            if (Random.nextInt(10) > 2) { // ~70% chance
-                dayEvents.add(
-                    createRandomEvent(
-                        type = "outOfOffice",
-                        summary = summariesOutOfOffice.random(),
-                        date = date,
-                    ),
-                )
-            }
+            // Add an out-of-office events
+            dayEvents.add(
+                createOutOfOfficeEvent(
+                    date = date,
+                    summary = summariesOutOfOffice.random(),
+                    isFullDay = (Random.nextInt(7) == i), // Once a week it's full day
+                ),
+            )
 
-            // Add an out-of-office event 1 full day of the week
-            val isFullDayOutOfOffice = (Random.nextInt(7) == i) // Once a week
-            dayEvents.add(createOutOfOfficeEvent(date, isFullDayOutOfOffice, timeZone))
-
-            events[date] = dayEvents
+            events[date] = dayEvents.sortedBy { it.start }
         }
         return events
     }
@@ -163,15 +160,19 @@ internal class FakeEventsDataSource(
         attendees: List<String> = emptyList(),
         timeZone: TimeZone = TimeZone.currentSystemDefault(),
     ): Event {
-        val startHour = Random.nextInt(9, 16)
+        val startHour = Random.nextInt(9, 17)
         val duration = Random.nextInt(1, 3) // Between 1 and 2 hours
         val start = date.atTime(startHour, 0).toInstant(timeZone)
         val end = start.plus(duration.hours)
+        val selectedAttendees = if (attendees.isNotEmpty()) {
+            val attendeesSize = Random.nextInt(minOf(attendees.size, 2), attendees.size)
+            attendees.shuffled().take(attendeesSize)
+        } else attendees
         return Event(
             summary = summary,
             start = start,
             end = end,
-            attendees = attendees,
+            attendees = selectedAttendees,
             type = type,
         )
     }
@@ -197,6 +198,7 @@ internal class FakeEventsDataSource(
 
     private fun createOutOfOfficeEvent(
         date: LocalDate,
+        summary: String,
         isFullDay: Boolean,
         timeZone: TimeZone = TimeZone.currentSystemDefault(),
     ): Event = if (isFullDay) {
@@ -212,7 +214,7 @@ internal class FakeEventsDataSource(
         val start = date.atTime(hour = startHour, minute = 0)
         val end = date.atTime(hour = startHour + Random.nextInt(1, 3), minute = 0)
         Event(
-            summary = "Out of Office",
+            summary = summary,
             start = start.toInstant(timeZone),
             end = end.toInstant(timeZone),
             attendees = emptyList(),
