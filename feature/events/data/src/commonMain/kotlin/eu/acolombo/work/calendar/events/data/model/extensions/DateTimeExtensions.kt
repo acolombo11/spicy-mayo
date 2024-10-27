@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package eu.acolombo.work.calendar.events.ui.extensions
+package eu.acolombo.work.calendar.events.data.model.extensions
 
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
