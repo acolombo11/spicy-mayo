@@ -38,12 +38,4 @@ The screenshots are displaying different themes following the Material You user 
 ## Contribute
 
 The project is very specific to my requirements, it could be a lot more generic, so if you need any feature feel free to fork the project and continue by yourself or open a Pull Request.
-Some ideas to make the app generic, which you can contribute to:
-
-* [ ] Make the timezones changeable by clicking on them and showing a selector
-* [ ] Add more event types
-
-There are also a few things I'd like to improve which likely I will never get to, because the app fulfills my needs as-is, but which you can help with:
-
-* [ ] Add local cache of the days data, add a ViewPager to scroll between the days and add pull to refresh
-* [ ] Add iOs Screenshots and Material You Screenshots (light and dark themes)
+Check the repo's [issues](issues) to find some good first issues and other ideas.
