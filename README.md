@@ -43,7 +43,7 @@ The screenshots are displaying different themes following the Material You user 
 ## Contribute
 
 Restore after porting to multiplatform
-* [ ] Modules
+* [x] Modules
 * [ ] Gradle Secrets
 
 The project is very specific to my requirements, it could be a lot more generic, so if you need any feature feel free to fork the project and continue by yourself or open a Pull Request. There are a few things I'd like to do which likely I will never get to, because the app fulfills my needs as-is, but which you can help with:
