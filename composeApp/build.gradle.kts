@@ -9,7 +9,7 @@ plugins {
 }
 
 kotlin {
-    androidTarget { compilerOptions { jvmTarget.set(JvmTarget.JVM_20) } }
+    androidTarget { compilerOptions { jvmTarget.set(JvmTarget.JVM_11) } }
     listOf(
         iosX64(),
         iosArm64(),
