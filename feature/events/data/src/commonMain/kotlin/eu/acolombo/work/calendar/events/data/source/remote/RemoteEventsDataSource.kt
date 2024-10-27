@@ -16,6 +16,8 @@ internal class RemoteEventsDataSource(
     private val dispatcher: CoroutineDispatcher,
     private val baseUrl: String = "https://script.google.com/macros/s",
 ) : EventsDataSource {
+    // If you get Unresolved reference 'Secrets' compilation error
+    // check the README.md file and make sure you filled the /secrets.properties file
     override suspend fun getEvents(date: LocalDate): List<Event> = withContext(dispatcher) {
         client.get("$baseUrl/${Secrets.DeployId}/exec") {
             parameter("date", date)

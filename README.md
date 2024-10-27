@@ -33,7 +33,7 @@ The screenshots are displaying different themes following the Material You user 
 5. Deploy the script as **"type"** <i>Web App</i>, choosing to **"execute as"** <i>Me <sub><sup>(email)</sup></sub></i>, with **"Who has access"** to <i>Anyone</i>
 6. Copy the obtained Deployment ID, and the Api key generated previously, to the [secrets.template.properties](secrets.template.properties) file in the root of the project
 7. Remove the template extension from the file, so to have as result the `secrets.properties` file, which is ignored by git not to expose any secrets
-8. Run `./gradlew assemble` to update the secrets then run the app and enjoy it
+8. Build the app and enjoy it
 
 ## Contribute
 

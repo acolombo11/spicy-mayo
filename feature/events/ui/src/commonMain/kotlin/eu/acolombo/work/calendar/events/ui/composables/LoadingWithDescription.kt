@@ -15,8 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import eu.acolombo.work.calendar.design.theme.Spacing
 import org.jetbrains.compose.resources.stringResource
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.Res
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.loading
+import spicy_mayo.feature.events.ui.generated.resources.Res
+import spicy_mayo.feature.events.ui.generated.resources.loading
 
 @Composable
 fun LoadingWithDescription(

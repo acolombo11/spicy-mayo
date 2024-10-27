@@ -52,11 +52,11 @@ import eu.acolombo.work.calendar.events.ui.composables.rememberDatePicker
 
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.stringResource
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.Res
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.alert_done_for_the_day
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.description_empty
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.description_error
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.loading
+import spicy_mayo.feature.events.ui.generated.resources.Res
+import spicy_mayo.feature.events.ui.generated.resources.alert_done_for_the_day
+import spicy_mayo.feature.events.ui.generated.resources.description_empty
+import spicy_mayo.feature.events.ui.generated.resources.description_error
+import spicy_mayo.feature.events.ui.generated.resources.loading
 
 @Serializable
 object EventsRouteDestination

@@ -2,16 +2,16 @@
  * Google Apps Script default entry point.
  *
  * Remember to fill-in the spicyApiKey const with a randomly generated value and copy the same value
- * to your ~/.gradle/grade.properties spicyApiKey variable. After uploading this script on Google
+ * to your /secrets.properties spicyApiKey variable. After uploading this script on Google
  * Apps Script and deploying it, make sure to also copy the Deployment ID to fill the spicyDeployId
- * value.
+ * value in the same file.
  *
  * @param {string} e - The request parameters. We are just interested in two url query parameters:
  * - key: The api-key to make sure we're not exposing the data to the public,
  * - date: The date the script is gonna request the events for (format: 2024-12-01).
  */
 function doGet(e) {
-    const spicyApiKey = ""; // Replace this value and add it to ~/.gradle/grade.properties
+    const spicyApiKey = ""; // Replace this value and add it to /secrets.properties
     if (e.parameter.key == spicyApiKey) {
         return getEvents(e.parameter.date);
     }

@@ -19,9 +19,9 @@ import kotlinx.datetime.atTime
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.stringResource
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.Res
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.cancel
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.ok
+import spicy_mayo.feature.events.ui.generated.resources.Res
+import spicy_mayo.feature.events.ui.generated.resources.cancel
+import spicy_mayo.feature.events.ui.generated.resources.ok
 
 @Composable
 internal fun DatePickerDialog(

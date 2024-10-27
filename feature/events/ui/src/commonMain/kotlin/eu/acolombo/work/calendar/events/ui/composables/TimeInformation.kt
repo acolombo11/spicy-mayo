@@ -19,8 +19,8 @@ import eu.acolombo.work.calendar.events.domain.model.Offices
 import eu.acolombo.work.calendar.events.domain.model.Update
 import kotlinx.datetime.LocalTime
 import org.jetbrains.compose.resources.stringResource
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.Res
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.title_last_update
+import spicy_mayo.feature.events.ui.generated.resources.Res
+import spicy_mayo.feature.events.ui.generated.resources.title_last_update
 
 @Composable
 fun TimeInformation(

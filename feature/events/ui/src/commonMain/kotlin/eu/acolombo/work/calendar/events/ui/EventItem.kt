@@ -25,10 +25,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import eu.acolombo.work.calendar.design.theme.Spacing
 import eu.acolombo.work.calendar.design.theme.WorkCalendarTheme
 import eu.acolombo.work.calendar.events.domain.model.Event
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.Res
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.label_duration_all_day
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.label_end
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.label_start
+import spicy_mayo.feature.events.ui.generated.resources.Res
+import spicy_mayo.feature.events.ui.generated.resources.label_duration_all_day
+import spicy_mayo.feature.events.ui.generated.resources.label_end
+import spicy_mayo.feature.events.ui.generated.resources.label_start
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone

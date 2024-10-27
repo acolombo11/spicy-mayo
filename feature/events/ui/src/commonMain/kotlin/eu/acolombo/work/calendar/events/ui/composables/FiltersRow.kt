@@ -19,10 +19,10 @@ import eu.acolombo.work.calendar.design.theme.WorkCalendarTheme
 import eu.acolombo.work.calendar.events.ui.EventsFilter
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.Res
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.button_today
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.button_tomorrow
-import spicy_mayo_multiplatform.feature.events.ui.generated.resources.description_select_date
+import spicy_mayo.feature.events.ui.generated.resources.Res
+import spicy_mayo.feature.events.ui.generated.resources.button_today
+import spicy_mayo.feature.events.ui.generated.resources.button_tomorrow
+import spicy_mayo.feature.events.ui.generated.resources.description_select_date
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

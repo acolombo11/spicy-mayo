@@ -4,13 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import org.jetbrains.compose.resources.Font
-import spicy_mayo_multiplatform.design.theme.generated.resources.Res
-import spicy_mayo_multiplatform.design.theme.generated.resources.space_grotesk_bold
-import spicy_mayo_multiplatform.design.theme.generated.resources.space_grotesk_medium
-import spicy_mayo_multiplatform.design.theme.generated.resources.space_grotesk_regular
-import spicy_mayo_multiplatform.design.theme.generated.resources.space_grotesk_semi_bold
-import spicy_mayo_multiplatform.design.theme.generated.resources.space_mono_bold
-import spicy_mayo_multiplatform.design.theme.generated.resources.space_mono_regular
+import spicy_mayo.design.theme.generated.resources.Res
+import spicy_mayo.design.theme.generated.resources.space_grotesk_bold
+import spicy_mayo.design.theme.generated.resources.space_grotesk_medium
+import spicy_mayo.design.theme.generated.resources.space_grotesk_regular
+import spicy_mayo.design.theme.generated.resources.space_grotesk_semi_bold
+import spicy_mayo.design.theme.generated.resources.space_mono_bold
+import spicy_mayo.design.theme.generated.resources.space_mono_regular
 
 val spaceMonoFamily
     @Composable
