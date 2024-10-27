@@ -1,6 +1,7 @@
 package eu.acolombo.work.calendar
 
 import App
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,18 +15,21 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            enableEdgeToEdge(
-                statusBarStyle = SystemBarStyle.auto(
-                    lightScrim = Color.TRANSPARENT,
-                    darkScrim = Color.TRANSPARENT,
-                ),
-                navigationBarStyle = SystemBarStyle.auto(
-                    lightScrim = Color.TRANSPARENT,
-                    darkScrim = Color.TRANSPARENT,
-                ),
-            )
+            updateSystemBars()
             App()
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        updateSystemBars()
+    }
+
+    private fun updateSystemBars() {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT),
+        )
     }
 }
 
