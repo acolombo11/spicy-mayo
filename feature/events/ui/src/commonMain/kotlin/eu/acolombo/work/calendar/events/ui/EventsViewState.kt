@@ -2,6 +2,7 @@ package eu.acolombo.work.calendar.events.ui
 
 import eu.acolombo.work.calendar.events.domain.model.Event
 import eu.acolombo.work.calendar.events.domain.model.Update
+import org.jetbrains.compose.resources.StringResource
 
 sealed class EventsViewState(val input: EventsFilter) {
     class Loading(
@@ -15,6 +16,7 @@ sealed class EventsViewState(val input: EventsFilter) {
     ) : EventsViewState(input)
     class Error(
         input: EventsFilter,
+        val resource: StringResource?,
         val message: String?,
     ) : EventsViewState(input)
 }

@@ -5,6 +5,7 @@
     <string name="loading">Loading events...</string>
     <string name="button_today">Today</string>
     <string name="button_tomorrow">Tomorrow</string>
+    <string name="button_retry">Retry</string>
     <string name="description_select_date">Select Date</string>
     <string name="alert_done_for_the_day">Congrats, no more meetings for the day! Checking tomorrow…</string>
     <string name="title_last_update">Last Update</string>
@@ -13,4 +14,6 @@
     <string name="label_start">Start</string>
     <string name="label_end">End</string>
     <string name="label_duration_all_day">All day</string>
+    <string name="error_connection">Error! Check your internet connection and try again</string>
+    <string name="error_deployment">Error! Check if your project is using the correct DeployId</string>
 </resources>

@@ -2,6 +2,9 @@ package eu.acolombo.work.calendar.events.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import eu.acolombo.work.calendar.events.data.model.NoConnectionException
+import eu.acolombo.work.calendar.events.data.model.DeploymentErrorException
+import eu.acolombo.work.calendar.events.data.model.ServerErrorException
 import eu.acolombo.work.calendar.events.domain.GetEventsUseCase
 import eu.acolombo.work.calendar.events.domain.model.Update
 import eu.acolombo.work.calendar.events.ui.EventsFilter.Date
@@ -21,6 +24,9 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
+import spicy_mayo.feature.events.ui.generated.resources.Res
+import spicy_mayo.feature.events.ui.generated.resources.error_connection
+import spicy_mayo.feature.events.ui.generated.resources.error_deployment
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class EventsViewModel(
@@ -43,7 +49,16 @@ class EventsViewModel(
         }.onStart {
             emit(EventsViewState.Loading(input, showSnackbar))
         }.catch {
-            emit(EventsViewState.Error(input, it.message))
+            val resource = when (it) {
+                is DeploymentErrorException -> Res.string.error_deployment
+                is NoConnectionException -> Res.string.error_connection
+                else -> null
+            }
+            val message = when (it) {
+                is ServerErrorException -> it.error.message
+                else -> it.message
+            }
+            emit(EventsViewState.Error(input, resource, message))
         }
     }.stateIn(
         scope = viewModelScope,

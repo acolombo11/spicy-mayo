@@ -54,6 +54,7 @@ import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.stringResource
 import spicy_mayo.feature.events.ui.generated.resources.Res
 import spicy_mayo.feature.events.ui.generated.resources.alert_done_for_the_day
+import spicy_mayo.feature.events.ui.generated.resources.button_retry
 import spicy_mayo.feature.events.ui.generated.resources.description_empty
 import spicy_mayo.feature.events.ui.generated.resources.description_error
 import spicy_mayo.feature.events.ui.generated.resources.loading
@@ -70,6 +71,7 @@ fun EventsRoute(
     EventsScreen(
         uiState = uiState,
         onInputChange = viewModel::onInputChange,
+        onRefresh = viewModel::refresh,
     )
 }
 
@@ -78,6 +80,7 @@ fun EventsRoute(
 internal fun EventsScreen(
     uiState: EventsViewState,
     onInputChange: (EventsFilter) -> Unit,
+    onRefresh: () -> Unit,
 ) {
     val showDialog = remember { mutableStateOf(false) }
 
@@ -107,7 +110,7 @@ internal fun EventsScreen(
                     TimeInformation(
                         modifier = Modifier
                             .padding(it)
-                            .padding(bottom = padding.calculateTopPadding()/2)
+                            .padding(bottom = padding.calculateTopPadding() / 2)
                             .height(contentHeight)
                             .widthIn(max = BottomSheetMaxWidth)
                             .fillMaxWidth(),
@@ -200,8 +203,11 @@ internal fun EventsScreen(
                                     fill = MaterialTheme.colorScheme.secondaryContainer,
                                     stroke = MaterialTheme.colorScheme.onSecondaryContainer,
                                 ),
-                                description = uiState.message
+                                description = uiState.resource?.let { stringResource(it) }
+                                    ?: uiState.message
                                     ?: stringResource(Res.string.description_error),
+                                button = stringResource(Res.string.button_retry),
+                                onClick = onRefresh,
                             )
                         }
                     }
