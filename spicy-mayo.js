@@ -1,3 +1,9 @@
+/*********************************** IMPORTANT: API KEY NEEDED ***********************************\
+        Replace `spicyApiKey` value with your own API key before pasting on Apps Scripts!
+        Make sure to also paste the same value in your project's secrets.properties file
+\*************************************************************************************************/
+const spicyApiKey = "";
+
 /**
  * Google Apps Script default entry point.
  *
@@ -12,7 +18,6 @@
  * @return {string} Json containing the events, or Json containing the error.
  */
 function doGet(e) {
-    const spicyApiKey = ""; // Replace this value and add it to /secrets.properties
     if (e.parameter.key == spicyApiKey) {
         return getEvents(e.parameter.date);
     } else {
