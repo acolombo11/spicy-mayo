@@ -1,21 +1,19 @@
 package eu.acolombo.work.calendar.events.data.source.remote
 
 import eu.acolombo.work.calendar.events.data.model.Event
-import eu.acolombo.work.calendar.events.data.model.extensions.now
 import eu.acolombo.work.calendar.events.data.source.EventsDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.atTime
-import kotlinx.datetime.plus
 import kotlinx.datetime.toInstant
 import kotlin.random.Random
+import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 
@@ -26,51 +24,14 @@ internal class FakeEventsDataSource(
 
     override suspend fun getEvents(date: LocalDate): List<Event> = withContext(dispatcher) {
         delay(2000)
-        events[date].orEmpty()
+        events[date.dayOfWeek]?.map { it.toEvent(date) }.orEmpty()
     }
 
-    /**
-     * I created this with the help of ChatGPT, I needed to fix small syntax details but otherwise
-     * the logic was correct (I'm sure if I had also instructed GPT on the syntax mistakes it made,
-     * I wouldn't have had to fix them manually). Here are the prompts I wrote (initial and additions):
-     *
-     * I need you to generate random events in the next 7 days. The function should be a list of the events you generate, but should take as input today's date.
-     * This is the Event class:
-     * data class Event(
-     *     val summary: String?,
-     *     val start: Instant?,
-     *     val end: Instant?,
-     *     val attendees: List<String> = emptyList(),
-     *     val type: String,
-     * )
-     * The attendees are selected randomly in a list 12 names(examples Connor, Silvia, Mario, Mohammad, etc.), the summary is also selected randomly in a list of 14 names(examples are Daily Standup, Sprint Planning, Lunch with kids, etc.). Type of events are always the same:
-     * "default", "outOfOffice", "workingLocation" "focusTime".
-     * Most events should be of type default, but every day there should be a workingLocation event, rarely a focusTime event and almost every day an outOfOffice event of 1 hr. 1 day of the week should contain a outOfOffice event during all day.
-     *   +
-     * Each event shouldn't have all the attendees, but just a random selection of 2 to 12
-     *   +
-     * Don't add events on saturdays and sundays
-     *   +
-     * Add an event every day with summary "Daily Standup" from 9:30 to 10, with all attendees, and exclude it from general events
-     *   +
-     * The startDate parameter of the function should have a default value of the current day LocalData, also please use trailing commas everywhere
-     *   +
-     * Make it a map where the key is the date and the value is the list of events for that day
-     *
-     *
-     * At last I added summariesOutOfOffice and slightly modified ChatGPT logic just cause I wanted to add emojis and have a little fun
-     */
-    private fun generateRandomEvents(
-        startDate: LocalDate = LocalDate.now(),
-    ): Map<LocalDate, List<Event>> {
+    private fun generateRandomEvents(): Map<DayOfWeek, List<DayEvent>> {
         val summariesOffice = listOf(
-            "Sprint Planning", "Code Review", "1:1 Meeting",
+            "Sprint Planning", "Code Review", "1:1 Meeting", "Planning Session",
             "Team Sync", "Design Review", "Project Update", "Performance Check",
-            "Retrospective", "All Hands", "Customer Demo", "Coffee Break", "Planning Session",
-        )
-        val attendeesList = listOf(
-            "Connor", "Silvia", "Mario", "Mohammad", "Emma", "David",
-            "Olivia", "Lucas", "Sophia", "Amir", "Ella", "Noah",
+            "Retrospective", "All Hands", "Customer Demo", "Coffee Break",
         )
         val summariesOutOfOffice = listOf(
             "Lunch \uD83C\uDF5D",
@@ -78,147 +39,155 @@ internal class FakeEventsDataSource(
             "Gym Break \uD83D\uDCAA",
             "Free \uD83C\uDF49 Palestine",
         )
+        val attendeesList = listOf(
+            "Connor", "Silvia", "Mario", "Mohammad", "Emma", "David",
+            "Olivia", "Lucas", "Sophia", "Amir", "Ella", "Noah",
+        )
 
-        val timeZone = TimeZone.currentSystemDefault()
+        val events = mutableMapOf<DayOfWeek, List<DayEvent>>()
 
-        val events = mutableMapOf<LocalDate, List<Event>>()
+        // One day of the week is fully off
+        val offDay = DayOfWeek.entries.random()
 
-        // Generate events for the next 7 days so there's always a weekend included
-        for (i in 0 until 7) {
-            val date = startDate.plus(DatePeriod(days = i))
-
+        // Generate events for each day of the week
+        DayOfWeek.entries.forEach { dayOfWeek ->
             // Skip weekends
-            if (date.dayOfWeek == DayOfWeek.SATURDAY || date.dayOfWeek == DayOfWeek.SUNDAY) {
-                continue
+            events[dayOfWeek] = when (dayOfWeek) {
+                DayOfWeek.SATURDAY, DayOfWeek.SUNDAY -> emptyList()
+                else -> {
+                    val dayEvents = mutableListOf<DayEvent>()
+
+                    // Add a "Daily Standup" event from 9:30 to 10:00
+                    dayEvents.add(
+                        DayEvent(
+                            summary = "Daily Standup",
+                            day = dayOfWeek,
+                            start = LocalTime(hour = 9, minute = 30),
+                            duration = 30.minutes,
+                            attendees = attendeesList,
+                            type = "default",
+                        ),
+                    )
+
+                    // Generate default events
+                    val defaultEventCount = Random.nextInt(2, 4)
+                    repeat(defaultEventCount) {
+                        dayEvents.add(
+                            createRandomEvent(
+                                type = "default",
+                                summary = summariesOffice.random(),
+                                day = dayOfWeek,
+                                attendees = attendeesList,
+                            ),
+                        )
+                    }
+
+                    // Add a daily working location event
+                    dayEvents.add(
+                        DayEvent(
+                            summary = "Working Location: Home",
+                            day = dayOfWeek,
+                            start = LocalTime(0,0,0),
+                            duration = 24.hours,
+                            attendees = emptyList(),
+                            type = "workingLocation",
+                        ),
+                    )
+
+                    // Add a rare focus time event
+                    if (Random.nextInt(10) > 7) { // ~20% chance
+                        dayEvents.add(
+                            createRandomEvent(
+                                type = "focusTime",
+                                summary = "Deep Focus",
+                                day = dayOfWeek,
+                            ),
+                        )
+                    }
+
+                    // Add out-of-office events
+                    dayEvents.add(
+                        createOutOfOfficeEvent(
+                            day = dayOfWeek,
+                            summary = summariesOutOfOffice.random(),
+                            isFullDay = dayOfWeek == offDay,
+                        ),
+                    )
+
+                    dayEvents.sortedBy { it.start }
+                }
             }
-            val dayEvents = mutableListOf<Event>()
-
-            // Add a "Daily Standup" event from 9:30 to 10:00
-            dayEvents.add(
-                createFixedEvent(
-                    summary = "Daily Standup",
-                    date = date,
-                    startTime = LocalTime(hour = 9, minute = 30),
-                    durationMinutes = 30,
-                    attendees = attendeesList,
-                ),
-            )
-
-            // Generate default events
-            val defaultEventCount = Random.nextInt(2, 4)
-            repeat(defaultEventCount) {
-                dayEvents.add(
-                    createRandomEvent(
-                        type = "default",
-                        summary = summariesOffice.random(),
-                        date = date,
-                        attendees = attendeesList,
-                    ),
-                )
-            }
-
-            // Add a daily working location event
-            dayEvents.add(
-                Event(
-                    summary = "Working Location: Home",
-                    start = date.atStartOfDayIn(timeZone),
-                    end = date.plus(DatePeriod(days = 1)).atStartOfDayIn(timeZone),
-                    attendees = emptyList(),
-                    type = "workingLocation",
-                ),
-            )
-
-            // Add a rare focus time event
-            if (Random.nextInt(10) > 7) { // ~20% chance
-                dayEvents.add(
-                    createRandomEvent(
-                        type = "focusTime",
-                        summary = "Deep Focus",
-                        date = date,
-                    ),
-                )
-            }
-
-            // Add an out-of-office events
-            dayEvents.add(
-                createOutOfOfficeEvent(
-                    date = date,
-                    summary = summariesOutOfOffice.random(),
-                    isFullDay = (Random.nextInt(7) == i), // Once a week it's full day
-                ),
-            )
-
-            events[date] = dayEvents.sortedBy { it.start }
         }
         return events
     }
 
+    private val minutes = listOf(0, 15, 30, 45)
+
     private fun createRandomEvent(
         type: String,
         summary: String,
-        date: LocalDate,
+        day: DayOfWeek,
         attendees: List<String> = emptyList(),
-        timeZone: TimeZone = TimeZone.currentSystemDefault(),
-    ): Event {
-        val startHour = Random.nextInt(9, 17)
-        val duration = Random.nextInt(1, 3) // Between 1 and 2 hours
-        val start = date.atTime(startHour, 0).toInstant(timeZone)
-        val end = start.plus(duration.hours)
-        val selectedAttendees = if (attendees.isNotEmpty()) {
-            val attendeesSize = Random.nextInt(minOf(attendees.size, 2), attendees.size)
-            attendees.shuffled().take(attendeesSize)
-        } else attendees
-        return Event(
+    ) = DayEvent(
             summary = summary,
-            start = start,
-            end = end,
-            attendees = selectedAttendees,
+            day = day,
+            start = LocalTime(hour = Random.nextInt(9, 17), minute = minutes.random()),
+            duration = Random.nextInt(1, 3).hours,
+            attendees = attendees.takeIf { it.isNotEmpty() }?.shuffled()?.takeRandom().orEmpty(),
             type = type,
+        )
+
+    private fun <T> Iterable<T>.takeRandom(
+        from: Int = count(),
+        until: Int = count(),
+    ): List<T> = take(Random.nextInt(minOf(count(), from), minOf(count(), until)))
+
+
+    private fun createOutOfOfficeEvent(
+        day: DayOfWeek,
+        summary: String,
+        isFullDay: Boolean,
+    ): DayEvent = if (isFullDay) {
+        DayEvent(
+            summary = "Out of Office",
+            day = day,
+            start = LocalTime(0,0,0),
+            duration = 24.hours,
+            attendees = emptyList(),
+            type = "outOfOffice",
+        )
+    } else {
+        DayEvent(
+            summary = summary,
+            day = day,
+            start = LocalTime(hour = Random.nextInt(8, 17), minute = 0),
+            duration = Random.nextInt(1, 3).hours,
+            attendees = emptyList(),
+            type = "outOfOffice",
         )
     }
 
-    private fun createFixedEvent(
-        summary: String,
+    data class DayEvent(
+        val summary: String?,
+        val day: DayOfWeek,
+        val start: LocalTime,
+        val duration: Duration,
+        val attendees: List<String> = emptyList(),
+        val type: String,
+    )
+
+    private fun DayEvent.toEvent(
         date: LocalDate,
-        startTime: LocalTime,
-        durationMinutes: Int,
-        attendees: List<String>,
         timeZone: TimeZone = TimeZone.currentSystemDefault(),
     ): Event {
-        val start = date.atTime(startTime).toInstant(timeZone)
-        val end = start.plus(durationMinutes.minutes)
+        val start: Instant = date.atTime(start).toInstant(timeZone)
+        val end: Instant = start.plus(duration)
         return Event(
             summary = summary,
             start = start,
             end = end,
             attendees = attendees,
-            type = "default",
-        )
-    }
-
-    private fun createOutOfOfficeEvent(
-        date: LocalDate,
-        summary: String,
-        isFullDay: Boolean,
-        timeZone: TimeZone = TimeZone.currentSystemDefault(),
-    ): Event = if (isFullDay) {
-        Event(
-            summary = "Out of Office",
-            start = date.atStartOfDayIn(timeZone),
-            end = date.plus(DatePeriod(days = 1)).atStartOfDayIn(timeZone),
-            attendees = emptyList(),
-            type = "outOfOffice",
-        )
-    } else {
-        val startHour = Random.nextInt(8, 17)
-        val start = date.atTime(hour = startHour, minute = 0)
-        val end = date.atTime(hour = startHour + Random.nextInt(1, 3), minute = 0)
-        Event(
-            summary = summary,
-            start = start.toInstant(timeZone),
-            end = end.toInstant(timeZone),
-            attendees = emptyList(),
-            type = "outOfOffice",
+            type = type,
         )
     }
 }
