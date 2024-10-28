@@ -62,11 +62,12 @@ function getEvents(date) {
 }
 
 /**
- * Takes a corporate email of format "name.surname@company.xyz" or "name@company.xyz" and extracts
- * just the name part of the email, no surname or company name.
+ * Extracts and formats a name from a corporate email address.
  *
- * @param {string} email - The attendee's corporate email.
- * @return {string} The name part of the email, no surname or company name.
+ * @param {string} email - The corporate email address in the format "firstname.lastname@company.com"
+ *                       or "firstname@company.com".
+ * @returns {string} The extracted first name with the first letter capitalized,
+ *                  no surname or company name.
  */
 function extractNameFromCorporateEmail(email) {
     const string = email
@@ -75,7 +76,13 @@ function extractNameFromCorporateEmail(email) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-// TODO Add docs
+/**
+ * Creates a JSON text output response with the specified data.
+ *
+ * @param {Object} data - The data to be converted to JSON format and returned as text output.
+ * @returns {TextOutput} A text output containing the JSON string representation of the data,
+ *                     with the MIME type set to application/json.
+ */
 function result(data) {
     return ContentService
         .createTextOutput(JSON.stringify(data))
