@@ -20,7 +20,7 @@ import kotlin.time.Duration.Companion.minutes
 internal class FakeEventsDataSource(
     private val dispatcher: CoroutineDispatcher,
 ) : EventsDataSource {
-    val events = generateRandomEvents()
+    private val events = generateRandomEvents()
 
     override suspend fun getEvents(date: LocalDate): List<Event> = withContext(dispatcher) {
         delay(2000)
@@ -87,7 +87,7 @@ internal class FakeEventsDataSource(
                         DayEvent(
                             summary = "Working Location: Home",
                             day = dayOfWeek,
-                            start = LocalTime(0,0,0),
+                            start = LocalTime(0, 0, 0),
                             duration = 24.hours,
                             attendees = emptyList(),
                             type = "workingLocation",
@@ -129,19 +129,13 @@ internal class FakeEventsDataSource(
         day: DayOfWeek,
         attendees: List<String> = emptyList(),
     ) = DayEvent(
-            summary = summary,
-            day = day,
-            start = LocalTime(hour = Random.nextInt(9, 17), minute = minutes.random()),
-            duration = Random.nextInt(1, 3).hours,
-            attendees = attendees.takeIf { it.isNotEmpty() }?.shuffled()?.takeRandom().orEmpty(),
-            type = type,
-        )
-
-    private fun <T> Iterable<T>.takeRandom(
-        from: Int = count(),
-        until: Int = count(),
-    ): List<T> = take(Random.nextInt(minOf(count(), from), minOf(count(), until)))
-
+        summary = summary,
+        day = day,
+        start = LocalTime(hour = Random.nextInt(9, 17), minute = minutes.random()),
+        duration = Random.nextInt(1, 3).hours,
+        attendees = attendees.takeIf { it.isNotEmpty() }?.shuffled()?.takeRandom().orEmpty(),
+        type = type,
+    )
 
     private fun createOutOfOfficeEvent(
         day: DayOfWeek,
@@ -151,7 +145,7 @@ internal class FakeEventsDataSource(
         DayEvent(
             summary = "Out of Office",
             day = day,
-            start = LocalTime(0,0,0),
+            start = LocalTime(0, 0, 0),
             duration = 24.hours,
             attendees = emptyList(),
             type = "outOfOffice",
@@ -167,27 +161,32 @@ internal class FakeEventsDataSource(
         )
     }
 
-    data class DayEvent(
-        val summary: String?,
-        val day: DayOfWeek,
-        val start: LocalTime,
-        val duration: Duration,
-        val attendees: List<String> = emptyList(),
-        val type: String,
-    )
+    private fun <T> Iterable<T>.takeRandom(
+        from: Int = count(),
+        until: Int = count(),
+    ): List<T> = take(Random.nextInt(minOf(count(), from), minOf(count(), until)))
+}
 
-    private fun DayEvent.toEvent(
-        date: LocalDate,
-        timeZone: TimeZone = TimeZone.currentSystemDefault(),
-    ): Event {
-        val start: Instant = date.atTime(start).toInstant(timeZone)
-        val end: Instant = start.plus(duration)
-        return Event(
-            summary = summary,
-            start = start,
-            end = end,
-            attendees = attendees,
-            type = type,
-        )
-    }
+private data class DayEvent(
+    val summary: String?,
+    val day: DayOfWeek,
+    val start: LocalTime,
+    val duration: Duration,
+    val attendees: List<String> = emptyList(),
+    val type: String,
+)
+
+private fun DayEvent.toEvent(
+    date: LocalDate,
+    timeZone: TimeZone = TimeZone.currentSystemDefault(),
+): Event {
+    val start: Instant = date.atTime(start).toInstant(timeZone)
+    val end: Instant = start.plus(duration)
+    return Event(
+        summary = summary,
+        start = start,
+        end = end,
+        attendees = attendees,
+        type = type,
+    )
 }
