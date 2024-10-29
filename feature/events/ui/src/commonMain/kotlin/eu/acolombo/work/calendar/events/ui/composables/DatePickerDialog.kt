@@ -26,7 +26,7 @@ import spicy_mayo.feature.events.ui.generated.resources.ok
 @Composable
 internal fun DatePickerDialog(
     datePickerState: DatePickerState,
-    onSelection: (LocalDate) -> Unit,
+    onSelectDate: (LocalDate) -> Unit,
     hideDatePicker: () -> Unit,
 ) {
     DatePickerDialog(
@@ -35,7 +35,7 @@ internal fun DatePickerDialog(
             TextButton(onClick = {
                 hideDatePicker()
                 datePickerState.selectedDateMillis?.let {
-                    onSelection(
+                    onSelectDate(
                         Instant.fromEpochMilliseconds(it)
                             .toLocalDateTime(TimeZone.currentSystemDefault()).date,
                     )

@@ -92,14 +92,14 @@ internal fun EventsScreen(
     if (showDatePicker.value) {
         DatePickerDialog(
             datePickerState = datePickerState,
-            onSelection = { onInputChange(Date(it)) },
+            onSelectDate = { onInputChange(Date(it)) },
             hideDatePicker = { showDatePicker.value = false },
         )
     }
     showTimeZonePickerIndex.value?.let { index ->
         TimeZoneIdPickerDialog(
-            selected = (uiState as? Success)?.offices?.get(index)?.timezone?.id,
-            onSelection = { onOfficeChange(index, it) },
+            selectedTimeZoneId = (uiState as? Success)?.offices?.get(index)?.timezone?.id,
+            onSelectTimeZoneId = { onOfficeChange(index, it) },
             hideTimeZoneIdPicker = { showTimeZonePickerIndex.value = null },
         )
     }

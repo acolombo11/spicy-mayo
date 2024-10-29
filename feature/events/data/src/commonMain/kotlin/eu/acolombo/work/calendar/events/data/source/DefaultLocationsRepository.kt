@@ -6,6 +6,6 @@ class DefaultLocationsRepository : LocationsRepository { // TODO Add local stora
     override fun getLocationsZoneIds(): List<String> = locationsZonesIds
 
     override fun setLocation(index: Int, zoneId: String) {
-        locationsZonesIds.set(index, zoneId)
+        locationsZonesIds[index] = zoneId
     }
 }

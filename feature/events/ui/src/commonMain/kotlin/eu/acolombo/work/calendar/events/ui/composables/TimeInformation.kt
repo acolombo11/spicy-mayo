@@ -49,7 +49,6 @@ fun TimeInformation(
                 text = stringResource(Res.string.title_last_update),
                 style = MaterialTheme.typography.labelLarge,
             )
-
         }
         VerticalDivider(
             modifier = Modifier
