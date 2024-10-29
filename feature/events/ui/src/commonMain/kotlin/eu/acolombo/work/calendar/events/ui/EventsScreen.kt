@@ -48,6 +48,7 @@ import eu.acolombo.work.calendar.events.ui.composables.FiltersRow
 import eu.acolombo.work.calendar.events.ui.composables.IllustrationWithDescription
 import eu.acolombo.work.calendar.events.ui.composables.LoadingWithDescription
 import eu.acolombo.work.calendar.events.ui.composables.TimeInformation
+import eu.acolombo.work.calendar.events.ui.composables.TimeZoneIdPickerDialog
 import eu.acolombo.work.calendar.events.ui.composables.rememberDatePicker
 
 import kotlinx.serialization.Serializable
@@ -71,6 +72,7 @@ fun EventsRoute(
     EventsScreen(
         uiState = uiState,
         onInputChange = viewModel::onInputChange,
+        onOfficeChange = viewModel::onOfficeChange,
         onRefresh = viewModel::refresh,
     )
 }
@@ -80,16 +82,25 @@ fun EventsRoute(
 internal fun EventsScreen(
     uiState: EventsViewState,
     onInputChange: (EventsFilter) -> Unit,
+    onOfficeChange: (index: Int, timeZoneId: String) -> Unit,
     onRefresh: () -> Unit,
 ) {
-    val showDialog = remember { mutableStateOf(false) }
+    val showDatePicker = remember { mutableStateOf(false) }
+    val showTimeZonePickerIndex = remember { mutableStateOf<Int?>(null) }
 
     val datePickerState = rememberDatePicker(uiState.input.date)
-    if (showDialog.value) {
+    if (showDatePicker.value) {
         DatePickerDialog(
             datePickerState = datePickerState,
             onSelection = { onInputChange(Date(it)) },
-            hideDatePicker = { showDialog.value = false },
+            hideDatePicker = { showDatePicker.value = false },
+        )
+    }
+    showTimeZonePickerIndex.value?.let { index ->
+        TimeZoneIdPickerDialog(
+            selected = (uiState as? Success)?.offices?.get(index)?.timezone?.id,
+            onSelection = { onOfficeChange(index, it) },
+            hideTimeZoneIdPicker = { showTimeZonePickerIndex.value = null },
         )
     }
 
@@ -114,7 +125,11 @@ internal fun EventsScreen(
                             .height(contentHeight)
                             .widthIn(max = BottomSheetMaxWidth)
                             .fillMaxWidth(),
-                        update = (uiState as? Success)?.update,
+                        latest = (uiState as? Success)?.update?.latest,
+                        offices = uiState.offices,
+                        onOfficeClick = { index ->
+                            showTimeZonePickerIndex.value = index
+                        }
                     )
                 },
                 scaffoldState = rememberBottomSheetScaffoldState(),
@@ -128,7 +143,7 @@ internal fun EventsScreen(
                         input = uiState.input,
                         onSelectToday = { onInputChange(Today) },
                         onSelectTomorrow = { onInputChange(Tomorrow) },
-                        showDatePicker = { showDialog.value = true },
+                        showDatePicker = { showDatePicker.value = true },
                     )
                 },
                 sheetContent = {
