@@ -6,5 +6,5 @@ import eu.acolombo.work.calendar.storage.createDataStore
 import org.koin.dsl.module
 
 actual val dataStoreModule = module {
-    single<DataStore<List<String>>> { createDataStore() }
+    single<DataStore<Preferences>> { createDataStore() }
 }

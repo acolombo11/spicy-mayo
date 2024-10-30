@@ -15,17 +15,10 @@ actual val dynamicColorScheme: ColorScheme?
     get() {
         val context = LocalContext.current
         val dynamic = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-        return if (isSystemInDarkTheme()) {
-            if (dynamic) {
-                dynamicDarkColorScheme(context)
-            } else {
-                darkColorScheme()
-            }
-        } else {
-            if (dynamic) {
-                dynamicLightColorScheme(context)
-            } else {
-                lightColorScheme()
-            }
+        return when {
+            isSystemInDarkTheme() && dynamic -> dynamicDarkColorScheme(context)
+            isSystemInDarkTheme() -> darkColorScheme()
+            dynamic -> dynamicLightColorScheme(context)
+            else -> lightColorScheme()
         }
     }
