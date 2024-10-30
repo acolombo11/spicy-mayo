@@ -37,6 +37,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import eu.acolombo.work.calendar.design.illustrations.Computer
 import eu.acolombo.work.calendar.design.illustrations.Meditation
 import eu.acolombo.work.calendar.design.theme.Spacing
+import eu.acolombo.work.calendar.events.domain.model.Location
 import eu.acolombo.work.calendar.events.ui.EventsFilter.Date
 import eu.acolombo.work.calendar.events.ui.EventsFilter.Today
 import eu.acolombo.work.calendar.events.ui.EventsFilter.Tomorrow
@@ -67,10 +68,12 @@ object EventsRouteDestination
 fun EventsRoute(
     viewModel: EventsViewModel = viewModel(),
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val eventsState by viewModel.eventsState.collectAsStateWithLifecycle()
+    val locations by viewModel.locations.collectAsStateWithLifecycle()
 
     EventsScreen(
-        uiState = uiState,
+        eventsState = eventsState,
+        locations = locations,
         onInputChange = viewModel::onInputChange,
         onOfficeChange = viewModel::onOfficeChange,
         onRefresh = viewModel::refresh,
@@ -80,7 +83,8 @@ fun EventsRoute(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun EventsScreen(
-    uiState: EventsViewState,
+    eventsState: EventsViewState,
+    locations: List<Location>,
     onInputChange: (EventsFilter) -> Unit,
     onOfficeChange: (index: Int, timeZoneId: String) -> Unit,
     onRefresh: () -> Unit,
@@ -88,7 +92,7 @@ internal fun EventsScreen(
     val showDatePicker = remember { mutableStateOf(false) }
     val showTimeZonePickerIndex = remember { mutableStateOf<Int?>(null) }
 
-    val datePickerState = rememberDatePicker(uiState.input.date)
+    val datePickerState = rememberDatePicker(eventsState.input.date)
     if (showDatePicker.value) {
         DatePickerDialog(
             datePickerState = datePickerState,
@@ -98,7 +102,7 @@ internal fun EventsScreen(
     }
     showTimeZonePickerIndex.value?.let { index ->
         TimeZoneIdPickerDialog(
-            selectedTimeZoneId = (uiState as? Success)?.offices?.get(index)?.timezone?.id,
+            selectedTimeZoneId = locations[index].timezone.id,
             onSelectTimeZoneId = { onOfficeChange(index, it) },
             hideTimeZoneIdPicker = { showTimeZonePickerIndex.value = null },
         )
@@ -125,8 +129,8 @@ internal fun EventsScreen(
                             .height(contentHeight)
                             .widthIn(max = BottomSheetMaxWidth)
                             .fillMaxWidth(),
-                        latest = (uiState as? Success)?.update?.latest,
-                        offices = uiState.offices,
+                        latest = (eventsState as? Success)?.update?.latest,
+                        locations = locations,
                         onOfficeClick = { index ->
                             showTimeZonePickerIndex.value = index
                         }
@@ -140,7 +144,7 @@ internal fun EventsScreen(
                 sheetDragHandle = {
                     FiltersRow(
                         modifier = Modifier.padding(Spacing.M),
-                        input = uiState.input,
+                        input = eventsState.input,
                         onSelectToday = { onInputChange(Today) },
                         onSelectTomorrow = { onInputChange(Tomorrow) },
                         showDatePicker = { showDatePicker.value = true },
@@ -155,16 +159,16 @@ internal fun EventsScreen(
                                 orientation = Orientation.Horizontal,
                                 state = DraggableState {
                                     when {
-                                        it < 0 && uiState.input == Today -> onInputChange(Tomorrow)
-                                        it > 0 && uiState.input == Tomorrow -> onInputChange(Today)
-                                        it > 0 && uiState.input is Date -> onInputChange(Tomorrow)
+                                        it < 0 && eventsState.input == Today -> onInputChange(Tomorrow)
+                                        it > 0 && eventsState.input == Tomorrow -> onInputChange(Today)
+                                        it > 0 && eventsState.input is Date -> onInputChange(Tomorrow)
                                     }
                                 },
                             )
                     ) {
                         val bottom = padding.calculateBottomPadding()
-                        when (uiState) {
-                            is Success -> if (uiState.events.isEmpty()) {
+                        when (eventsState) {
+                            is Success -> if (eventsState.events.isEmpty()) {
                                 // TODO: It would be cool to resize the column when expanding and add vertical arrangement, or maybe just use something similar to xml coordinator layout
                                 IllustrationWithDescription(
                                     modifier = Modifier.padding(bottom = bottom),
@@ -188,7 +192,7 @@ internal fun EventsScreen(
                                         )
                                         .background(MaterialTheme.colorScheme.background),
                                 ) {
-                                    items(items = uiState.events) {
+                                    items(items = eventsState.events) {
                                         EventItem(
                                             event = it,
                                             modifier = Modifier.padding(bottom = Spacing.S),
@@ -205,7 +209,7 @@ internal fun EventsScreen(
                                     modifier = Modifier.padding(bottom = bottom),
                                     description = stringResource(Res.string.loading),
                                 )
-                                if (uiState.showSnack) {
+                                if (eventsState.showSnack) {
                                     LaunchedEffect(snackOwner.lifecycle) {
                                         snackHostState.showSnackbar(message = snackMessage)
                                     }
@@ -218,8 +222,8 @@ internal fun EventsScreen(
                                     fill = MaterialTheme.colorScheme.secondaryContainer,
                                     stroke = MaterialTheme.colorScheme.onSecondaryContainer,
                                 ),
-                                description = uiState.resource?.let { stringResource(it) }
-                                    ?: uiState.message
+                                description = eventsState.resource?.let { stringResource(it) }
+                                    ?: eventsState.message
                                     ?: stringResource(Res.string.description_error),
                                 button = stringResource(Res.string.button_retry),
                                 onClick = onRefresh,

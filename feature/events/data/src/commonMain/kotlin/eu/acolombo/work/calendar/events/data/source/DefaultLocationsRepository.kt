@@ -1,11 +1,17 @@
 package eu.acolombo.work.calendar.events.data.source
 
-class DefaultLocationsRepository : LocationsRepository { // TODO Add local storage
-    private var locationsZonesIds = mutableListOf("Europe/Madrid", "Europe/Dublin") // TODO Replace with empty list
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 
-    override fun getLocationsZoneIds(): List<String> = locationsZonesIds
+class DefaultLocationsRepository : LocationsRepository { // TODO Add local storage
+    private val locationsZonesIds = MutableStateFlow(
+        listOf("Europe/Madrid", "Europe/Dublin"), // TODO Replace with empty list
+    )
+
+    override fun getLocations(): Flow<List<String>> = locationsZonesIds
 
     override fun setLocation(index: Int, zoneId: String) {
-        locationsZonesIds[index] = zoneId
+        locationsZonesIds.update { it.toMutableList().apply { this[index] = zoneId } }
     }
 }

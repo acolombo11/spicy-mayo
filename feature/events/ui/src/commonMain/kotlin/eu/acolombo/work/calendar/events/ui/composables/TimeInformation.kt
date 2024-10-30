@@ -2,10 +2,12 @@ package eu.acolombo.work.calendar.events.ui.composables
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Badge
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
@@ -16,9 +18,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import eu.acolombo.work.calendar.design.theme.Spacing
-import eu.acolombo.work.calendar.events.model.Office
+import eu.acolombo.work.calendar.events.domain.model.Location
+import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.minus
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.stringResource
 import spicy_mayo.feature.events.ui.generated.resources.Res
@@ -29,7 +33,7 @@ import spicy_mayo.feature.events.ui.generated.resources.label_set_location
 fun TimeInformation(
     modifier: Modifier,
     latest: Instant?,
-    offices: List<Office>,
+    locations: List<Location>,
     onOfficeClick: (index: Int) -> Unit,
 ) {
     Row(
@@ -62,10 +66,10 @@ fun TimeInformation(
                 .weight(.4f)
                 .padding(horizontal = Spacing.M, vertical = Spacing.XL),
         ) {
-            offices.take(n = 2, or = { null }).forEachIndexed { index, office ->
-                OfficeInformation(
+            locations.take(n = 2, or = { null }).forEachIndexed { index, office ->
+                LocationsInformation(
                     latest = latest,
-                    office = office,
+                    location = office,
                     onClick = { onOfficeClick(index) },
                 )
             }
@@ -74,29 +78,53 @@ fun TimeInformation(
 }
 
 @Composable
-private fun OfficeInformation(
+private fun LocationsInformation(
     latest: Instant?,
-    office: Office?,
+    location: Location?,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = modifier
-            .clip(MaterialTheme.shapes.medium)
-            .clickable(onClick = onClick)
-            .padding(bottom = Spacing.XS)
-            .padding(horizontal = Spacing.M, vertical = Spacing.XS),
-    ) {
-        Text(
-            text = latest.toTimeString(timeZone = office?.timezone),
-            style = MaterialTheme.typography.headlineSmall,
-        )
-        Text(
-            text = office?.name ?: stringResource(Res.string.label_set_location),
-            style = MaterialTheme.typography.labelLarge,
-            overflow = TextOverflow.Ellipsis,
-            maxLines = 1,
-        )
+    Box {
+        Column(
+            modifier = Modifier
+                .clip(MaterialTheme.shapes.medium)
+                .clickable(onClick = onClick)
+                .padding(bottom = Spacing.XS)
+                .padding(horizontal = Spacing.M, vertical = Spacing.XS),
+        ) {
+            Box(contentAlignment = Alignment.TopEnd) {
+                Text(
+                    text = latest.toTimeString(timeZone = location?.timezone),
+                    style = MaterialTheme.typography.headlineSmall,
+                )
+            }
+
+            Text(
+                text = location?.name?.replace("_", " ")
+                    ?: stringResource(Res.string.label_set_location),
+                style = MaterialTheme.typography.labelLarge,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1,
+            )
+        }
+        latest?.let { time ->
+            val timeZone = TimeZone.currentSystemDefault()
+            val here = time.toLocalDateTime(timeZone)
+            val there = time.toLocalDateTime(location?.timezone ?: timeZone)
+            val difference: DatePeriod = (there.date - here.date)
+            difference.days
+        }?.takeIf { it != 0 }?.let { delta ->
+            val sign = if (delta > 0) "+" else ""
+            Badge(
+                modifier = Modifier.align(Alignment.TopEnd),
+                containerColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                contentColor = MaterialTheme.colorScheme.primaryContainer,
+            ) {
+                Text(
+                    text = "$sign$delta",
+                    style = MaterialTheme.typography.labelSmall,
+                )
+            }
+        }
     }
 }
 

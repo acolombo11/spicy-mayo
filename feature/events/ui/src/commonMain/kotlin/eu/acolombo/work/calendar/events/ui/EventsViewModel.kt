@@ -6,15 +6,16 @@ import eu.acolombo.work.calendar.events.data.model.NoConnectionException
 import eu.acolombo.work.calendar.events.data.model.DeploymentErrorException
 import eu.acolombo.work.calendar.events.data.model.ServerErrorException
 import eu.acolombo.work.calendar.events.domain.GetEventsUseCase
+import eu.acolombo.work.calendar.events.domain.GetLocationsUseCase
+import eu.acolombo.work.calendar.events.domain.SetLocationUseCase
 import eu.acolombo.work.calendar.events.domain.model.Update
-import eu.acolombo.work.calendar.events.model.Office
+import eu.acolombo.work.calendar.events.domain.model.Location
 import eu.acolombo.work.calendar.events.ui.EventsFilter.Date
 import eu.acolombo.work.calendar.events.ui.EventsFilter.Today
 import eu.acolombo.work.calendar.events.ui.EventsFilter.Tomorrow
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -33,6 +34,8 @@ import spicy_mayo.feature.events.ui.generated.resources.error_deployment
 @OptIn(ExperimentalCoroutinesApi::class)
 class EventsViewModel(
     getEvents: GetEventsUseCase,
+    getLocations: GetLocationsUseCase,
+    private val setLocation: SetLocationUseCase,
 ) : ViewModel() {
 
     private val _input = MutableSharedFlow<Pair<EventsFilter, Boolean>>(
@@ -40,23 +43,16 @@ class EventsViewModel(
         onBufferOverflow = BufferOverflow.DROP_OLDEST,
     )
 
-    private val offices = MutableStateFlow(
-        listOf(Office("Europe/Dublin"), Office("Europe/Madrid"))
-    )
-
     @Suppress("USELESS_CAST")
-    val uiState: StateFlow<EventsViewState> = _input.flatMapLatest { (input, showSnackbar) ->
-        getEvents(input.date).flatMapLatest { events ->
-            offices.map { offices ->
-                EventsViewState.Success(
-                    events = events,
-                    input = input,
-                    update = Update(Clock.System.now()),
-                    offices = offices,
-                ) as EventsViewState
-            }
+    val eventsState: StateFlow<EventsViewState> = _input.flatMapLatest { (input, showSnackbar) ->
+        getEvents(input.date).map { events ->
+            EventsViewState.Success(
+                events = events,
+                input = input,
+                update = Update(Clock.System.now()),
+            ) as EventsViewState
         }.onStart {
-            emit(EventsViewState.Loading(input, offices.value, showSnackbar))
+            emit(EventsViewState.Loading(input = input, showSnack = showSnackbar))
         }.catch {
             val resource = when (it) {
                 is DeploymentErrorException -> Res.string.error_deployment
@@ -67,12 +63,18 @@ class EventsViewModel(
                 is ServerErrorException -> it.error.message
                 else -> it.message
             }
-            emit(EventsViewState.Error(input, offices.value, resource, message))
+            emit(EventsViewState.Error(input = input, resource = resource, message = message))
         }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(),
-        initialValue = EventsViewState.Loading(Today, offices.value),
+        initialValue = EventsViewState.Loading(input = Today),
+    )
+
+    val locations: StateFlow<List<Location>> = getLocations().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(),
+        initialValue = emptyList(),
     )
 
     init {
@@ -97,7 +99,7 @@ class EventsViewModel(
     }
 
     private fun checkEndOfTheDay() = viewModelScope.launch {
-        val state = uiState.filterIsInstance<EventsViewState.Success>().first()
+        val state = eventsState.filterIsInstance<EventsViewState.Success>().first()
         state.events.lastOrNull()
             ?.takeIf { it.end?.let { it < state.update.time } ?: false }
             ?.let { onInputChange(selection = Tomorrow, showSnack = true) }
@@ -108,11 +110,8 @@ class EventsViewModel(
         _input.emit(_input.replayCache.last())
     }
 
-    // TODO This should be in repository
     fun onOfficeChange(index: Int, timeZoneId: String) {
-        offices.value = offices.value.toMutableList().apply {
-            this[index] = Office(timeZoneId)
-        }
+        setLocation(index, timeZoneId)
     }
 }
 

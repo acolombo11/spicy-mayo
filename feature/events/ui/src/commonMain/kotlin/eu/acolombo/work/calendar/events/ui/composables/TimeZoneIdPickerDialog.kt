@@ -35,9 +35,9 @@ import spicy_mayo.feature.events.ui.generated.resources.button_dismiss
 import spicy_mayo.feature.events.ui.generated.resources.label_search_timezone
 
 private val timeZoneIds = TimeZone.availableZoneIds
-    .filter { "/" in it && !it.startsWith("System") && !it.startsWith("Etc") }
+    .filter { !it.startsWith("System") && !it.startsWith("Etc") }
     .toList()
-    .sorted()
+    .sortedWith(compareBy({ it.uppercase() == it }, { it }))
 
 @Composable
 internal fun TimeZoneIdPickerDialog(
