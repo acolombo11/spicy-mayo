@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import eu.acolombo.work.calendar.events.util.TimeZoneFormatter
 import kotlinx.datetime.TimeZone
 import org.jetbrains.compose.resources.stringResource
 import spicy_mayo.feature.events.ui.generated.resources.Res
@@ -35,9 +36,9 @@ import spicy_mayo.feature.events.ui.generated.resources.button_dismiss
 import spicy_mayo.feature.events.ui.generated.resources.label_search_timezone
 
 private val timeZoneIds = TimeZone.availableZoneIds
-    .filter { !it.startsWith("System") && !it.startsWith("Etc") }
+    .filter { "/" in it && !it.startsWith("System") && !it.startsWith("Etc") }
     .toList()
-    .sortedWith(compareBy({ it.uppercase() == it }, { it }))
+    .sorted()
 
 @Composable
 internal fun TimeZoneIdPickerDialog(
@@ -70,17 +71,19 @@ private fun TimeZoneIdSearchBar(
 ) {
     var query by remember { mutableStateOf("") }
 
-    val filteredTimeZoneIds = timeZoneIds.filter { zoneId ->
-        zoneId.toSafeTimeZoneId().toDisplayTimeZoneId().contains(
-            other = query,
-            ignoreCase = true,
-        ) || zoneId.toDisplayTimeZoneId().contains(
-            other = query,
-            ignoreCase = true,
-        ) || zoneId.contains(
-            other = query,
-            ignoreCase = true,
-        )
+    val filteredTimeZoneIds = with(TimeZoneFormatter) {
+        timeZoneIds.filter { zoneId ->
+            getSearchName(getDisplayName(zoneId)).contains(
+                other = query,
+                ignoreCase = true,
+            ) || getDisplayName(zoneId).contains(
+                other = query,
+                ignoreCase = true,
+            ) || zoneId.contains(
+                other = query,
+                ignoreCase = true,
+            )
+        }
     }
 
     SearchBar(
@@ -165,7 +168,7 @@ private fun TimeZoneIdItem(
                 onSelection(zoneId)
             }
             .padding(16.dp),
-        text = zoneId.toDisplayTimeZoneId(),
+        text = TimeZoneFormatter.getDisplayName(zoneId),
         color = if (selected) {
             MaterialTheme.colorScheme.onPrimary
         } else {
@@ -175,6 +178,3 @@ private fun TimeZoneIdItem(
         maxLines = 1,
     )
 }
-
-private fun String.toSafeTimeZoneId() = replace("/", " ")
-private fun String.toDisplayTimeZoneId() = replace("_", " ")

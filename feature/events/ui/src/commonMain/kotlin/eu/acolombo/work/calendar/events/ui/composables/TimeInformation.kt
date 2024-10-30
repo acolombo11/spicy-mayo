@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import eu.acolombo.work.calendar.design.theme.Spacing
 import eu.acolombo.work.calendar.events.domain.model.Location
+import eu.acolombo.work.calendar.events.util.TimeZoneFormatter
 import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
@@ -99,8 +100,9 @@ private fun LocationsInformation(
             }
 
             Text(
-                text = location?.name?.replace("_", " ")
-                    ?: stringResource(Res.string.label_set_location),
+                text = location?.zoneId?.let {
+                    TimeZoneFormatter.getLastSegment(timeZoneId = it)
+                } ?: stringResource(Res.string.label_set_location),
                 style = MaterialTheme.typography.labelLarge,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
