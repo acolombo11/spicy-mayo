@@ -34,7 +34,7 @@ import spicy_mayo.feature.events.ui.generated.resources.label_set_location
 fun TimeInformation(
     modifier: Modifier,
     latest: Instant?,
-    locations: List<Location>,
+    locations: List<Location?>,
     onOfficeClick: (index: Int) -> Unit,
 ) {
     Row(

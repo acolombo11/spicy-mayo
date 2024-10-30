@@ -23,9 +23,12 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(projects.design.theme)
+            implementation(projects.core.network)
+            implementation(projects.core.storage)
+
             implementation(projects.feature.events.domain)
             implementation(projects.feature.events.ui)
-            implementation(projects.design.theme)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

@@ -30,6 +30,9 @@ dependencyResolutionManagement {
 
 include(":composeApp")
 
+include("core:storage")
+include("core:network")
+
 include("feature:events:data")
 include("feature:events:domain")
 include("feature:events:ui")

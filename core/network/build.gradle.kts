@@ -1,0 +1,33 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+plugins {
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.library)
+}
+
+kotlin {
+    jvmToolchain(libs.versions.module.jvmToolchain.get().toInt())
+    androidTarget { compilerOptions { jvmTarget.set(JvmTarget.JVM_20) } }
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(libs.koin.core)
+
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.kotlinx.serialization)
+        }
+    }
+}
+
+android {
+    namespace = "eu.acolombo.work.calendar.network"
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
+
+    defaultConfig { minSdk = libs.versions.android.minSdk.get().toInt() }
+}

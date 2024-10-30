@@ -71,10 +71,10 @@ class EventsViewModel(
         initialValue = EventsViewState.Loading(input = Today),
     )
 
-    val locations: StateFlow<List<Location>> = getLocations().stateIn(
+    val locations: StateFlow<List<Location?>> = getLocations().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(),
-        initialValue = emptyList(),
+        initialValue = List(2) { null },
     )
 
     init {
@@ -110,7 +110,7 @@ class EventsViewModel(
         _input.emit(_input.replayCache.last())
     }
 
-    fun onOfficeChange(index: Int, timeZoneId: String) {
+    fun onChangeLocation(index: Int, timeZoneId: String) = viewModelScope.launch {
         setLocation(index, timeZoneId)
     }
 }

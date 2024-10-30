@@ -4,12 +4,15 @@ import eu.acolombo.work.calendar.events.data.source.DefaultEventsRepository
 import eu.acolombo.work.calendar.events.data.source.DefaultLocationsRepository
 import eu.acolombo.work.calendar.events.data.source.EventsDataSource
 import eu.acolombo.work.calendar.events.data.source.EventsRepository
+import eu.acolombo.work.calendar.events.data.source.LocationsDataSource
 import eu.acolombo.work.calendar.events.data.source.LocationsRepository
+import eu.acolombo.work.calendar.events.data.source.local.LocalLocationsDataSource
 import eu.acolombo.work.calendar.events.data.source.remote.RemoteEventsDataSource
 import org.koin.dsl.module
 
 val dataModule = module {
     single<EventsDataSource> { RemoteEventsDataSource(get(), get()) }
     single<EventsRepository> { DefaultEventsRepository(get(), get()) }
-    single<LocationsRepository> { DefaultLocationsRepository() }
+    single<LocationsDataSource> { LocalLocationsDataSource(get()) }
+    single<LocationsRepository> { DefaultLocationsRepository(get()) }
 }

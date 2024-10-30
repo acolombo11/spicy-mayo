@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.map
 class GetLocationsUseCase(
     private val repository: LocationsRepository,
 ) {
-    operator fun invoke(): Flow<List<Location>> = repository.getLocations().map { timeZoneIds ->
+    operator fun invoke(): Flow<List<Location?>> = repository.getLocations().map { timeZoneIds ->
         timeZoneIds.map { timeZoneId ->
-            Location(timeZoneId)
+            timeZoneId?.let { Location(it) }
         }
     }
 }

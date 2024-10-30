@@ -76,7 +76,7 @@ fun EventsRoute(
         eventsState = eventsState,
         locations = locations,
         onInputChange = viewModel::onInputChange,
-        onOfficeChange = viewModel::onOfficeChange,
+        onOfficeChange = viewModel::onChangeLocation,
         onRefresh = viewModel::refresh,
     )
 }
@@ -85,7 +85,7 @@ fun EventsRoute(
 @Composable
 internal fun EventsScreen(
     eventsState: EventsViewState,
-    locations: List<Location>,
+    locations: List<Location?>,
     onInputChange: (EventsFilter) -> Unit,
     onOfficeChange: (index: Int, timeZoneId: String) -> Unit,
     onRefresh: () -> Unit,
@@ -105,7 +105,7 @@ internal fun EventsScreen(
     showTimeZonePickerIndex.value?.let { index ->
         TimeZoneIdPickerDialog(
             lazyState = timeZoneIdPickerState,
-            selectedTimeZoneId = locations[index].timezone.id,
+            selectedTimeZoneId = locations.getOrNull(index)?.timezone?.id,
             onSelectTimeZoneId = { onOfficeChange(index, it) },
             hideTimeZoneIdPicker = { showTimeZonePickerIndex.value = null },
         )
