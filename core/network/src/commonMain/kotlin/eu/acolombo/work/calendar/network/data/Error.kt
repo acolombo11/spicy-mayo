@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.data.model
+package eu.acolombo.work.calendar.network.data
 
 import kotlinx.serialization.Serializable
 

@@ -2,9 +2,6 @@ package eu.acolombo.work.calendar.events.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import eu.acolombo.work.calendar.events.data.model.NoConnectionException
-import eu.acolombo.work.calendar.events.data.model.DeploymentErrorException
-import eu.acolombo.work.calendar.events.data.model.ServerErrorException
 import eu.acolombo.work.calendar.events.domain.GetEventsUseCase
 import eu.acolombo.work.calendar.events.domain.GetLocationsUseCase
 import eu.acolombo.work.calendar.events.domain.SetLocationUseCase
@@ -13,6 +10,9 @@ import eu.acolombo.work.calendar.events.domain.model.Location
 import eu.acolombo.work.calendar.events.ui.EventsFilter.Date
 import eu.acolombo.work.calendar.events.ui.EventsFilter.Today
 import eu.acolombo.work.calendar.events.ui.EventsFilter.Tomorrow
+import eu.acolombo.work.calendar.network.DeploymentErrorException
+import eu.acolombo.work.calendar.network.NoConnectionException
+import eu.acolombo.work.calendar.network.ServerErrorException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow

@@ -17,12 +17,12 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(projects.core.network) // TODO Remove and map errors in domain layer
             implementation(projects.feature.events.domain)
             implementation(projects.feature.events.data)
 
             implementation(projects.design.theme)
             implementation(projects.design.illustrations)
-
 
             implementation(compose.runtime)
             implementation(compose.foundation)

@@ -44,7 +44,8 @@ fun TimeInformation(
         Column(
             modifier = Modifier
                 .weight(.6f)
-                .padding(Spacing.L),
+                .padding(horizontal = Spacing.L)
+                .padding(bottom = Spacing.S),
         ) {
             Text(
                 text = latest.toTimeString(),
@@ -65,7 +66,7 @@ fun TimeInformation(
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .weight(.4f)
-                .padding(horizontal = Spacing.M, vertical = Spacing.XL),
+                .padding(horizontal = Spacing.M),
         ) {
             locations.take(n = 2, or = { null }).forEachIndexed { index, office ->
                 LocationsInformation(

@@ -16,18 +16,13 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(projects.core.network)
             implementation(projects.core.storage)
 
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization)
 
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.logging)
-            implementation(libs.ktor.client.content.negotiation)
-
             api(libs.koin.core)
-            api(libs.androidx.datastore)
-            api(libs.androidx.datastore.preferences)
         }
     }
 }

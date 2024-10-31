@@ -2,11 +2,11 @@ package eu.acolombo.work.calendar.events.data.source.remote
 
 import eu.acolombo.work.calendar.events.data.Secrets
 import eu.acolombo.work.calendar.events.data.model.Event
-import eu.acolombo.work.calendar.events.data.model.NoConnectionException
-import eu.acolombo.work.calendar.events.data.model.DeploymentErrorException
-import eu.acolombo.work.calendar.events.data.model.Error
-import eu.acolombo.work.calendar.events.data.model.ServerErrorException
 import eu.acolombo.work.calendar.events.data.source.EventsDataSource
+import eu.acolombo.work.calendar.network.DeploymentErrorException
+import eu.acolombo.work.calendar.network.NoConnectionException
+import eu.acolombo.work.calendar.network.ServerErrorException
+import eu.acolombo.work.calendar.network.data.Error
 import io.ktor.client.HttpClient
 import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
