@@ -7,11 +7,16 @@ import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -19,7 +24,6 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.rememberBottomSheetScaffoldState
@@ -116,126 +120,123 @@ internal fun EventsScreen(
     val snackOwner = LocalLifecycleOwner.current
     val contentHeight = BackLayerContentHeight
 
-    Scaffold { padding ->
-        BoxWithConstraints(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .padding(top = padding.calculateTopPadding()),
-        ) {
-            BottomSheetScaffold(
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                content = {
-                    TimeInformation(
-                        modifier = Modifier
-                            .padding(it)
-                            .padding(bottom = padding.calculateTopPadding() / 2)
-                            .height(contentHeight)
-                            .widthIn(max = BottomSheetMaxWidth)
-                            .fillMaxWidth(),
-                        latest = (eventsState as? Success)?.update?.latest,
-                        locations = locations,
-                        onOfficeClick = { index ->
-                            showTimeZonePickerIndex.value = index
-                        }
-                    )
-                },
-                scaffoldState = rememberBottomSheetScaffoldState(),
-                snackbarHost = { SnackbarHost(snackHostState) },
-                sheetPeekHeight = maxHeight - contentHeight,
-                sheetTonalElevation = 0.dp,
-                sheetShadowElevation = 0.dp,
-                sheetDragHandle = {
-                    FiltersRow(
-                        modifier = Modifier.padding(Spacing.M),
-                        input = eventsState.input,
-                        onSelectToday = { onInputChange(Today) },
-                        onSelectTomorrow = { onInputChange(Tomorrow) },
-                        showDatePicker = { showDatePicker.value = true },
-                    )
-                },
-                sheetContent = {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .draggable(
-                                // TODO: Change to ViewPager
-                                orientation = Orientation.Horizontal,
-                                state = DraggableState {
-                                    when {
-                                        it < 0 && eventsState.input == Today -> onInputChange(Tomorrow)
-                                        it > 0 && eventsState.input == Tomorrow -> onInputChange(Today)
-                                        it > 0 && eventsState.input is Date -> onInputChange(Tomorrow)
-                                    }
-                                },
-                            )
-                    ) {
-                        val bottom = padding.calculateBottomPadding()
-                        when (eventsState) {
-                            is Success -> if (eventsState.events.isEmpty()) {
-                                // TODO: It would be cool to resize the column when expanding and add vertical arrangement, or maybe just use something similar to xml coordinator layout
-                                IllustrationWithDescription(
-                                    modifier = Modifier.padding(bottom = bottom),
-                                    illustration = Meditation(
-                                        fill = MaterialTheme.colorScheme.secondaryContainer,
-                                        stroke = MaterialTheme.colorScheme.onSecondaryContainer,
-                                    ),
-                                    description = stringResource(Res.string.description_empty),
-                                )
-                            } else {
-                                LazyColumn(
-                                    contentPadding = PaddingValues(bottom = bottom),
-                                    modifier = Modifier
-                                        .padding(horizontal = Spacing.S)
-                                        .fillMaxSize()
-                                        .clip(
-                                            MaterialTheme.shapes.medium.copy(
-                                                bottomStart = CornerSize(0.dp),
-                                                bottomEnd = CornerSize(0.dp),
-                                            )
-                                        )
-                                        .background(MaterialTheme.colorScheme.background),
-                                ) {
-                                    items(items = eventsState.events) {
-                                        EventItem(
-                                            event = it,
-                                            modifier = Modifier.padding(bottom = Spacing.S),
-                                        )
-                                    }
+    BoxWithConstraints(
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.primaryContainer)
+            .windowInsetsPadding(WindowInsets.statusBars),
+    ) {
+        BottomSheetScaffold(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            content = {
+                TimeInformation(
+                    modifier = Modifier
+                        .padding(it)
+                        .padding(bottom = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() / 2)
+                        .height(contentHeight)
+                        .widthIn(max = BottomSheetMaxWidth)
+                        .fillMaxWidth(),
+                    latest = (eventsState as? Success)?.update?.latest,
+                    locations = locations,
+                    onOfficeClick = { index ->
+                        showTimeZonePickerIndex.value = index
+                    }
+                )
+            },
+            scaffoldState = rememberBottomSheetScaffoldState(),
+            snackbarHost = { SnackbarHost(snackHostState) },
+            sheetPeekHeight = maxHeight - contentHeight,
+            sheetTonalElevation = 0.dp,
+            sheetShadowElevation = 0.dp,
+            sheetDragHandle = {
+                FiltersRow(
+                    modifier = Modifier.padding(Spacing.M),
+                    input = eventsState.input,
+                    onSelectToday = { onInputChange(Today) },
+                    onSelectTomorrow = { onInputChange(Tomorrow) },
+                    showDatePicker = { showDatePicker.value = true },
+                )
+            },
+            sheetContent = {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .draggable(
+                            // TODO: Change to ViewPager
+                            orientation = Orientation.Horizontal,
+                            state = DraggableState {
+                                when {
+                                    it < 0 && eventsState.input == Today -> onInputChange(Tomorrow)
+                                    it > 0 && eventsState.input == Tomorrow -> onInputChange(Today)
+                                    it > 0 && eventsState.input is Date -> onInputChange(Tomorrow)
                                 }
-                            }
-
-                            is Loading -> Box(
-                                modifier = Modifier.fillMaxWidth(),
-                                contentAlignment = Alignment.Center,
-                            ) {
-                                LoadingWithDescription(
-                                    modifier = Modifier.padding(bottom = bottom),
-                                    description = stringResource(Res.string.loading),
-                                )
-                                if (eventsState.showSnack) {
-                                    LaunchedEffect(snackOwner.lifecycle) {
-                                        snackHostState.showSnackbar(message = snackMessage)
-                                    }
-                                }
-                            }
-
-                            is Error -> IllustrationWithDescription(
-                                modifier = Modifier.padding(bottom = bottom),
-                                illustration = Computer(
+                            },
+                        )
+                ) {
+                    val modifier = Modifier.windowInsetsPadding(WindowInsets.navigationBars)
+                    when (eventsState) {
+                        is Success -> if (eventsState.events.isEmpty()) {
+                            IllustrationWithDescription(
+                                modifier = modifier,
+                                illustration = Meditation(
                                     fill = MaterialTheme.colorScheme.secondaryContainer,
                                     stroke = MaterialTheme.colorScheme.onSecondaryContainer,
                                 ),
-                                description = eventsState.resource?.let { stringResource(it) }
-                                    ?: eventsState.message
-                                    ?: stringResource(Res.string.description_error),
-                                button = stringResource(Res.string.button_retry),
-                                onClick = onRefresh,
+                                description = stringResource(Res.string.description_empty),
                             )
+                        } else {
+                            LazyColumn(
+                                contentPadding = WindowInsets.navigationBars.asPaddingValues(),
+                                modifier = Modifier
+                                    .padding(horizontal = Spacing.S)
+                                    .fillMaxSize()
+                                    .clip(
+                                        MaterialTheme.shapes.medium.copy(
+                                            bottomStart = CornerSize(0.dp),
+                                            bottomEnd = CornerSize(0.dp),
+                                        )
+                                    )
+                                    .background(MaterialTheme.colorScheme.background),
+                            ) {
+                                items(items = eventsState.events) {
+                                    EventItem(
+                                        event = it,
+                                        modifier = Modifier.padding(bottom = Spacing.S),
+                                    )
+                                }
+                            }
                         }
+
+                        is Loading -> Box(
+                            modifier = Modifier.fillMaxWidth(),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            LoadingWithDescription(
+                                modifier = modifier,
+                                description = stringResource(Res.string.loading),
+                            )
+                            if (eventsState.showSnack) {
+                                LaunchedEffect(snackOwner.lifecycle) {
+                                    snackHostState.showSnackbar(message = snackMessage)
+                                }
+                            }
+                        }
+
+                        is Error -> IllustrationWithDescription(
+                            modifier = modifier,
+                            illustration = Computer(
+                                fill = MaterialTheme.colorScheme.secondaryContainer,
+                                stroke = MaterialTheme.colorScheme.onSecondaryContainer,
+                            ),
+                            description = eventsState.resource?.let { stringResource(it) }
+                                ?: eventsState.message
+                                ?: stringResource(Res.string.description_error),
+                            button = stringResource(Res.string.button_retry),
+                            onClick = onRefresh,
+                        )
                     }
-                },
-            )
-        }
+                }
+            },
+        )
     }
 }
 

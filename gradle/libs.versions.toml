@@ -5,7 +5,7 @@ android-minSdk = "26"
 android-targetSdk = "35"
 module-jvmToolchain = "20"
 androidxActivityCompose = "1.9.3"
-compose = "1.7.4"
+compose = "1.7.5"
 composePlugin = "1.6.11"
 kotlin = "2.0.20"
 kotlinxCoroutines = "1.9.0"
@@ -15,7 +15,7 @@ ktor = "2.3.12"
 datastore = "1.1.1"
 
 koin = "4.0.0-RC2"
-lifecycleViewModel = "2.8.6"
+lifecycleViewModel = "2.8.7"
 navigationCompose = "2.8.0-alpha09"
 
 [libraries]

@@ -22,7 +22,7 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization)
 
-            api(libs.koin.core)
+            implementation(libs.koin.core)
         }
     }
 }
