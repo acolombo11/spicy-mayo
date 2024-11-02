@@ -88,7 +88,7 @@ private fun ContentWithDescription(
         }
         Text(
             modifier = Modifier
-                .padding(Spacing.M)
+                .padding(Spacing.M.dp)
                 .fillMaxWidth(),
             text = description,
             textAlign = TextAlign.Center,

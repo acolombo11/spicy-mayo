@@ -62,7 +62,7 @@ internal fun EventItem(
         colors = CardDefaults.cardColors(containerColor = colors.containerColor),
         shape = MaterialTheme.shapes.extraLarge,
     ) {
-        Column(modifier = Modifier.padding(horizontal = Spacing.L, vertical = Spacing.M)) {
+        Column(modifier = Modifier.padding(horizontal = Spacing.L.dp, vertical = Spacing.M.dp)) {
             Text(
                 modifier = Modifier.fillMaxWidth(.6f),
                 text = event.summary,
@@ -75,7 +75,7 @@ internal fun EventItem(
             Text(
                 modifier = Modifier
                     .basicMarquee()
-                    .padding(vertical = Spacing.S)
+                    .padding(vertical = Spacing.S.dp)
                     .alpha(.5f),
                 text = event.attendees.joinToString(),
                 maxLines = 1,
@@ -99,7 +99,7 @@ internal fun EventItem(
                     modifier = Modifier
                         .clip(shape = CircleShape)
                         .background(colors.accentColor)
-                        .padding(horizontal = Spacing.M, vertical = Spacing.S),
+                        .padding(horizontal = Spacing.M.dp, vertical = Spacing.S.dp),
                     text = if (event.duration >= 1.toDuration(DurationUnit.DAYS)) {
                         stringResource(Res.string.label_duration_all_day)
                     } else {
@@ -132,7 +132,7 @@ private fun LabeledTime(
 ) {
     Column(
         horizontalAlignment = alignment,
-        modifier = modifier.padding(bottom = Spacing.XS),
+        modifier = modifier.padding(bottom = Spacing.XS.dp),
     ) {
         val textAlign = when (alignment) {
             Alignment.Start -> TextAlign.Start

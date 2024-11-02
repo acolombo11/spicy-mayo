@@ -142,7 +142,6 @@ internal fun EventsScreen(
                         .padding(it)
                         .padding(bottom = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() / 2)
                         .height(contentHeight)
-                        .widthIn(max = BottomSheetMaxWidth)
                         .fillMaxWidth(),
                     latest = (eventsState as? Success)?.update?.latest,
                     locations = locations,
@@ -158,7 +157,7 @@ internal fun EventsScreen(
             sheetShadowElevation = 0.dp,
             sheetDragHandle = {
                 FiltersRow(
-                    modifier = Modifier.padding(Spacing.M),
+                    modifier = Modifier.padding(Spacing.M.dp),
                     input = eventsState.input,
                     onSelectToday = { onInputChange(Today) },
                     onSelectTomorrow = { onInputChange(Tomorrow) },
@@ -196,7 +195,7 @@ internal fun EventsScreen(
                             LazyColumn(
                                 contentPadding = WindowInsets.navigationBars.asPaddingValues(),
                                 modifier = Modifier
-                                    .padding(horizontal = Spacing.S)
+                                    .padding(horizontal = Spacing.S.dp)
                                     .fillMaxSize()
                                     .clip(
                                         MaterialTheme.shapes.medium.copy(
@@ -209,7 +208,7 @@ internal fun EventsScreen(
                                 items(items = eventsState.events) {
                                     EventItem(
                                         event = it,
-                                        modifier = Modifier.padding(bottom = Spacing.S),
+                                        modifier = Modifier.padding(bottom = Spacing.S.dp),
                                     )
                                 }
                             }
@@ -250,6 +249,4 @@ internal fun EventsScreen(
     }
 }
 
-// copy of internal androidx.compose.material3.BottomSheetMaxWidth
-private val BottomSheetMaxWidth = 640.dp
 private val BackLayerContentHeight = 220.dp

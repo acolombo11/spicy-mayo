@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Badge
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -30,6 +32,9 @@ import spicy_mayo.feature.events.ui.generated.resources.Res
 import spicy_mayo.feature.events.ui.generated.resources.title_last_update
 import spicy_mayo.feature.events.ui.generated.resources.label_set_location
 
+// copy of internal androidx.compose.material3.BottomSheetMaxWidth
+private val BottomSheetMaxWidth = 640.dp
+
 @Composable
 fun TimeInformation(
     modifier: Modifier,
@@ -37,43 +42,49 @@ fun TimeInformation(
     locations: List<Location?>,
     onOfficeClick: (index: Int) -> Unit,
 ) {
-    Row(
+    Box(
         modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
+        contentAlignment = Alignment.Center,
     ) {
-        Column(
-            modifier = Modifier
-                .weight(.6f)
-                .padding(horizontal = Spacing.L)
-                .padding(bottom = Spacing.S),
+        Row(
+            modifier = Modifier.widthIn(max = BottomSheetMaxWidth*0.9f),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Text(
-                text = latest.toTimeString(),
-                style = MaterialTheme.typography.displayLarge,
-            )
-            Text(
-                text = stringResource(Res.string.title_last_update),
-                style = MaterialTheme.typography.labelLarge,
-            )
-        }
-        VerticalDivider(
-            modifier = Modifier
-                .padding(vertical = Spacing.L)
-                .width(1.5.dp),
-            color = MaterialTheme.colorScheme.onPrimaryContainer,
-        )
-        Column(
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .weight(.4f)
-                .padding(horizontal = Spacing.M),
-        ) {
-            locations.take(n = 2, or = { null }).forEachIndexed { index, office ->
-                LocationsInformation(
-                    latest = latest,
-                    location = office,
-                    onClick = { onOfficeClick(index) },
+            Column(
+                modifier = Modifier
+                    .weight(.6f)
+                    .padding(horizontal = Spacing.L.dp)
+                    .padding(bottom = Spacing.S.dp),
+            ) {
+                Text(
+                    text = latest.toTimeString(),
+                    style = MaterialTheme.typography.displayLarge,
                 )
+                Text(
+                    text = stringResource(Res.string.title_last_update),
+                    style = MaterialTheme.typography.labelLarge,
+                )
+            }
+            VerticalDivider(
+                modifier = Modifier
+                    .fillMaxHeight(.75f)
+                    .padding(vertical = Spacing.M.dp)
+                    .width(1.dp),
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+            )
+            Column(
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .padding(horizontal = Spacing.M.dp),
+            ) {
+                locations.take(n = 2, or = { null }).forEachIndexed { index, office ->
+                    LocationsInformation(
+                        latest = latest,
+                        location = office,
+                        onClick = { onOfficeClick(index) },
+                    )
+                }
             }
         }
     }
@@ -90,8 +101,8 @@ private fun LocationsInformation(
             modifier = Modifier
                 .clip(MaterialTheme.shapes.medium)
                 .clickable(onClick = onClick)
-                .padding(bottom = Spacing.XS)
-                .padding(horizontal = Spacing.M, vertical = Spacing.XS),
+                .padding(bottom = Spacing.XS.dp)
+                .padding(horizontal = Spacing.M.dp, vertical = Spacing.XS.dp),
         ) {
             Box(contentAlignment = Alignment.TopEnd) {
                 Text(

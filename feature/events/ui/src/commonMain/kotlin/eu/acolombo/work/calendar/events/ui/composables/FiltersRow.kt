@@ -42,14 +42,14 @@ internal fun FiltersRow(
             )
             SpicyFilterChip(
                 label = stringResource(Res.string.button_tomorrow),
-                modifier = Modifier.padding(start = Spacing.S),
+                modifier = Modifier.padding(start = Spacing.S.dp),
                 selected = input is EventsFilter.Tomorrow,
                 onClick = { onSelectTomorrow() },
             )
             if (input is EventsFilter.Date) {
                 SpicyFilterChip(
                     label = input.date.toString(),
-                    modifier = Modifier.padding(start = Spacing.S),
+                    modifier = Modifier.padding(start = Spacing.S.dp),
                     selected = true,
                     onClick = { showDatePicker() },
                 )
@@ -58,7 +58,7 @@ internal fun FiltersRow(
         if (input !is EventsFilter.Date) {
             FilledTonalIconButton(
                 onClick = { showDatePicker() },
-                modifier = Modifier.padding(start = Spacing.S),
+                modifier = Modifier.padding(start = Spacing.S.dp),
             ) {
                 Icon(
                     imageVector = Icons.TwoTone.CalendarToday,
