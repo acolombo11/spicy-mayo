@@ -32,9 +32,6 @@ import spicy_mayo.feature.events.ui.generated.resources.Res
 import spicy_mayo.feature.events.ui.generated.resources.title_last_update
 import spicy_mayo.feature.events.ui.generated.resources.label_set_location
 
-// copy of internal androidx.compose.material3.BottomSheetMaxWidth
-private val BottomSheetMaxWidth = 640.dp
-
 @Composable
 fun TimeInformation(
     modifier: Modifier,
@@ -157,3 +154,6 @@ private fun Instant?.toTimeString(
         ?.toString()
         ?.substring(0, maxLength)
 } ?: replacement
+
+// copy of internal androidx.compose.material3.BottomSheetMaxWidth
+private val BottomSheetMaxWidth = 640.dp
