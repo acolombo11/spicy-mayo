@@ -7,7 +7,7 @@ class DefaultLocationsRepository(
 ) : LocationsRepository {
     override fun getLocations(): Flow<List<String?>> = dataSource.getLocations()
 
-    override suspend fun setLocation(index: Int, zoneId: String) {
+    override suspend fun setLocation(index: Int, zoneId: String?) {
         dataSource.setLocation(index, zoneId)
     }
 }

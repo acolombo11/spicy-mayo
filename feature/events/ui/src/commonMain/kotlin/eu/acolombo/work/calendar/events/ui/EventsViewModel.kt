@@ -110,7 +110,7 @@ class EventsViewModel(
         _input.emit(_input.replayCache.last())
     }
 
-    fun onChangeLocation(index: Int, timeZoneId: String) = viewModelScope.launch {
+    fun onChangeLocation(index: Int, timeZoneId: String?) = viewModelScope.launch {
         setLocation(index, timeZoneId)
     }
 }

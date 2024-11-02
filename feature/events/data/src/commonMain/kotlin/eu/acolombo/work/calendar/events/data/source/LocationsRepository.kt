@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocationsRepository {
     fun getLocations(): Flow<List<String?>>
-    suspend fun setLocation(index: Int, zoneId: String)
+    suspend fun setLocation(index: Int, zoneId: String?)
 }

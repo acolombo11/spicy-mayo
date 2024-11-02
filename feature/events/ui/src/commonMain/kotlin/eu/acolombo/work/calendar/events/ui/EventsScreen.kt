@@ -92,7 +92,7 @@ internal fun EventsScreen(
     eventsState: EventsViewState,
     locations: List<Location?>,
     onInputChange: (EventsFilter) -> Unit,
-    onLocationChange: (index: Int, timeZoneId: String) -> Unit,
+    onLocationChange: (index: Int, timeZoneId: String?) -> Unit,
     onRefresh: () -> Unit,
 ) {
     val showDatePicker = remember { mutableStateOf(false) }
@@ -117,6 +117,7 @@ internal fun EventsScreen(
             onSelectTimeZoneId = { onLocationChange(index, it) },
             hideTimeZoneIdPicker = { showTimeZonePickerIndex.value = null },
             onSearchError = {
+                onLocationChange(index, null)
                 snackOwner.lifecycleScope.launch {
                     snackHostState.showSnackbar(
                         message = "No timezone found. Select one of the available timezones"

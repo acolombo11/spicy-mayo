@@ -25,7 +25,7 @@ internal class LocalLocationsDataSource(
         preferences.locationsList
     }
 
-    override suspend fun setLocation(index: Int, zoneId: String) {
+    override suspend fun setLocation(index: Int, zoneId: String?) {
         dataStore.edit { preferences ->
             val newList = preferences.locationsList.toMutableList()
             if (newList.lastIndex < index) {

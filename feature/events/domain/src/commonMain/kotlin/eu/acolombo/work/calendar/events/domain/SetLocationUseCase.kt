@@ -5,6 +5,6 @@ import eu.acolombo.work.calendar.events.data.source.LocationsRepository
 class SetLocationUseCase(
     private val repository: LocationsRepository,
 ) {
-    suspend operator fun invoke(index: Int, timeZoneId: String) =
+    suspend operator fun invoke(index: Int, timeZoneId: String?) =
         repository.setLocation(index, timeZoneId)
 }
