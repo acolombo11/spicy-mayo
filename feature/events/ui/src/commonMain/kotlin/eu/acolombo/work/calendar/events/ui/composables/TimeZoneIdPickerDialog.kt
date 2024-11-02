@@ -57,6 +57,7 @@ internal fun TimeZoneIdPickerDialog(
     selectedTimeZoneId: String?,
     onSelectTimeZoneId: (String) -> Unit,
     hideTimeZoneIdPicker: () -> Unit,
+    onSearchError: () -> Unit,
     lazyState: LazyListState = rememberLazyListState(),
 ) {
     BasicAlertDialog(
@@ -69,9 +70,13 @@ internal fun TimeZoneIdPickerDialog(
             lazyState = lazyState,
             onDismiss = hideTimeZoneIdPicker,
             onSelection = { timeZoneId ->
-                onSelectTimeZoneId(timeZoneId)
                 hideTimeZoneIdPicker()
+                onSelectTimeZoneId(timeZoneId)
             },
+            onSearchError = {
+                hideTimeZoneIdPicker()
+                onSearchError()
+            }
         )
     }
 }
@@ -82,6 +87,7 @@ private fun TimeZoneIdSearchBar(
     selectedTimeZoneId: String?,
     onSelection: (String) -> Unit,
     onDismiss: () -> Unit,
+    onSearchError: () -> Unit,
     lazyState: LazyListState = rememberLazyListState(),
 ) {
     var query by remember { mutableStateOf("") }
@@ -108,7 +114,7 @@ private fun TimeZoneIdSearchBar(
         query = query,
         onQueryChange = { query = it },
         onSearch = {
-            filteredTimeZoneIds.singleOrNull()?.let { onSelection(it) }
+            filteredTimeZoneIds.singleOrNull()?.let { onSelection(it) } ?: onSearchError()
         },
         placeholder = {
             Text(stringResource(Res.string.label_search_timezone))

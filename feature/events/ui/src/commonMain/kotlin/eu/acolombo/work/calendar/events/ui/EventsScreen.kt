@@ -37,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import eu.acolombo.work.calendar.design.illustrations.Computer
 import eu.acolombo.work.calendar.design.illustrations.Meditation
@@ -55,6 +56,7 @@ import eu.acolombo.work.calendar.events.ui.composables.LoadingWithDescription
 import eu.acolombo.work.calendar.events.ui.composables.TimeInformation
 import eu.acolombo.work.calendar.events.ui.composables.TimeZoneIdPickerDialog
 import eu.acolombo.work.calendar.events.ui.composables.rememberDatePicker
+import kotlinx.coroutines.launch
 
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.stringResource
@@ -96,6 +98,9 @@ internal fun EventsScreen(
     val showDatePicker = remember { mutableStateOf(false) }
     val showTimeZonePickerIndex = remember { mutableStateOf<Int?>(null) }
 
+    val snackHostState = remember { SnackbarHostState() }
+    val snackOwner = LocalLifecycleOwner.current
+
     val datePickerState = rememberDatePicker(eventsState.input.date)
     if (showDatePicker.value) {
         DatePickerDialog(
@@ -111,12 +116,16 @@ internal fun EventsScreen(
             selectedTimeZoneId = locations.getOrNull(index)?.timezone?.id,
             onSelectTimeZoneId = { onLocationChange(index, it) },
             hideTimeZoneIdPicker = { showTimeZonePickerIndex.value = null },
+            onSearchError = {
+                snackOwner.lifecycleScope.launch {
+                    snackHostState.showSnackbar(
+                        message = "No timezone found. Select one of the available timezones"
+                    )
+                }
+            }
         )
     }
 
-    val snackHostState = remember { SnackbarHostState() }
-    val snackMessage = stringResource(Res.string.alert_done_for_the_day)
-    val snackOwner = LocalLifecycleOwner.current
     val contentHeight = BackLayerContentHeight
 
     BoxWithConstraints(
@@ -214,6 +223,7 @@ internal fun EventsScreen(
                                 description = stringResource(Res.string.loading),
                             )
                             if (eventsState.showSnack) {
+                                val snackMessage = stringResource(Res.string.alert_done_for_the_day)
                                 LaunchedEffect(snackOwner.lifecycle) {
                                     snackHostState.showSnackbar(message = snackMessage)
                                 }
