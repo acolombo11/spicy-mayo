@@ -13,10 +13,10 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.serialization.JsonConvertException
-import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDate
+import kotlinx.io.IOException
 
 internal class RemoteEventsDataSource(
     private val client: HttpClient,
