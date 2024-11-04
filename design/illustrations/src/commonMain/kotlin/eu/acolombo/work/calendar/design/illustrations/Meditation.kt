@@ -10,16 +10,19 @@ import androidx.compose.ui.graphics.PathFillType.Companion.NonZero
 import androidx.compose.ui.graphics.StrokeCap.Companion.Round
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.ImageVector.Builder
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 data object Meditation : Illustration() {
+    /**
+     * Illustration by Freepik
+     * @see (https://www.freepik.com/serie/114133737)
+     */
     override fun getImage(
         colors: IllustrationColors,
         strokeWidth: Float,
-    ) = Builder(
+    ) = ImageVector.Builder(
         name = "Meditation",
         defaultWidth = 416.701.dp,
         defaultHeight = 620.46.dp,

@@ -9,8 +9,6 @@ Since the backend needs to be setup on the account of the Google Calendar owner,
 
 ### Screenshots
 
-The screenshots are displaying different themes following the Material You user colors, the vector illustrations designed by [freepik](https://www.freepik.com/free-vector/hand-drawn-people-doodle-illustration_126362575.htm) and transformed to compose `ImageVector`s using [the svg-to-compose plugin](https://plugins.jetbrains.com/plugin/18619-svg-to-compose) for Android Studio, and the three different types of day that can be shown (today, tomorrow or a specific date) with the three different states the screen can be in (w/ events, empty state, error state).
-
  <table>
   <tr>
     <th>Events</th>
@@ -22,7 +20,13 @@ The screenshots are displaying different themes following the Material You user 
     <td><img src="docs/screenshot-2.png" width="270px"/></td>
     <td><img src="docs/screenshot-3.png" width="270px"/></td>
   </tr>
-</table> 
+</table>
+
+The screenshots are displaying
+- the dark and light theme following the user's system preference (iOs, Android)
+- different themes following the Material You user colors (Android)
+- the three different types of day that can be shown (today, tomorrow or a specific date)
+- the three different states the screen can be in (w/ events, empty state, error state)
 
 ## How to setup
 
