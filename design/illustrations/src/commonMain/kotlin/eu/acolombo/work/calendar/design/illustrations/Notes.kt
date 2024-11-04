@@ -15,18 +15,18 @@ import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-class Notes(
-    fill: Color = Color(0xFF85b65f),
-    stroke: Color = Color(0xFF101419),
-) : Illustration(fill, stroke) {
-    override val image: ImageVector = Builder(
+data object Notes : Illustration() {
+    override fun getImage(
+        colors: IllustrationColors,
+        strokeWidth: Float,
+    ) = Builder(
         name = "Notes",
         defaultWidth = 416.701.dp,
         defaultHeight = 620.46.dp,
         viewportWidth = 416.701f,
         viewportHeight = 620.46f,
     ).apply {
-        path(fill = strokeColor) {
+        path(fill = colors.solidStroke) {
             moveToRelative(246.954f, 179.223f)
             curveToRelative(-0.015f, 5.028f, -2.556f, 10.0f, -6.62f, 12.961f)
             curveToRelative(0.056f, -0.211f, -0.237f, -0.392f, -0.237f, -0.587f)
@@ -53,7 +53,7 @@ class Notes(
             curveToRelative(5.895f, 4.288f, 8.324f, 12.765f, 5.587f, 19.539f)
             curveToRelative(4.051f, 2.975f, 6.467f, 6.773f, 6.467f, 11.815f)
         }
-        path(fill = fillColor) {
+        path(fill = colors.solidFill) {
             moveToRelative(405.789f, 483.625f)
             lineToRelative(-82.304f, 55.519f)
             horizontalLineToRelative(-180.859f)
@@ -98,7 +98,7 @@ class Notes(
             lineToRelative(109.508f, 1.523f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -111,7 +111,7 @@ class Notes(
             curveToRelative(2.867f, 5.455f, 22.757f, 17.961f, 28.778f, 19.275f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -126,7 +126,7 @@ class Notes(
             curveToRelative(7.852f, -6.908f, 13.289f, -11.576f, 23.497f, -13.852f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -148,7 +148,7 @@ class Notes(
             curveToRelative(-13.672f, -1.771f, -27.344f, -3.541f, -41.016f, -5.311f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -159,7 +159,7 @@ class Notes(
             horizontalLineToRelative(30.031f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -170,7 +170,7 @@ class Notes(
             horizontalLineToRelative(30.031f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -181,7 +181,7 @@ class Notes(
             verticalLineToRelative(-61.34f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -192,7 +192,7 @@ class Notes(
             verticalLineToRelative(-63.277f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -206,7 +206,7 @@ class Notes(
             close()
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -217,7 +217,7 @@ class Notes(
             verticalLineToRelative(13.003f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -228,7 +228,7 @@ class Notes(
             verticalLineToRelative(10.504f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -239,7 +239,7 @@ class Notes(
             curveToRelative(4.496f, 1.209f, 9.291f, 1.285f, 13.824f, 0.221f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -250,7 +250,7 @@ class Notes(
             curveToRelative(-1.5f, 33.007f, 5.345f, 66.361f, 19.725f, 96.108f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -263,7 +263,7 @@ class Notes(
             curveToRelative(0.452f, 5.847f, 4.671f, 11.135f, 10.147f, 13.235f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -274,14 +274,14 @@ class Notes(
             curveToRelative(-2.4f, -0.596f, -5.111f, 0.351f, -6.619f, 2.309f)
             curveToRelative(-1.508f, 1.96f, -1.729f, 4.823f, -0.539f, 6.991f)
         }
-        path(fill = strokeColor) {
+        path(fill = colors.solidStroke) {
             moveToRelative(212.417f, 210.474f)
             curveToRelative(-1.193f, 1.705f, -3.104f, 2.428f, -4.269f, 1.612f)
             curveToRelative(-1.165f, -0.815f, -1.143f, -2.859f, 0.051f, -4.564f)
             curveToRelative(1.193f, -1.705f, 3.105f, -2.427f, 4.269f, -1.612f)
             curveToRelative(1.165f, 0.816f, 1.143f, 2.859f, -0.051f, 4.564f)
         }
-        path(fill = strokeColor) {
+        path(fill = colors.solidStroke) {
             moveToRelative(230.44f, 220.635f)
             curveToRelative(-1.193f, 1.705f, -2.888f, 2.58f, -3.784f, 1.953f)
             curveToRelative(-0.896f, -0.628f, -0.656f, -2.519f, 0.537f, -4.224f)
@@ -289,7 +289,7 @@ class Notes(
             curveToRelative(0.896f, 0.627f, 0.656f, 2.517f, -0.537f, 4.223f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -301,7 +301,7 @@ class Notes(
             curveToRelative(-1.679f, 0.0f, -3.357f, -0.411f, -4.841f, -1.196f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -312,7 +312,7 @@ class Notes(
             curveToRelative(-0.091f, 1.844f, 0.593f, 3.715f, 1.855f, 5.063f)
             curveToRelative(1.26f, 1.349f, 3.079f, 2.159f, 4.925f, 2.192f)
         }
-        path(fill = strokeColor) {
+        path(fill = colors.solidStroke) {
             moveToRelative(211.137f, 194.494f)
             curveToRelative(-0.692f, -0.051f, -1.407f, -0.045f, -2.052f, 0.209f)
             curveToRelative(-0.645f, 0.255f, -1.212f, 0.803f, -1.317f, 1.488f)
@@ -322,7 +322,7 @@ class Notes(
             curveToRelative(0.861f, -0.189f, 1.603f, -0.852f, 1.888f, -1.687f)
             curveToRelative(1.343f, -3.927f, -5.052f, -5.44f, -7.699f, -5.633f)
         }
-        path(fill = strokeColor) {
+        path(fill = colors.solidStroke) {
             moveToRelative(236.913f, 208.385f)
             curveToRelative(-0.685f, 1.927f, -1.467f, 3.827f, -2.361f, 5.669f)
             curveToRelative(-1.089f, -0.935f, -2.123f, -1.94f, -3.085f, -3.016f)
@@ -331,7 +331,7 @@ class Notes(
             curveToRelative(2.151f, -1.593f, 4.315f, 0.153f, 5.852f, 2.276f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -343,7 +343,7 @@ class Notes(
             curveToRelative(3.987f, 1.308f, 8.38f, 1.343f, 12.387f, 0.099f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -354,7 +354,7 @@ class Notes(
             curveToRelative(4.892f, 0.124f, 11.797f, -0.252f, 16.689f, -0.128f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -365,7 +365,7 @@ class Notes(
             curveToRelative(4.892f, 0.123f, 9.785f, 0.245f, 14.679f, 0.368f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -376,7 +376,7 @@ class Notes(
             curveToRelative(4.359f, 0.377f, 8.716f, 0.755f, 13.075f, 1.132f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -389,7 +389,7 @@ class Notes(
             curveToRelative(7.308f, -1.517f, 11.995f, -5.113f, 16.673f, -10.929f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -400,7 +400,7 @@ class Notes(
             curveToRelative(27.358f, 5.768f, 55.472f, 7.944f, 83.393f, 6.451f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -411,7 +411,7 @@ class Notes(
             curveToRelative(-7.815f, 2.232f, -15.628f, 4.465f, -23.443f, 6.699f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -422,7 +422,7 @@ class Notes(
             lineToRelative(-57.913f, 37.669f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -433,7 +433,7 @@ class Notes(
             lineToRelative(-57.913f, 37.669f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -444,7 +444,7 @@ class Notes(
             lineToRelative(55.317f, -35.633f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -460,7 +460,7 @@ class Notes(
 @Composable
 @Preview
 private fun Preview() {
-    val notes = Notes().image
+    val notes = Notes.image
     Image(
         modifier = Modifier
             .background(Color(0xFFFFF6ED))

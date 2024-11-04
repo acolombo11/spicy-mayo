@@ -184,10 +184,7 @@ internal fun EventsScreen(
                         is Success -> if (eventsState.events.isEmpty()) {
                             IllustrationWithDescription(
                                 modifier = modifier,
-                                illustration = Meditation(
-                                    fill = MaterialTheme.colorScheme.secondaryContainer,
-                                    stroke = MaterialTheme.colorScheme.onSecondaryContainer,
-                                ),
+                                illustration = Meditation,
                                 description = stringResource(Res.string.description_empty),
                             )
                         } else {
@@ -231,10 +228,7 @@ internal fun EventsScreen(
 
                         is Error -> IllustrationWithDescription(
                             modifier = modifier,
-                            illustration = Computer(
-                                fill = MaterialTheme.colorScheme.secondaryContainer,
-                                stroke = MaterialTheme.colorScheme.onSecondaryContainer,
-                            ),
+                            illustration = Computer,
                             description = eventsState.resource?.let { stringResource(it) }
                                 ?: eventsState.message
                                 ?: stringResource(Res.string.description_error),

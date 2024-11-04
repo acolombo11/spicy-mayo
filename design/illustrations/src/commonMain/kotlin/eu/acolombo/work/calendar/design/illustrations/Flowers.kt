@@ -15,18 +15,18 @@ import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-class Flowers(
-    fill: Color = Color(0xFFF68329),
-    stroke: Color = Color(0xFF101419),
-) : Illustration(fill, stroke) {
-    override val image: ImageVector = Builder(
-        name = "Phone",
+data object Flowers : Illustration() {
+    override fun getImage(
+        colors: IllustrationColors,
+        strokeWidth: Float,
+    ) = Builder(
+        name = "Flowers",
         defaultWidth = 416.701.dp,
         defaultHeight = 620.46.dp,
         viewportWidth = 416.701f,
         viewportHeight = 620.46f,
     ).apply {
-        path(fill = fillColor) {
+        path(fill = colors.solidFill) {
             moveToRelative(381.116f, 433.906f)
             curveToRelative(-1.597f, -11.852f, -6.044f, -23.104f, -9.053f, -34.679f)
             curveToRelative(-3.441f, -13.233f, -5.0f, -26.881f, -7.868f, -40.251f)
@@ -87,7 +87,7 @@ class Flowers(
             curveToRelative(7.889f, -8.987f, 9.572f, -22.003f, 7.973f, -33.855f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -105,7 +105,7 @@ class Flowers(
             curveToRelative(21.267f, -2.584f, 33.127f, -7.037f, 59.811f, -16.291f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -120,7 +120,7 @@ class Flowers(
             curveToRelative(0.039f, 2.275f, 0.239f, 3.148f, 0.741f, 5.367f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -135,7 +135,7 @@ class Flowers(
             curveToRelative(-0.407f, 2.103f, -0.415f, 5.113f, -0.335f, 7.255f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -148,14 +148,14 @@ class Flowers(
             curveToRelative(-1.928f, -0.82f, -3.937f, -0.173f, -5.547f, 1.167f)
             curveToRelative(-2.641f, 2.197f, -2.687f, 7.62f, -1.797f, 10.809f)
         }
-        path(fill = strokeColor) {
+        path(fill = colors.solidStroke) {
             moveToRelative(240.184f, 265.185f)
             curveToRelative(0.0f, 0.0f, 19.46f, 17.563f, 42.677f, 1.285f)
             curveToRelative(0.0f, 0.0f, -5.371f, 12.771f, -21.897f, 12.991f)
             curveToRelative(-16.527f, 0.22f, -20.78f, -14.276f, -20.78f, -14.276f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -168,7 +168,7 @@ class Flowers(
             curveToRelative(1.421f, 2.749f, 4.8f, 4.407f, 7.795f, 3.624f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -181,7 +181,7 @@ class Flowers(
             curveToRelative(-1.592f, 2.609f, -4.54f, 4.269f, -7.584f, 4.539f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -192,7 +192,7 @@ class Flowers(
             curveToRelative(-0.465f, -2.681f, -2.689f, -4.968f, -5.356f, -5.511f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -203,7 +203,7 @@ class Flowers(
             curveToRelative(0.62f, -3.12f, 3.567f, -5.616f, 6.745f, -5.715f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -215,7 +215,7 @@ class Flowers(
             curveToRelative(1.873f, 1.0f, 4.229f, 1.04f, 6.137f, 0.107f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -227,7 +227,7 @@ class Flowers(
             curveToRelative(3.449f, -0.001f, 6.857f, -1.704f, 8.931f, -4.461f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -239,7 +239,7 @@ class Flowers(
             curveToRelative(2.316f, -0.275f, 4.731f, 1.145f, 5.617f, 3.303f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -250,7 +250,7 @@ class Flowers(
             curveToRelative(1.039f, -1.987f, 3.372f, -3.211f, 5.596f, -2.939f)
             curveToRelative(2.225f, 0.273f, 4.193f, 2.025f, 4.72f, 4.204f)
         }
-        path(fill = strokeColor) {
+        path(fill = colors.solidStroke) {
             moveToRelative(240.529f, 219.639f)
             curveToRelative(-0.704f, 0.389f, -1.417f, 0.844f, -1.875f, 1.571f)
             curveToRelative(-0.456f, 0.728f, -0.58f, 1.799f, -0.087f, 2.483f)
@@ -260,7 +260,7 @@ class Flowers(
             curveToRelative(3.048f, -1.863f, 1.453f, -5.503f, -1.444f, -5.511f)
             curveToRelative(-3.389f, -0.008f, -6.859f, 0.996f, -9.913f, 2.685f)
         }
-        path(fill = strokeColor) {
+        path(fill = colors.solidStroke) {
             moveToRelative(283.38f, 221.395f)
             curveToRelative(0.671f, 0.445f, 1.344f, 0.957f, 1.739f, 1.719f)
             curveToRelative(0.396f, 0.763f, 0.432f, 1.84f, -0.115f, 2.481f)
@@ -271,7 +271,7 @@ class Flowers(
             curveToRelative(3.379f, 0.268f, 6.753f, 1.553f, 9.66f, 3.487f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -295,7 +295,7 @@ class Flowers(
             curveToRelative(3.809f, 9.312f, 9.532f, 17.837f, 16.711f, 24.888f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -309,7 +309,7 @@ class Flowers(
             curveToRelative(2.04f, -2.303f, 8.116f, -2.977f, 12.125f, 0.908f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -322,7 +322,7 @@ class Flowers(
             curveToRelative(0.221f, -1.817f, 3.413f, -7.252f, 8.56f, -4.944f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -335,7 +335,7 @@ class Flowers(
             lineToRelative(-6.432f, 71.617f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -351,7 +351,7 @@ class Flowers(
             curveToRelative(2.308f, -0.929f, 4.512f, -2.563f, 5.297f, -4.924f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -369,7 +369,7 @@ class Flowers(
             curveToRelative(3.156f, 2.977f, 6.229f, 4.92f, 9.385f, 7.896f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -385,7 +385,7 @@ class Flowers(
             curveToRelative(17.119f, -13.613f, 41.549f, -17.284f, 62.401f, -10.684f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -397,7 +397,7 @@ class Flowers(
             curveToRelative(14.959f, -11.453f, 34.739f, -16.384f, 53.323f, -13.293f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -409,7 +409,7 @@ class Flowers(
             curveToRelative(7.573f, 12.523f, 11.043f, 27.484f, 9.753f, 42.061f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -423,7 +423,7 @@ class Flowers(
             curveToRelative(5.901f, 2.688f, 10.463f, 8.156f, 12.048f, 14.444f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -438,7 +438,7 @@ class Flowers(
             curveToRelative(-11.66f, 9.591f, -18.289f, 24.985f, -17.245f, 40.047f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -451,7 +451,7 @@ class Flowers(
             curveToRelative(1.599f, -0.709f, 3.446f, -0.145f, 5.101f, 0.424f)
         }
         path(
-            stroke = strokeColor,
+            stroke = colors.solidStroke,
             strokeLineWidth = strokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -469,7 +469,7 @@ class Flowers(
 @Composable
 @Preview
 private fun Preview() {
-    val flowers = Flowers().image
+    val flowers = Flowers.image
     Image(
         modifier = Modifier
             .background(Color(0xFFFFF6ED))
