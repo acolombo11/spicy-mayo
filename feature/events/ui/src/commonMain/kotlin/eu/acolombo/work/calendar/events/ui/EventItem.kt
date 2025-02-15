@@ -1,6 +1,5 @@
 package eu.acolombo.work.calendar.events.ui
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
@@ -39,7 +38,6 @@ import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun EventItem(
     event: Event,
