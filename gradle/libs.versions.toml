@@ -6,17 +6,17 @@ android-targetSdk = "35"
 module-jvmToolchain = "20"
 androidxActivityCompose = "1.10.0"
 compose = "1.8.0-beta02"
-composePlugin = "1.7.0"
+composePlugin = "1.7.3"
 kotlin = "2.1.0"
 kotlinxCoroutines = "1.10.1"
 kotlinxDatetime = "0.6.1"
 kotlinxSerialization = "1.7.3"
-ktor = "3.0.1"
+ktor = "3.0.3"
 datastore = "1.1.2"
 
 koin = "4.0.0"
 lifecycleViewModel = "2.8.7"
-navigationCompose = "2.8.0-alpha10"
+navigationCompose = "2.8.0-alpha11"
 
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivityCompose" }
