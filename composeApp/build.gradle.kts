@@ -28,7 +28,7 @@ kotlin {
             implementation(projects.core.storage)
 
             implementation(projects.feature.events.domain)
-            implementation(projects.feature.events.ui)
+            implementation(projects.feature.events.presentation)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -40,7 +40,6 @@ kotlin {
 
             api(libs.koin.core)
             implementation(libs.koin.compose)
-            implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.navigation.compose)
 
             implementation(libs.ktor.client.core)
@@ -51,7 +50,6 @@ kotlin {
             implementation(libs.kotlinx.datetime)
         }
         androidMain.dependencies {
-            implementation(libs.androidx.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
 
             implementation(libs.koin.android)

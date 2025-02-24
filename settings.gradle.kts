@@ -35,7 +35,7 @@ include("core:network")
 
 include("feature:events:data")
 include("feature:events:domain")
-include("feature:events:ui")
+include("feature:events:presentation")
 
 include("design:theme")
 include("design:illustrations")
