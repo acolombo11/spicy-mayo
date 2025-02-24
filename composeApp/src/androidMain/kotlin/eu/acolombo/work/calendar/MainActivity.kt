@@ -1,6 +1,5 @@
 package eu.acolombo.work.calendar
 
-import App
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle

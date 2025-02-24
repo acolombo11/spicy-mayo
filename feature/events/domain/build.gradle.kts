@@ -7,7 +7,11 @@ plugins {
 
 kotlin {
     jvmToolchain(libs.versions.module.jvmToolchain.get().toInt())
-    androidTarget { compilerOptions { jvmTarget.set(JvmTarget.JVM_20) } }
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.fromTarget(libs.versions.module.jvmToolchain.get()))
+        }
+    }
     iosX64()
     iosArm64()
     iosSimulatorArm64()
