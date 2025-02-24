@@ -1,6 +1,6 @@
 package eu.acolombo.work.calendar
 
-import KoinInitializer
+import eu.acolombo.work.calendar.di.KoinInitializer
 import android.app.Application
 
 class SpicyMayo: Application() {

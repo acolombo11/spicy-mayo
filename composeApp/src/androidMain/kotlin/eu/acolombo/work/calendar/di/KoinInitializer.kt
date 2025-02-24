@@ -1,3 +1,4 @@
+package eu.acolombo.work.calendar.di
 
 import android.content.Context
 import org.koin.android.ext.koin.androidContext
