@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.presentations.composables
+package eu.acolombo.work.calendar.events.presentation.composables
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

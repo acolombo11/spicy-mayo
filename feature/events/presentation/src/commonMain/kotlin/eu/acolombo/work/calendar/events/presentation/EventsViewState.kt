@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.presentations
+package eu.acolombo.work.calendar.events.presentation
 
 import eu.acolombo.work.calendar.events.domain.model.Event
 import eu.acolombo.work.calendar.events.domain.model.Update

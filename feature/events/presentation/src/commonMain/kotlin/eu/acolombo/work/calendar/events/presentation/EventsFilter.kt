@@ -1,6 +1,6 @@
-package eu.acolombo.work.calendar.events.presentations
+package eu.acolombo.work.calendar.events.presentation
 
-import eu.acolombo.work.calendar.events.data.model.extensions.now
+import eu.acolombo.work.calendar.events.presentation.extension.now
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.plus

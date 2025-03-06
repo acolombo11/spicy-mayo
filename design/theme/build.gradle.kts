@@ -8,10 +8,10 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(libs.versions.module.jvmToolchain.get().toInt())
+    jvmToolchain(libs.versions.java.jdk.get().toInt())
     androidTarget {
         compilerOptions {
-            jvmTarget.set(JvmTarget.fromTarget(libs.versions.module.jvmToolchain.get()))
+            jvmTarget.set(JvmTarget.fromTarget(libs.versions.java.jdk.get()))
         }
     }
     iosX64()

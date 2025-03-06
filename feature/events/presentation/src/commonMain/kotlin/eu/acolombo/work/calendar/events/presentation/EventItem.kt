@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.presentations
+package eu.acolombo.work.calendar.events.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee

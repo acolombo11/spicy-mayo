@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.presentations.composables
+package eu.acolombo.work.calendar.events.presentation.composables
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing

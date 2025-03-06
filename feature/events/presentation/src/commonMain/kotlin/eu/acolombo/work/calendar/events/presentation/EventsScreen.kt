@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.presentations
+package eu.acolombo.work.calendar.events.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.DraggableState
@@ -42,19 +42,19 @@ import eu.acolombo.work.calendar.design.illustrations.Computer
 import eu.acolombo.work.calendar.design.illustrations.Meditation
 import eu.acolombo.work.calendar.design.theme.Spacing
 import eu.acolombo.work.calendar.events.domain.model.Location
-import eu.acolombo.work.calendar.events.presentations.EventsFilter.Date
-import eu.acolombo.work.calendar.events.presentations.EventsFilter.Today
-import eu.acolombo.work.calendar.events.presentations.EventsFilter.Tomorrow
-import eu.acolombo.work.calendar.events.presentations.EventsViewState.Error
-import eu.acolombo.work.calendar.events.presentations.EventsViewState.Loading
-import eu.acolombo.work.calendar.events.presentations.EventsViewState.Success
-import eu.acolombo.work.calendar.events.presentations.composables.DatePickerDialog
-import eu.acolombo.work.calendar.events.presentations.composables.FiltersRow
-import eu.acolombo.work.calendar.events.presentations.composables.IllustrationWithDescription
-import eu.acolombo.work.calendar.events.presentations.composables.LoadingWithDescription
-import eu.acolombo.work.calendar.events.presentations.composables.TimeInformation
-import eu.acolombo.work.calendar.events.presentations.composables.TimeZoneIdPickerDialog
-import eu.acolombo.work.calendar.events.presentations.composables.rememberDatePicker
+import eu.acolombo.work.calendar.events.presentation.EventsFilter.Date
+import eu.acolombo.work.calendar.events.presentation.EventsFilter.Today
+import eu.acolombo.work.calendar.events.presentation.EventsFilter.Tomorrow
+import eu.acolombo.work.calendar.events.presentation.EventsViewState.Error
+import eu.acolombo.work.calendar.events.presentation.EventsViewState.Loading
+import eu.acolombo.work.calendar.events.presentation.EventsViewState.Success
+import eu.acolombo.work.calendar.events.presentation.composables.DatePickerDialog
+import eu.acolombo.work.calendar.events.presentation.composables.FiltersRow
+import eu.acolombo.work.calendar.events.presentation.composables.IllustrationWithDescription
+import eu.acolombo.work.calendar.events.presentation.composables.LoadingWithDescription
+import eu.acolombo.work.calendar.events.presentation.composables.TimeInformation
+import eu.acolombo.work.calendar.events.presentation.composables.TimeZoneIdPickerDialog
+import eu.acolombo.work.calendar.events.presentation.composables.rememberDatePicker
 import kotlinx.coroutines.launch
 
 import kotlinx.serialization.Serializable

@@ -9,10 +9,10 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(libs.versions.module.jvmToolchain.get().toInt())
+    jvmToolchain(libs.versions.java.jdk.get().toInt())
     androidTarget {
         compilerOptions {
-            jvmTarget.set(JvmTarget.fromTarget(libs.versions.module.jvmToolchain.get()))
+            jvmTarget.set(JvmTarget.fromTarget(libs.versions.java.jdk.get()))
         }
     }
     iosX64()
@@ -21,9 +21,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.core.network) // TODO Remove and map errors in domain layer
             implementation(projects.feature.events.domain)
-            implementation(projects.feature.events.data)
+            implementation(projects.core.network) // For error mapping
 
             implementation(projects.design.theme)
             implementation(projects.design.illustrations)
@@ -36,7 +35,7 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
-            api(libs.koin.core)
+            implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.navigation.compose)
 

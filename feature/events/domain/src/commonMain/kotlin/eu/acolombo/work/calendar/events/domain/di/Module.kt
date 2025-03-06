@@ -1,5 +1,6 @@
 package eu.acolombo.work.calendar.events.domain.di
 
+import eu.acolombo.work.calendar.events.data.di.dataModule
 import eu.acolombo.work.calendar.events.domain.GetEventsUseCase
 import eu.acolombo.work.calendar.events.domain.GetLocationsUseCase
 import eu.acolombo.work.calendar.events.domain.SetLocationUseCase
@@ -10,3 +11,8 @@ val domainModule = module {
     single { GetLocationsUseCase(get()) }
     single { SetLocationUseCase(get()) }
 }
+
+val modules = listOf(
+    dataModule,
+    domainModule,
+)

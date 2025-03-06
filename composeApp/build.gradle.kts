@@ -11,7 +11,7 @@ plugins {
 kotlin {
     androidTarget {
         compilerOptions {
-            jvmTarget.set(JvmTarget.fromTarget(libs.versions.module.jvmToolchain.get()))
+            jvmTarget.set(JvmTarget.fromTarget(libs.versions.java.jdk.get()))
         }
     }
     listOf(
@@ -93,7 +93,7 @@ android {
         }
     }
     compileOptions {
-        val javaVersion = JavaVersion.toVersion(libs.versions.module.jvmToolchain.get().toInt())
+        val javaVersion = JavaVersion.toVersion(libs.versions.java.jdk.get().toInt())
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
     }

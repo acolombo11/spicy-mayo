@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.presentations.composables
+package eu.acolombo.work.calendar.events.presentation.composables
 
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import eu.acolombo.work.calendar.design.theme.Spacing
 import eu.acolombo.work.calendar.design.theme.WorkCalendarTheme
-import eu.acolombo.work.calendar.events.presentations.EventsFilter
+import eu.acolombo.work.calendar.events.presentation.EventsFilter
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import spicy_mayo.feature.events.presentation.generated.resources.Res

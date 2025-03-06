@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.events.presentations
+package eu.acolombo.work.calendar.events.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,12 +7,9 @@ import eu.acolombo.work.calendar.events.domain.GetLocationsUseCase
 import eu.acolombo.work.calendar.events.domain.SetLocationUseCase
 import eu.acolombo.work.calendar.events.domain.model.Update
 import eu.acolombo.work.calendar.events.domain.model.Location
-import eu.acolombo.work.calendar.events.presentations.EventsFilter.Date
-import eu.acolombo.work.calendar.events.presentations.EventsFilter.Today
-import eu.acolombo.work.calendar.events.presentations.EventsFilter.Tomorrow
-import eu.acolombo.work.calendar.network.DeploymentErrorException
-import eu.acolombo.work.calendar.network.NoConnectionException
-import eu.acolombo.work.calendar.network.ServerErrorException
+import eu.acolombo.work.calendar.events.presentation.EventsFilter.Date
+import eu.acolombo.work.calendar.events.presentation.EventsFilter.Today
+import eu.acolombo.work.calendar.events.presentation.EventsFilter.Tomorrow
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow

@@ -7,9 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import eu.acolombo.work.calendar.design.theme.WorkCalendarTheme
-import eu.acolombo.work.calendar.events.presentations.EventsRoute
-import eu.acolombo.work.calendar.events.presentations.EventsRouteDestination
-import eu.acolombo.work.calendar.events.presentations.EventsViewModel
+import eu.acolombo.work.calendar.events.presentation.EventsRoute
+import eu.acolombo.work.calendar.events.presentation.EventsRouteDestination
+import eu.acolombo.work.calendar.events.presentation.EventsViewModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinContext
 import org.koin.compose.currentKoinScope
