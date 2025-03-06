@@ -10,6 +10,9 @@ import eu.acolombo.work.calendar.events.domain.model.Location
 import eu.acolombo.work.calendar.events.presentation.EventsFilter.Date
 import eu.acolombo.work.calendar.events.presentation.EventsFilter.Today
 import eu.acolombo.work.calendar.events.presentation.EventsFilter.Tomorrow
+import eu.acolombo.work.calendar.network.DeploymentErrorException
+import eu.acolombo.work.calendar.network.NoConnectionException
+import eu.acolombo.work.calendar.network.ServerErrorException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
