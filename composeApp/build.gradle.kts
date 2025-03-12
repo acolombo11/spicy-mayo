@@ -30,7 +30,6 @@ kotlin {
             implementation(projects.design.theme)
             implementation(projects.core.network)
             implementation(projects.core.storage)
-
             implementation(projects.feature.events.domain)
             implementation(projects.feature.events.presentation)
 
@@ -42,27 +41,18 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(compose.materialIconsExtended)
 
-            api(libs.koin.core)
-            implementation(libs.koin.compose)
-            implementation(libs.navigation.compose)
-
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.logging)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.kotlinx.serialization)
             implementation(libs.kotlinx.datetime)
+
+            implementation(libs.navigation.compose)
+
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+            implementation(libs.koin.compose.viewmodel.navigation)
         }
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
-
-            implementation(libs.koin.android)
-            implementation(libs.koin.androidx.compose)
-
-            implementation(libs.ktor.client.okhttp)
-        }
-        iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
         }
     }
 }
@@ -96,9 +86,6 @@ android {
         val javaVersion = JavaVersion.toVersion(libs.versions.java.jdk.get().toInt())
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
-    }
-    buildFeatures {
-        compose = true
     }
 }
 
