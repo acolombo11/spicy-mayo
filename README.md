@@ -21,9 +21,9 @@ Since the backend needs to be setup on the account of the Google Calendar owner,
     <td><img src="docs/screenshot-android-3.png"/></td>
   </tr>
   <tr>
-    <td><img src="docs/screenshot-ios-1.png"/></td>
-    <td><img src="docs/screenshot-ios-2.png"/></td>
-    <td><img src="docs/screenshot-ios-3.png"/></td>
+    <td><img src="docs2/screenshot-ios-1.png"/></td>
+    <td><img src="docs2/screenshot-ios-2.png"/></td>
+    <td><img src="docs2/screenshot-ios-3.png"/></td>
   </tr>
 </table>
 
