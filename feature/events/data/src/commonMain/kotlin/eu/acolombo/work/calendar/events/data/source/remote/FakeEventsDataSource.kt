@@ -121,8 +121,6 @@ internal class FakeEventsDataSource(
         return events
     }
 
-    private val minutes = listOf(0, 15, 30, 45)
-
     private fun createRandomEvent(
         type: String,
         summary: String,
@@ -131,7 +129,7 @@ internal class FakeEventsDataSource(
     ) = DayEvent(
         summary = summary,
         day = day,
-        start = LocalTime(hour = Random.nextInt(9, 17), minute = minutes.random()),
+        start = LocalTime(hour = Random.nextInt(9, 17), minute = listOf(0, 15, 30, 45).random()),
         duration = Random.nextInt(1, 3).hours,
         attendees = attendees.takeIf { it.isNotEmpty() }?.shuffled()?.takeRandom().orEmpty(),
         type = type,
@@ -162,7 +160,7 @@ internal class FakeEventsDataSource(
     }
 
     private fun <T> Iterable<T>.takeRandom(
-        from: Int = count(),
+        from: Int = 2,
         until: Int = count(),
     ): List<T> = take(Random.nextInt(minOf(count(), from), minOf(count(), until)))
 }
