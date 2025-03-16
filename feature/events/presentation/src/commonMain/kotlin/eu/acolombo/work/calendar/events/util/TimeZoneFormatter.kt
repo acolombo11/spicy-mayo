@@ -4,4 +4,6 @@ object TimeZoneFormatter {
     fun getSearchName(timeZoneId: String) = timeZoneId.replace("/", " ")
     fun getDisplayName(timeZoneId: String) = timeZoneId.replace("_", " ")
     fun getLastSegment(timeZoneId: String) = getDisplayName(timeZoneId).split("/").last()
+    fun getFilterName(timeZoneId: String) = getSearchName(getDisplayName(timeZoneId)) +
+            getDisplayName(timeZoneId) + timeZoneId
 }

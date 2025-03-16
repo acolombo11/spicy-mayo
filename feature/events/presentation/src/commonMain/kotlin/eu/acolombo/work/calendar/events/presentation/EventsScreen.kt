@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -111,6 +112,8 @@ internal fun EventsScreen(
     val timeZoneIdPickerState = rememberLazyListState()
     showTimeZonePickerIndex.value?.let { index ->
         TimeZoneIdPickerDialog(
+            modifier = Modifier.fillMaxHeight(.9f)
+                .clip(MaterialTheme.shapes.extraLarge),
             lazyState = timeZoneIdPickerState,
             selectedTimeZoneId = locations.getOrNull(index)?.timezone?.id,
             onSelectTimeZoneId = { onLocationChange(index, it) },
@@ -139,7 +142,10 @@ internal fun EventsScreen(
                 TimeInformation(
                     modifier = Modifier
                         .padding(it)
-                        .padding(bottom = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() / 2)
+                        .padding(
+                            bottom = WindowInsets.statusBars.asPaddingValues()
+                                .calculateTopPadding() / 2
+                        )
                         .height(contentHeight)
                         .fillMaxWidth(),
                     latest = (eventsState as? Success)?.update?.latest,

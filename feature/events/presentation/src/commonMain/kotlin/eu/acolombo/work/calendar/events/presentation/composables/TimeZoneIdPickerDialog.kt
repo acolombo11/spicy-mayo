@@ -6,7 +6,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,6 +23,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,7 +33,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -58,10 +57,11 @@ internal fun TimeZoneIdPickerDialog(
     onSelectTimeZoneId: (String) -> Unit,
     hideTimeZoneIdPicker: () -> Unit,
     onSearchError: () -> Unit,
+    modifier: Modifier = Modifier,
     lazyState: LazyListState = rememberLazyListState(),
 ) {
     BasicAlertDialog(
-        modifier = Modifier,
+        modifier = modifier,
         onDismissRequest = { hideTimeZoneIdPicker() },
     ) {
         TimeZoneIdSearchBar(
@@ -88,65 +88,70 @@ private fun TimeZoneIdSearchBar(
     onSelection: (String) -> Unit,
     onDismiss: () -> Unit,
     onSearchError: () -> Unit,
+    modifier: Modifier = Modifier,
     lazyState: LazyListState = rememberLazyListState(),
 ) {
     var query by remember { mutableStateOf("") }
 
     val filteredTimeZoneIds = with(TimeZoneFormatter) {
         timeZoneIds.filter { zoneId ->
-            getSearchName(getDisplayName(zoneId)).contains(
-                other = query,
-                ignoreCase = true,
-            ) || getDisplayName(zoneId).contains(
-                other = query,
-                ignoreCase = true,
-            ) || zoneId.contains(
+            getFilterName(zoneId).contains(
                 other = query,
                 ignoreCase = true,
             )
         }
     }
 
-    SearchBar(
-        modifier = Modifier
-            .fillMaxHeight(.9f)
-            .clip(MaterialTheme.shapes.extraLarge),
-        query = query,
-        onQueryChange = { query = it },
-        onSearch = {
-            filteredTimeZoneIds.singleOrNull()?.let { onSelection(it) } ?: onSearchError()
-        },
-        placeholder = {
-            Text(stringResource(Res.string.label_search_timezone))
-        },
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.AutoMirrored.Default.ManageSearch,
-                contentDescription = null,
-            )
-        },
-        trailingIcon = {
-            IconButton(
-                onClick = onDismiss,
-                content = {
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = stringResource(Res.string.button_dismiss),
-                    )
-                }
-            )
-        },
-        active = true,
-        onActiveChange = {},
-        content = {
+    val expanded = true
+    val onExpandedChange : (Boolean) -> Unit = { }
+
+    Box(modifier = modifier) { // Box to avoid SearchBar InputField to take up all height
+        SearchBar(
+            inputField = {
+                SearchBarDefaults.InputField(
+                    modifier = Modifier.fillMaxWidth(),
+                    query = query,
+                    onQueryChange = { query = it },
+                    onSearch = {
+                        filteredTimeZoneIds.singleOrNull()?.let {
+                            onSelection(it)
+                        } ?: onSearchError()
+                    },
+                    expanded = expanded,
+                    onExpandedChange = onExpandedChange,
+                    placeholder = {
+                        Text(stringResource(Res.string.label_search_timezone))
+                    },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Default.ManageSearch,
+                            contentDescription = null, // Placeholder is enough
+                        )
+                    },
+                    trailingIcon = {
+                        IconButton(
+                            onClick = onDismiss,
+                            content = {
+                                Icon(
+                                    imageVector = Icons.Default.Close,
+                                    contentDescription = stringResource(Res.string.button_dismiss),
+                                )
+                            }
+                        )
+                    },
+                )
+            },
+            expanded = expanded,
+            onExpandedChange = onExpandedChange,
+        ) {
             TimeZoneIdList(
                 timeZoneIds = filteredTimeZoneIds,
                 selectedZoneId = selectedTimeZoneId,
                 lazyState = lazyState,
                 onSelection = onSelection,
             )
-        },
-    )
+        }
+    }
 }
 
 @Composable
