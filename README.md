@@ -16,9 +16,14 @@ Since the backend needs to be setup on the account of the Google Calendar owner,
     <th>Empty</th>
   </tr>
   <tr>
-    <td><img src="docs/screenshot-1.png" width="270px"/></td>
-    <td><img src="docs/screenshot-2.png" width="270px"/></td>
-    <td><img src="docs/screenshot-3.png" width="270px"/></td>
+    <td><img src="docs/screenshot-android-1.png"/></td>
+    <td><img src="docs/screenshot-android-2.png"/></td>
+    <td><img src="docs/screenshot-android-3.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshot-ios-1.png"/></td>
+    <td><img src="docs/screenshot-ios-2.png"/></td>
+    <td><img src="docs/screenshot-ios-3.png"/></td>
   </tr>
 </table>
 

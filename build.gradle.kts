@@ -34,7 +34,7 @@ allprojects {
     }
 }
 
-private fun Project.targets(name: String? = null) {
+private fun Project.targets(targetName: String? = null) {
     plugins {
         alias(rootProject.libs.plugins.kotlin.multiplatform)
     }
@@ -51,9 +51,9 @@ private fun Project.targets(name: String? = null) {
             iosArm64(),
             iosSimulatorArm64(),
         ).forEach { iosTarget ->
-            name?.let {
+            targetName?.let {
                 iosTarget.binaries.framework {
-                    baseName = name
+                    baseName = targetName
                     isStatic = true
                 }
             }

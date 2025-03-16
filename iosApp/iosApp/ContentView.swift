@@ -1,6 +1,6 @@
-import UIKit
-import SwiftUI
 import SpicyMayoApp
+import SwiftUI
+import UIKit
 
 struct ComposeView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
@@ -13,10 +13,7 @@ struct ComposeView: UIViewControllerRepresentable {
 struct ContentView: View {
     var body: some View {
         ComposeView()
-                .ignoresSafeArea(edges: .all)
-                .ignoresSafeArea(.keyboard) // Compose has own keyboard handler
+            .ignoresSafeArea(edges: .all)
+            .ignoresSafeArea(.keyboard)  // Compose has own keyboard handler
     }
 }
-
-
-
