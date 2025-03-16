@@ -138,14 +138,12 @@ internal fun EventsScreen(
     ) {
         BottomSheetScaffold(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
-            content = {
+            content = { padding ->
                 TimeInformation(
                     modifier = Modifier
-                        .padding(it)
-                        .padding(
-                            bottom = WindowInsets.statusBars.asPaddingValues()
-                                .calculateTopPadding() / 2
-                        )
+                        .padding(padding)
+                        .padding(horizontal = Spacing.S.dp)
+                        .padding(bottom = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() / 2)
                         .height(contentHeight)
                         .fillMaxWidth(),
                     latest = (eventsState as? Success)?.update?.latest,
@@ -160,6 +158,7 @@ internal fun EventsScreen(
             sheetPeekHeight = maxHeight - contentHeight,
             sheetTonalElevation = 0.dp,
             sheetShadowElevation = 0.dp,
+            sheetContainerColor = MaterialTheme.colorScheme.surfaceContainerLow,
             sheetDragHandle = {
                 FiltersRow(
                     modifier = Modifier.padding(Spacing.M.dp),
@@ -205,11 +204,11 @@ internal fun EventsScreen(
                                             bottomEnd = CornerSize(0.dp),
                                         )
                                     )
-                                    .background(MaterialTheme.colorScheme.background),
+                                    .background(MaterialTheme.colorScheme.surfaceContainerLow),
                             ) {
-                                items(items = eventsState.events) {
+                                items(items = eventsState.events) { event ->
                                     EventItem(
-                                        event = it,
+                                        event = event,
                                         modifier = Modifier.padding(bottom = Spacing.S.dp),
                                     )
                                 }
