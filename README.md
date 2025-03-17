@@ -12,7 +12,7 @@ Since the backend needs to be setup on the account of the Google Calendar owner,
 Android
 | Events                                     | Error                                       | Empty                                      |
 |--------------------------------------------|---------------------------------------------|--------------------------------------------|
-| <img src="docs/screenshot-android-0.png"/> | <img src="docs/screenshot-android-2.png"/>  | <img src="docs/screenshot-android-3.png"/> |
+| <img src="docs/screenshot-android-1.png"/> | <img src="docs/screenshot-android-2.png"/>  | <img src="docs/screenshot-android-3.png"/> |
 
 iOS
 
