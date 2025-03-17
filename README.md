@@ -9,23 +9,17 @@ Since the backend needs to be setup on the account of the Google Calendar owner,
 
 ### Screenshots
 
- <table>
-  <tr>
-    <th>Events</th>
-    <th>Error</th>
-    <th>Empty</th>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshot-android-1.png"/></td>
-    <td><img src="docs/screenshot-android-2.png"/></td>
-    <td><img src="docs/screenshot-android-3.png"/></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshot-ios-1.png"/></td>
-    <td><img src="docs/screenshot-ios-2.png"/></td>
-    <td><img src="docs/screenshot-ios-3.png"/></td>
-  </tr>
-</table>
+Android
+| Events                                     | Error                                       | Empty                                      |
+|--------------------------------------------|---------------------------------------------|--------------------------------------------|
+| <img src="docs/screenshot-android-1.png"/> | <img src="docs/screenshot-android-2.png"/>  | <img src="docs/screenshot-android-3.png"/> |
+
+iOS
+
+| Today                                      | Tomorrow                                    | Specific Date                              |
+|--------------------------------------------|---------------------------------------------|--------------------------------------------|
+| <img src="docs/screenshot-ios-1.png"/>     | <img src="docs/screenshot-ios-2.png"/>      | <img src="docs/screenshot-ios-3.png"/>     |
+
 
 The screenshots are displaying
 - the dark and light theme following the user's system preference (iOs, Android)
