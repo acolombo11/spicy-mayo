@@ -10,15 +10,15 @@ Since the backend needs to be setup on the account of the Google Calendar owner,
 ### Screenshots
 
 Android
-| Events                                     | Error                                       | Empty                                      |
-|--------------------------------------------|---------------------------------------------|--------------------------------------------|
-| <img src="docs/screenshot-android-1.png"/> | <img src="docs/screenshot-android-2.png"/>  | <img src="docs/screenshot-android-3.png"/> |
+| Events                                      | Error                                        | Empty                                       |
+|---------------------------------------------|----------------------------------------------|---------------------------------------------|
+| ![Android-1](docs/screenshot-android-1.png) | ![Android-2](docs/screenshot-android-2.png)  | ![Android-3](docs/screenshot-android-3.png) |
 
 iOS
 
-| Today                                      | Tomorrow                                    | Specific Date                              |
-|--------------------------------------------|---------------------------------------------|--------------------------------------------|
-| <img src="docs/screenshot-ios-1.png"/>     | <img src="docs/screenshot-ios-2.png"/>      | <img src="docs/screenshot-ios-3.png"/>     |
+| Today                                       | Tomorrow                                     | Specific Date                               |
+|---------------------------------------------|----------------------------------------------|---------------------------------------------|
+| ![iOS-1](docs/screenshot-ios-1.png)         | ![iOS-2](docs/screenshot-ios-2.png)          | ![iOS-3](docs/screenshot-ios-3.png)         |
 
 
 The screenshots are displaying
