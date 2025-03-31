@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.design.illustrations
+package eu.acolombo.work.calendar.design.illustrations.vectors
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,24 +12,23 @@ import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
+import eu.acolombo.work.calendar.design.illustrations.Illustrations
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-data object Phone : Illustration() {
-    /**
-     * Illustration by Freepik
-     * @see (https://www.freepik.com/serie/114133737)
-     */
-    override fun getImage(
-        colors: IllustrationColors,
-        strokeWidth: Float,
-    ) = ImageVector.Builder(
+/**
+ * Illustration by Freepik
+ * @see (https://www.freepik.com/serie/114133737)
+ */
+val Illustrations.Phone
+    @Composable
+    get() = ImageVector.Builder(
         name = "Phone",
         defaultWidth = 416.701.dp,
         defaultHeight = 620.46.dp,
         viewportWidth = 416.701f,
         viewportHeight = 620.46f,
     ).apply {
-        path(fill = colors.solidFill) {
+        path(fill = Colors.solidFill) {
             moveToRelative(360.13f, 311.265f)
             curveToRelative(-12.449f, 0.0f, -25.905f, -0.197f, -38.355f, -0.197f)
             curveToRelative(0.34f, -14.184f, 0.671f, -28.489f, -1.912f, -42.441f)
@@ -82,8 +81,8 @@ data object Phone : Illustration() {
             curveToRelative(5.061f, -28.708f, 2.472f, -60.796f, -4.941f, -88.989f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -95,8 +94,8 @@ data object Phone : Illustration() {
             curveToRelative(1.353f, -1.5f, 3.684f, -2.325f, 5.451f, -1.344f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -109,8 +108,8 @@ data object Phone : Illustration() {
             curveToRelative(2.333f, -0.1f, 6.3f, 0.648f, 6.744f, 8.305f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -122,8 +121,8 @@ data object Phone : Illustration() {
             curveToRelative(3.004f, -1.329f, 8.345f, -1.051f, 9.636f, 3.609f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -135,8 +134,8 @@ data object Phone : Illustration() {
             curveToRelative(6.149f, -15.719f, 5.395f, -33.839f, 6.511f, -50.681f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -150,8 +149,8 @@ data object Phone : Illustration() {
             curveToRelative(-4.221f, 11.966f, -3.78f, 19.904f, 2.339f, 23.072f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -164,8 +163,8 @@ data object Phone : Illustration() {
             curveToRelative(2.271f, 2.329f, 6.241f, 3.093f, 8.873f, 1.18f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -178,8 +177,8 @@ data object Phone : Illustration() {
             curveToRelative(2.22f, 2.29f, 6.365f, 2.828f, 8.529f, 0.487f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -193,8 +192,8 @@ data object Phone : Illustration() {
             curveToRelative(3.012f, -1.431f, 5.355f, -3.934f, 7.621f, -6.38f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -205,8 +204,8 @@ data object Phone : Illustration() {
             curveToRelative(0.0f, 0.0f, -30.012f, 125.22f, 63.217f, 129.455f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -217,8 +216,8 @@ data object Phone : Illustration() {
             curveToRelative(52.979f, -1.853f, 47.291f, 89.527f, 47.291f, 89.527f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -230,8 +229,8 @@ data object Phone : Illustration() {
             lineToRelative(-27.315f, 36.136f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -240,7 +239,7 @@ data object Phone : Illustration() {
             moveToRelative(151.146f, 334.273f)
             lineToRelative(-3.707f, 90.443f)
         }
-        path(fill = colors.solidStroke) {
+        path(fill = Colors.solidStroke) {
             moveToRelative(222.796f, 159.255f)
             curveToRelative(-5.568f, -8.364f, -15.04f, -14.007f, -25.047f, -14.92f)
             curveToRelative(-10.005f, -0.913f, -20.343f, 2.92f, -27.333f, 10.137f)
@@ -271,7 +270,7 @@ data object Phone : Illustration() {
             curveToRelative(-3.025f, -1.455f, -7.135f, -2.549f, -10.229f, -1.247f)
         }
         path(
-            stroke = colors.solidStroke,
+            stroke = Colors.solidStroke,
             strokeLineWidth = 3.54321f,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -309,8 +308,8 @@ data object Phone : Illustration() {
             close()
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -320,14 +319,14 @@ data object Phone : Illustration() {
             curveToRelative(2.736f, -0.2f, 5.483f, 1.708f, 6.248f, 4.343f)
             curveToRelative(0.765f, 2.633f, -0.531f, 5.717f, -2.947f, 7.015f)
         }
-        path(fill = colors.solidStroke) {
+        path(fill = Colors.solidStroke) {
             moveToRelative(192.048f, 195.137f)
             curveToRelative(0.0f, 2.423f, -1.221f, 4.385f, -2.728f, 4.385f)
             curveToRelative(-1.505f, 0.0f, -2.727f, -1.963f, -2.727f, -4.385f)
             curveToRelative(0.0f, -2.421f, 1.221f, -4.384f, 2.727f, -4.384f)
             curveToRelative(1.507f, 0.0f, 2.728f, 1.963f, 2.728f, 4.384f)
         }
-        path(fill = colors.solidStroke) {
+        path(fill = Colors.solidStroke) {
             moveToRelative(173.124f, 195.607f)
             curveToRelative(0.0f, 2.161f, -0.984f, 3.915f, -2.197f, 3.915f)
             curveToRelative(-1.215f, 0.0f, -2.199f, -1.753f, -2.199f, -3.915f)
@@ -335,8 +334,8 @@ data object Phone : Illustration() {
             curveToRelative(1.213f, 0.0f, 2.197f, 1.752f, 2.197f, 3.915f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -347,8 +346,8 @@ data object Phone : Illustration() {
             curveToRelative(1.112f, 1.701f, 3.501f, 2.432f, 5.375f, 1.641f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -358,15 +357,15 @@ data object Phone : Illustration() {
             curveToRelative(1.925f, 1.387f, 4.433f, 1.936f, 6.763f, 1.48f)
             curveToRelative(2.329f, -0.457f, 4.444f, -1.912f, 5.704f, -3.924f)
         }
-        path(fill = colors.solidStroke) {
+        path(fill = Colors.solidStroke) {
             moveToRelative(196.984f, 228.19f)
             curveToRelative(0.0f, 0.0f, 9.283f, 1.931f, 23.903f, -6.948f)
             curveToRelative(0.0f, 0.0f, -6.064f, 10.911f, -22.836f, 14.757f)
             lineToRelative(-1.067f, -7.809f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -376,8 +375,8 @@ data object Phone : Illustration() {
             lineToRelative(48.912f, -2.089f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -389,8 +388,8 @@ data object Phone : Illustration() {
             lineToRelative(-16.115f, -84.804f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -403,12 +402,11 @@ data object Phone : Illustration() {
             curveToRelative(8.807f, 19.772f, 7.884f, 41.209f, 6.803f, 62.328f)
         }
     }.build()
-}
 
 @Composable
 @Preview
 private fun Preview() {
-    val phone = Phone.image
+    val phone = Illustrations.Phone
     Image(
         modifier = Modifier
             .background(Color(0xFFFFF6ED))

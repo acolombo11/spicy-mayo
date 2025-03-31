@@ -15,8 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
-import eu.acolombo.work.calendar.design.illustrations.Illustration
 import eu.acolombo.work.calendar.design.theme.Spacing
 import org.jetbrains.compose.resources.stringResource
 import spicy_mayo.feature.events.presentation.generated.resources.Res
@@ -24,7 +24,7 @@ import spicy_mayo.feature.events.presentation.generated.resources.loading
 
 @Composable
 fun IllustrationWithDescription(
-    illustration: Illustration,
+    illustration: ImageVector,
     description: String,
     modifier: Modifier = Modifier,
     button: String? = null,
@@ -36,8 +36,8 @@ fun IllustrationWithDescription(
         content = {
             Image(
                 modifier = Modifier.fillMaxWidth(),
-                imageVector = illustration.image,
-                contentDescription = illustration.image.name,
+                imageVector = illustration,
+                contentDescription = illustration.name,
             )
         },
         bottomContent = { bottomModifier ->

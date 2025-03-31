@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.design.illustrations
+package eu.acolombo.work.calendar.design.illustrations.vectors
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,24 +12,23 @@ import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
+import eu.acolombo.work.calendar.design.illustrations.Illustrations
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-data object Meditation : Illustration() {
-    /**
-     * Illustration by Freepik
-     * @see (https://www.freepik.com/serie/114133737)
-     */
-    override fun getImage(
-        colors: IllustrationColors,
-        strokeWidth: Float,
-    ) = ImageVector.Builder(
+/**
+ * Illustration by Freepik
+ * @see (https://www.freepik.com/serie/114133737)
+ */
+val Illustrations.Meditation
+    @Composable
+    get() = ImageVector.Builder(
         name = "Meditation",
         defaultWidth = 416.701.dp,
         defaultHeight = 620.46.dp,
         viewportWidth = 416.701f,
         viewportHeight = 620.46f,
     ).apply {
-        path(fill = colors.solidFill) {
+        path(fill = Colors.solidFill) {
             moveToRelative(384.34f, 425.746f)
             curveToRelative(-3.816f, -8.409f, -11.617f, -14.904f, -20.579f, -17.133f)
             curveToRelative(3.697f, -3.236f, 6.049f, -7.447f, 7.685f, -12.027f)
@@ -101,8 +100,8 @@ data object Meditation : Illustration() {
             curveToRelative(4.224f, -8.211f, 4.475f, -18.359f, 0.659f, -26.768f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -112,8 +111,8 @@ data object Meditation : Illustration() {
             curveToRelative(14.281f, 5.663f, 29.299f, 9.468f, 44.555f, 11.285f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -128,8 +127,8 @@ data object Meditation : Illustration() {
             curveToRelative(-1.332f, 9.987f, -3.687f, 19.837f, -7.013f, 29.347f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -143,8 +142,8 @@ data object Meditation : Illustration() {
             curveToRelative(0.933f, 1.58f, 2.281f, 5.284f, 0.925f, 8.62f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -157,8 +156,8 @@ data object Meditation : Illustration() {
             curveToRelative(2.335f, 0.381f, 5.753f, 4.807f, 5.185f, 8.116f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -170,8 +169,8 @@ data object Meditation : Illustration() {
             curveToRelative(39.384f, 0.536f, 73.105f, 4.523f, 111.152f, 14.712f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -182,8 +181,8 @@ data object Meditation : Illustration() {
             curveToRelative(-8.059f, 7.731f, -11.681f, 11.729f, -19.976f, 19.316f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -198,8 +197,8 @@ data object Meditation : Illustration() {
             curveToRelative(2.092f, 8.721f, 4.185f, 17.444f, 6.277f, 26.167f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -212,8 +211,8 @@ data object Meditation : Illustration() {
             curveToRelative(-2.287f, 1.305f, -4.624f, 6.069f, -3.477f, 10.019f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -226,8 +225,8 @@ data object Meditation : Illustration() {
             curveToRelative(-1.099f, 1.035f, -2.867f, 2.717f, -2.165f, 6.065f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -237,8 +236,8 @@ data object Meditation : Illustration() {
             curveToRelative(16.488f, 1.108f, 33.236f, -1.857f, 48.34f, -8.561f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -252,8 +251,8 @@ data object Meditation : Illustration() {
             curveToRelative(3.66f, -2.336f, 9.859f, -10.972f, 11.304f, -15.067f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -268,8 +267,8 @@ data object Meditation : Illustration() {
             curveToRelative(-13.649f, 4.737f, -26.713f, 7.417f, -36.877f, 17.687f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -279,15 +278,15 @@ data object Meditation : Illustration() {
             curveToRelative(6.516f, 4.231f, 14.351f, 6.397f, 22.115f, 6.116f)
             curveToRelative(7.764f, -0.281f, 15.421f, -3.009f, 21.615f, -7.7f)
         }
-        path(fill = colors.solidStroke) {
+        path(fill = Colors.solidStroke) {
             moveToRelative(221.801f, 240.186f)
             curveToRelative(-10.231f, 6.499f, -23.755f, 7.465f, -34.805f, 2.488f)
             curveToRelative(0.0f, 0.0f, 8.371f, 9.711f, 17.403f, 8.909f)
             curveToRelative(9.031f, -0.803f, 17.403f, -11.397f, 17.403f, -11.397f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -299,8 +298,8 @@ data object Meditation : Illustration() {
             curveToRelative(1.94f, 1.871f, 4.923f, 2.389f, 7.545f, 1.769f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -312,8 +311,8 @@ data object Meditation : Illustration() {
             curveToRelative(-2.059f, 2.257f, -5.471f, 3.096f, -8.403f, 2.24f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -323,8 +322,8 @@ data object Meditation : Illustration() {
             curveToRelative(-1.377f, -2.475f, -4.16f, -4.1f, -6.993f, -4.085f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -334,8 +333,8 @@ data object Meditation : Illustration() {
             curveToRelative(1.395f, -2.307f, 4.096f, -3.759f, 6.789f, -3.651f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -346,8 +345,8 @@ data object Meditation : Illustration() {
             curveToRelative(0.905f, 0.316f, 1.901f, 0.365f, 2.833f, 0.14f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -357,8 +356,8 @@ data object Meditation : Illustration() {
             curveToRelative(4.423f, 3.356f, 11.113f, 3.304f, 15.484f, -0.121f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -369,8 +368,8 @@ data object Meditation : Illustration() {
             curveToRelative(2.325f, 0.283f, 4.767f, -0.713f, 6.231f, -2.541f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -380,7 +379,7 @@ data object Meditation : Illustration() {
             curveToRelative(1.327f, 1.931f, 3.687f, 3.104f, 6.027f, 2.993f)
             curveToRelative(2.34f, -0.111f, 4.58f, -1.5f, 5.719f, -3.548f)
         }
-        path(fill = colors.solidStroke) {
+        path(fill = Colors.solidStroke) {
             moveToRelative(233.292f, 208.183f)
             curveToRelative(-4.835f, -0.395f, -9.803f, -0.825f, -14.153f, -2.973f)
             curveToRelative(-4.349f, -2.148f, -8.22f, -7.949f, -8.127f, -12.8f)
@@ -396,7 +395,7 @@ data object Meditation : Illustration() {
             curveToRelative(7.785f, 7.113f, 12.825f, 18.12f, 11.82f, 28.617f)
         }
         path(
-            stroke = colors.solidStroke,
+            stroke = Colors.solidStroke,
             strokeLineWidth = 1.82123f,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -419,12 +418,11 @@ data object Meditation : Illustration() {
             close()
         }
     }.build()
-}
 
 @Composable
 @Preview
 private fun Preview() {
-    val meditation = Meditation.image
+    val meditation = Illustrations.Meditation
     Image(
         modifier = Modifier
             .background(Color(0xFFFFF6ED))

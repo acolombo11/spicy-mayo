@@ -1,4 +1,4 @@
-package eu.acolombo.work.calendar.design.illustrations
+package eu.acolombo.work.calendar.design.illustrations.vectors
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,24 +12,23 @@ import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
+import eu.acolombo.work.calendar.design.illustrations.Illustrations
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-data object Flower : Illustration() {
-    /**
-     * Illustration by Freepik
-     * @see (https://www.freepik.com/serie/114133737)
-     */
-    override fun getImage(
-        colors: IllustrationColors,
-        strokeWidth: Float,
-    ) = ImageVector.Builder(
+/**
+ * Illustration by Freepik
+ * @see (https://www.freepik.com/serie/114133737)
+ */
+val Illustrations.Flower
+    @Composable
+    get() = ImageVector.Builder(
         name = "Flower",
         defaultWidth = 416.701.dp,
         defaultHeight = 620.46.dp,
         viewportWidth = 416.701f,
         viewportHeight = 620.46f,
     ).apply {
-        path(fill = colors.solidStroke) {
+        path(fill = Colors.solidStroke) {
             moveToRelative(158.148f, 270.421f)
             curveToRelative(8.264f, 2.268f, 17.72f, -0.644f, 23.276f, -7.169f)
             curveToRelative(5.556f, -6.524f, 6.924f, -16.324f, 3.368f, -24.121f)
@@ -40,7 +39,7 @@ data object Flower : Illustration() {
             curveToRelative(-22.753f, 19.68f, -33.659f, 53.045f, -28.245f, 82.637f)
             curveToRelative(1.96f, 10.715f, 4.901f, 19.543f, 9.224f, 29.541f)
         }
-        path(fill = colors.solidFill) {
+        path(fill = Colors.solidFill) {
             moveToRelative(224.014f, 233.67f)
             curveToRelative(4.941f, 9.796f, 7.568f, 20.751f, 7.604f, 31.723f)
             curveToRelative(0.011f, 3.131f, -0.205f, 6.343f, -1.487f, 9.199f)
@@ -76,7 +75,7 @@ data object Flower : Illustration() {
             curveToRelative(-0.999f, 2.281f, -2.747f, 4.155f, -4.637f, 5.777f)
             curveToRelative(-10.54f, 9.043f, -27.333f, 10.943f, -39.589f, 4.411f)
         }
-        path(fill = colors.solidStroke) {
+        path(fill = Colors.solidStroke) {
             moveToRelative(229.438f, 219.962f)
             curveToRelative(3.044f, 3.661f, 0.448f, 10.84f, -5.797f, 16.033f)
             curveToRelative(-6.247f, 5.193f, -13.777f, 6.436f, -16.821f, 2.775f)
@@ -84,7 +83,7 @@ data object Flower : Illustration() {
             curveToRelative(6.247f, -5.193f, 13.777f, -6.436f, 16.823f, -2.775f)
         }
         path(
-            stroke = colors.solidStroke,
+            stroke = Colors.solidStroke,
             strokeLineWidth = 5.55801f,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -99,8 +98,8 @@ data object Flower : Illustration() {
             close()
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -111,7 +110,7 @@ data object Flower : Illustration() {
             curveToRelative(22.873f, 14.057f, 47.419f, 25.777f, 73.519f, 32.069f)
             curveToRelative(10.413f, 2.509f, 21.036f, 4.147f, 31.723f, 4.888f)
         }
-        path(fill = colors.solidFill) {
+        path(fill = Colors.solidFill) {
             moveToRelative(182.353f, 173.175f)
             curveToRelative(2.08f, 10.561f, 0.451f, 21.816f, -4.54f, 31.353f)
             curveToRelative(-4.991f, 9.537f, -12.424f, 21.235f, -23.189f, 21.235f)
@@ -143,8 +142,8 @@ data object Flower : Illustration() {
             curveToRelative(15.899f, 2.816f, 26.952f, 16.925f, 30.073f, 32.767f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -155,8 +154,8 @@ data object Flower : Illustration() {
             curveToRelative(1.775f, 0.635f, 3.823f, 0.46f, 5.465f, -0.467f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -166,7 +165,7 @@ data object Flower : Illustration() {
             curveToRelative(0.776f, 1.739f, 2.228f, 3.163f, 3.979f, 3.907f)
             curveToRelative(1.752f, 0.743f, 3.785f, 0.797f, 5.575f, 0.148f)
         }
-        path(fill = colors.solidStroke) {
+        path(fill = Colors.solidStroke) {
             moveToRelative(168.393f, 180.63f)
             curveToRelative(-0.892f, -0.105f, -1.811f, -0.208f, -2.673f, 0.04f)
             curveToRelative(-0.863f, 0.248f, -1.663f, 0.939f, -1.752f, 1.831f)
@@ -178,7 +177,7 @@ data object Flower : Illustration() {
             curveToRelative(0.945f, -3.436f, -7.971f, -3.039f, -9.875f, -3.263f)
         }
         path(
-            stroke = colors.solidStroke,
+            stroke = Colors.solidStroke,
             strokeLineWidth = 3.54321f,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -197,8 +196,8 @@ data object Flower : Illustration() {
             close()
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -208,8 +207,8 @@ data object Flower : Illustration() {
             curveToRelative(-7.396f, 1.424f, -15.496f, -2.08f, -19.521f, -8.447f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -220,8 +219,8 @@ data object Flower : Illustration() {
             curveToRelative(1.483f, -7.877f, 6.427f, -22.572f, 7.909f, -30.449f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -236,8 +235,8 @@ data object Flower : Illustration() {
             curveToRelative(-1.047f, 10.159f, -2.093f, 20.316f, -3.141f, 30.473f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -249,8 +248,8 @@ data object Flower : Illustration() {
             curveToRelative(-2.588f, -4.004f, -12.291f, -4.76f, -15.869f, 1.032f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -263,8 +262,8 @@ data object Flower : Illustration() {
             curveToRelative(-2.391f, -1.616f, -9.167f, -1.251f, -11.303f, 2.852f)
         }
         path(
-            stroke = colors.solidStroke,
-            strokeLineWidth = strokeWidth,
+            stroke = Colors.solidStroke,
+            strokeLineWidth = DefaultStrokeWidth,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -277,7 +276,7 @@ data object Flower : Illustration() {
             curveToRelative(-1.005f, 9.645f, -2.84f, 19.184f, -4.672f, 28.708f)
         }
         path(
-            stroke = colors.solidStroke,
+            stroke = Colors.solidStroke,
             strokeLineWidth = 2.54417f,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -288,12 +287,12 @@ data object Flower : Illustration() {
             curveToRelative(30.851f, 59.22f, 62.74f, 117.875f, 95.648f, 175.924f)
             curveToRelative(5.189f, 9.156f, 24.352f, 18.872f, 34.832f, 17.893f)
         }
-        path(fill = colors.solidFill) {
+        path(fill = Colors.solidFill) {
             moveToRelative(179.834f, 196.226f)
             curveToRelative(0.033f, 4.345f, 0.067f, 8.689f, 0.1f, 13.035f)
             curveToRelative(-2.056f, -0.251f, -4.112f, -0.5f, -6.168f, -0.751f)
         }
-        path(fill = colors.solidStroke) {
+        path(fill = Colors.solidStroke) {
             moveToRelative(183.526f, 150.614f)
             curveToRelative(-0.365f, -2.837f, -1.901f, -5.097f, -4.288f, -7.86f)
             curveToRelative(-3.196f, -3.7f, -7.312f, -6.808f, -11.851f, -8.661f)
@@ -322,7 +321,7 @@ data object Flower : Illustration() {
             curveToRelative(0.381f, -1.705f, 0.469f, -3.171f, 0.297f, -4.508f)
         }
         path(
-            stroke = colors.solidStroke,
+            stroke = Colors.solidStroke,
             strokeLineWidth = 2.54417f,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -335,7 +334,7 @@ data object Flower : Illustration() {
             curveToRelative(0.719f, 2.141f, 2.816f, 3.713f, 5.065f, 3.928f)
         }
         path(
-            stroke = colors.solidStroke,
+            stroke = Colors.solidStroke,
             strokeLineWidth = 2.54417f,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
@@ -346,12 +345,11 @@ data object Flower : Illustration() {
             curveToRelative(-0.925f, -1.688f, -2.675f, -2.896f, -4.58f, -3.164f)
         }
     }.build()
-}
 
 @Composable
 @Preview
 private fun Preview() {
-    val flower = Flower.image
+    val flower = Illustrations.Flower
     Image(
         modifier = Modifier
             .background(Color(0xFFFFF6ED))

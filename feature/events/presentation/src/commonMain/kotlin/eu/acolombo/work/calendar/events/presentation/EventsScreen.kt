@@ -39,8 +39,9 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
-import eu.acolombo.work.calendar.design.illustrations.Computer
-import eu.acolombo.work.calendar.design.illustrations.Meditation
+import eu.acolombo.work.calendar.design.illustrations.Illustrations
+import eu.acolombo.work.calendar.design.illustrations.vectors.Computer
+import eu.acolombo.work.calendar.design.illustrations.vectors.Meditation
 import eu.acolombo.work.calendar.design.theme.Spacing
 import eu.acolombo.work.calendar.events.domain.model.Location
 import eu.acolombo.work.calendar.events.presentation.EventsFilter.Date
@@ -189,7 +190,7 @@ internal fun EventsScreen(
                         is Success -> if (eventsState.events.isEmpty()) {
                             IllustrationWithDescription(
                                 modifier = modifier,
-                                illustration = Meditation,
+                                illustration = Illustrations.Meditation,
                                 description = stringResource(Res.string.description_empty),
                             )
                         } else {
@@ -233,7 +234,7 @@ internal fun EventsScreen(
 
                         is Error -> IllustrationWithDescription(
                             modifier = modifier,
-                            illustration = Computer,
+                            illustration = Illustrations.Computer,
                             description = eventsState.resource?.let { stringResource(it) }
                                 ?: eventsState.message
                                 ?: stringResource(Res.string.description_error),
