@@ -15,13 +15,13 @@ plugins {
 val nameSpace = "eu.acolombo.work.calendar"
 val javaVersion = libs.versions.java.jdk.get()
 
-allprojects {
+subprojects {
     when {
         path.count { it == ':' } >= 2 -> {
             androidLibrary()
             targets()
-            if (name in listOf("presentation", "theme", "illustrations")) compose()
-            if (path.split(':')[1] in listOf("feature", "core")) koin()
+            if (name  == "presentation" || rootName == "theme") compose()
+            if (rootName in listOf("feature", "core")) koin()
             if (name == "presentation") composeFeature()
         }
         name == "app" -> {
@@ -75,10 +75,6 @@ private fun Project.androidApplication() {
             applicationId = nameSpace
         }
 
-        sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-        sourceSets["main"].res.srcDirs("src/androidMain/res")
-        sourceSets["main"].resources.srcDirs("src/commonMain/resources")
-
         compileOptions {
             val javaVersion = JavaVersion.toVersion(javaVersion.toInt())
             sourceCompatibility = javaVersion
@@ -119,11 +115,6 @@ private fun Project.compose() {
                 implementation(compose.components.uiToolingPreview)
             }
         }
-    }
-
-    the<LibraryExtension>().apply {
-        sourceSets["main"].resources.srcDirs("src/commonMain/resources")
-        sourceSets["main"].resources.srcDirs("src/commonMain/composeResources")
     }
 }
 
@@ -180,6 +171,9 @@ private fun Project.composeApp() {
 private fun Project.plugins(apply: ProjectPluginDependenciesSpecScope.() -> Unit) {
     apply(ProjectPluginDependenciesSpecScope(this))
 }
+
+private val Project.rootName
+    get() = path.split(':')[1]
 
 class ProjectPluginDependenciesSpecScope(private val project: Project) {
     fun alias(provider: Provider<PluginDependency>) {
