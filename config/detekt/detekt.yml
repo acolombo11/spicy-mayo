@@ -40,7 +40,3 @@ formatting:
 
   TrailingCommaOnDeclarationSite:
     active: true
-Compose:
-  CompositionLocalAllowlist:
-    active: true
-    allowedCompositionLocals: [ "LocalBrandPalette", "LocalPaletteTone" ]

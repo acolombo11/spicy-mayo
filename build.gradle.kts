@@ -74,10 +74,10 @@ private fun Project.androidApplication() {
 
     android<ApplicationExtension> {
         namespace = nameSpace
-        compileSdk = rootProject.libs.versions.android.maxSdk.get().toInt()
+        compileSdk = rootProject.libs.versions.android.targetSdk.get().toInt()
         defaultConfig {
             minSdk = rootProject.libs.versions.android.minSdk.get().toInt()
-            targetSdk = rootProject.libs.versions.android.maxSdk.get().toInt()
+            targetSdk = rootProject.libs.versions.android.targetSdk.get().toInt()
             applicationId = nameSpace
         }
 
@@ -96,7 +96,7 @@ private fun Project.androidLibrary() {
 
     android<LibraryExtension> {
         namespace = nameSpace + path.replace(':','.')
-        compileSdk = rootProject.libs.versions.android.maxSdk.get().toInt()
+        compileSdk = rootProject.libs.versions.android.targetSdk.get().toInt()
         defaultConfig {
             minSdk = rootProject.libs.versions.android.minSdk.get().toInt()
         }
@@ -195,9 +195,7 @@ private fun Project.detekt() {
         tasks.withType<Detekt> {
             setSource(files(project.projectDir))
             exclude("**/build/**")
-            exclude {
-                it.file.relativeTo(projectDir).startsWith(project.buildDir.relativeTo(projectDir))
-            }
+            exclude { it.file.toPath().startsWith(layout.buildDirectory.get().asFile.toPath()) }
         }
         val detektBaselines by tasks.registering(DetektCreateBaselineTask::class) {
             description = "Overrides current baseline."
