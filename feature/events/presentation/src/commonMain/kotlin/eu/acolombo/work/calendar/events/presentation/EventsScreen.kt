@@ -79,22 +79,22 @@ fun EventsRoute(
     val locations by viewModel.locations.collectAsStateWithLifecycle()
 
     EventsScreen(
-        eventsState = eventsState,
-        locations = locations,
         onInputChange = viewModel::onInputChange,
         onLocationChange = viewModel::onChangeLocation,
         onRefresh = viewModel::refresh,
+        locations = locations,
+        eventsState = eventsState,
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun EventsScreen(
-    eventsState: EventsViewState,
-    locations: List<Location?>,
     onInputChange: (EventsFilter) -> Unit,
     onLocationChange: (index: Int, timeZoneId: String?) -> Unit,
     onRefresh: () -> Unit,
+    eventsState: EventsViewState,
+    locations: List<Location?>,
 ) {
     val showDatePicker = remember { mutableStateOf(false) }
     val showTimeZonePickerIndex = remember { mutableStateOf<Int?>(null) }
@@ -113,7 +113,7 @@ internal fun EventsScreen(
     val timeZoneIdPickerState = rememberLazyListState()
     showTimeZonePickerIndex.value?.let { index ->
         TimeZoneIdPickerDialog(
-            modifier = Modifier.fillMaxHeight(.9f)
+            modifier = Modifier.fillMaxHeight(DialogHeight)
                 .clip(MaterialTheme.shapes.extraLarge),
             lazyState = timeZoneIdPickerState,
             selectedTimeZoneId = locations.getOrNull(index)?.timezone?.id,
@@ -123,10 +123,10 @@ internal fun EventsScreen(
                 onLocationChange(index, null)
                 snackOwner.lifecycleScope.launch {
                     snackHostState.showSnackbar(
-                        message = "No timezone found. Select one of the available timezones"
+                        message = "No timezone found. Select one of the available timezones",
                     )
                 }
-            }
+            },
         )
     }
 
@@ -151,7 +151,7 @@ internal fun EventsScreen(
                     locations = locations,
                     onOfficeClick = { index ->
                         showTimeZonePickerIndex.value = index
-                    }
+                    },
                 )
             },
             scaffoldState = rememberBottomSheetScaffoldState(),
@@ -174,7 +174,7 @@ internal fun EventsScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .draggable(
-                            // TODO: Change to ViewPager
+                            // FIXME Change to ViewPager
                             orientation = Orientation.Horizontal,
                             state = DraggableState {
                                 when {
@@ -183,7 +183,7 @@ internal fun EventsScreen(
                                     it > 0 && eventsState.input is Date -> onInputChange(Tomorrow)
                                 }
                             },
-                        )
+                        ),
                 ) {
                     val modifier = Modifier.windowInsetsPadding(WindowInsets.navigationBars)
                     when (eventsState) {
@@ -203,7 +203,7 @@ internal fun EventsScreen(
                                         MaterialTheme.shapes.medium.copy(
                                             bottomStart = CornerSize(0.dp),
                                             bottomEnd = CornerSize(0.dp),
-                                        )
+                                        ),
                                     )
                                     .background(MaterialTheme.colorScheme.surfaceContainerLow),
                             ) {
@@ -249,3 +249,4 @@ internal fun EventsScreen(
 }
 
 private val BackLayerContentHeight = 220.dp
+private const val DialogHeight = .9f

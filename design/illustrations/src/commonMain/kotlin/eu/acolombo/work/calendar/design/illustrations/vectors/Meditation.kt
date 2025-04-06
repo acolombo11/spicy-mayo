@@ -419,6 +419,7 @@ val Illustrations.Meditation
         }
     }.build()
 
+@Suppress("MagicNumber")
 @Composable
 @Preview
 private fun Preview() {

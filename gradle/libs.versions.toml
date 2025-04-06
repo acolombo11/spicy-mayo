@@ -3,14 +3,16 @@ agp = "8.8.2"
 android-minSdk = "26"
 android-maxSdk = "35"
 java-jdk = "21"
+kotlin = "2.1.10"
+detekt = "1.23.8"
+detektComposeRules = "0.4.22"
 androidxActivityCompose = "1.10.1"
 composePlugin = "1.7.3"
-kotlin = "2.1.10"
 kotlinxCoroutines = "1.10.1"
 kotlinxDatetime = "0.6.1"
 kotlinxSerialization = "1.8.0"
 ktor = "3.0.3"
-datastore = "1.1.3"
+datastore = "1.1.4"
 koin = "4.1.0-Beta5"
 navigationCompose = "2.8.0-alpha11"
 
@@ -32,6 +34,8 @@ ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serializatio
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
+detekt-compose-rules = { group = "io.nlopez.compose.rules", name = "detekt", version.ref = "detektComposeRules" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -40,3 +44,4 @@ jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "composePlugin
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

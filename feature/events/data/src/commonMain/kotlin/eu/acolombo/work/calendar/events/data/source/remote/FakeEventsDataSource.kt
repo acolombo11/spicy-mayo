@@ -17,6 +17,7 @@ import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 
+@Suppress("MagicNumber")
 internal class FakeEventsDataSource(
     private val dispatcher: CoroutineDispatcher,
 ) : EventsDataSource {

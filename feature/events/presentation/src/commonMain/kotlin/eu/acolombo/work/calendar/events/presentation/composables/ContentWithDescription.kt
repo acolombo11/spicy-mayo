@@ -69,9 +69,9 @@ fun LoadingWithDescription(
 @Composable
 private fun ContentWithDescription(
     description: String,
-    content: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     bottomContent: @Composable BoxScope.(Modifier) -> Unit = {},
+    content: @Composable () -> Unit,
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
@@ -79,8 +79,8 @@ private fun ContentWithDescription(
     ) {
         Box(
             modifier = Modifier
-                .fillMaxWidth(.65f)
-                .aspectRatio(0.67f),
+                .fillMaxWidth(ContentWidth)
+                .aspectRatio(ContentRatio),
             contentAlignment = Alignment.Center,
         ) {
             content()
@@ -95,3 +95,6 @@ private fun ContentWithDescription(
         )
     }
 }
+
+private const val ContentRatio = .67f
+private const val ContentWidth = .65f

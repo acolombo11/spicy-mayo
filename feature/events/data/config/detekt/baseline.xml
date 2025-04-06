@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>LongMethod:FakeEventsDataSource.kt$FakeEventsDataSource$private fun generateRandomEvents(): Map&lt;DayOfWeek, List&lt;DayEvent&gt;&gt;</ID>
+    <ID>SwallowedException:RemoteEventsDataSource.kt$RemoteEventsDataSource$exception: IOException</ID>
+    <ID>SwallowedException:RemoteEventsDataSource.kt$RemoteEventsDataSource$exception: JsonConvertException</ID>
+    <ID>SwallowedException:RemoteEventsDataSource.kt$RemoteEventsDataSource$exception: NoTransformationFoundException</ID>
+  </CurrentIssues>
+</SmellBaseline>

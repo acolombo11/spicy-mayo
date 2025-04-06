@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>CyclomaticComplexMethod:EventsScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable internal fun EventsScreen( onInputChange: (EventsFilter) -&gt; Unit, onLocationChange: (index: Int, timeZoneId: String?) -&gt; Unit, onRefresh: () -&gt; Unit, eventsState: EventsViewState, locations: List&lt;Location?&gt;, )</ID>
+    <ID>LongMethod:EventItem.kt$@Composable internal fun EventItem( event: Event, modifier: Modifier = Modifier, colors: EventItemColors = EventItemColors( containerColor = when { event.type != Event.Type.Default -&gt; MaterialTheme.colorScheme.primary event.duration == Duration.INFINITE -&gt; MaterialTheme.colorScheme.secondary else -&gt; MaterialTheme.colorScheme.surfaceVariant }, accentColor = when { event.type != Event.Type.Default -&gt; MaterialTheme.colorScheme.surfaceVariant event.duration == Duration.INFINITE -&gt; MaterialTheme.colorScheme.secondaryContainer else -&gt; MaterialTheme.colorScheme.primary }, ), )</ID>
+    <ID>LongMethod:EventsScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable internal fun EventsScreen( onInputChange: (EventsFilter) -&gt; Unit, onLocationChange: (index: Int, timeZoneId: String?) -&gt; Unit, onRefresh: () -&gt; Unit, eventsState: EventsViewState, locations: List&lt;Location?&gt;, )</ID>
+    <ID>LongMethod:TimeZoneIdPickerDialog.kt$@Composable private fun TimeZoneIdSearchBar( timeZoneIds: List&lt;String&gt;, selectedTimeZoneId: String?, onSelection: (String) -&gt; Unit, onDismiss: () -&gt; Unit, onSearchError: () -&gt; Unit, modifier: Modifier = Modifier, lazyState: LazyListState = rememberLazyListState(), )</ID>
+    <ID>MatchingDeclarationName:EventsScreen.kt$EventsRouteDestination</ID>
+    <ID>MultipleEmitters:EventsScreen.kt$EventsScreen</ID>
+  </CurrentIssues>
+</SmellBaseline>

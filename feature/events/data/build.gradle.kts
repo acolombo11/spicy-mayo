@@ -32,8 +32,8 @@ val secretsGenerator by tasks.registering(Sync::class) {
         |  internal const val ApiKey = "$spicyApiKey"
         |  internal const val DeployId = "$spicyDeployId"
         |}
-            """.trimMargin()
-        )
+            """.trimMargin(),
+        ),
     ) {
         rename { "Secrets.kt" }
         into("eu/acolombo/work/calendar/events/data/")
@@ -45,7 +45,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             kotlin.srcDir(
-                secretsGenerator.map { it.destinationDir }
+                secretsGenerator.map { it.destinationDir },
             )
         }
     }

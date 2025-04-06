@@ -34,23 +34,23 @@ import spicy_mayo.feature.events.presentation.generated.resources.label_set_loca
 
 @Composable
 fun TimeInformation(
-    modifier: Modifier,
+    onOfficeClick: (index: Int) -> Unit,
     latest: Instant?,
     locations: List<Location?>,
-    onOfficeClick: (index: Int) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center,
     ) {
         Row(
-            modifier = Modifier.widthIn(max = BottomSheetMaxWidth*0.9f),
+            modifier = Modifier.widthIn(max = BottomSheetMaxWidth * WidthRatio),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             Column(
                 modifier = Modifier
-                    .weight(.6f)
+                    .weight(ContentHeight)
                     .padding(horizontal = Spacing.L.dp)
                     .padding(bottom = Spacing.S.dp),
             ) {
@@ -65,7 +65,7 @@ fun TimeInformation(
             }
             VerticalDivider(
                 modifier = Modifier
-                    .fillMaxHeight(.75f)
+                    .fillMaxHeight(DividerHeight)
                     .padding(vertical = Spacing.M.dp)
                     .width(1.dp),
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -157,3 +157,6 @@ private fun Instant?.toTimeString(
 
 // copy of internal androidx.compose.material3.BottomSheetMaxWidth
 private val BottomSheetMaxWidth = 640.dp
+private const val DividerHeight = .75f
+private const val ContentHeight = .6f
+private const val WidthRatio = .9f

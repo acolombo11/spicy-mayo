@@ -1,0 +1,46 @@
+naming:
+  FunctionNaming:
+    active: true
+    functionPattern: '[a-z][a-zA-Z0-9]*'
+    ignoreAnnotated: ['Composable']
+
+  TopLevelPropertyNaming:
+    active: true
+    constantPattern: '[A-Z][A-Za-z0-9]*' # Allows PascalCase for top-level constants for Compose
+
+complexity:
+  LongParameterList:
+    active: true
+    functionThreshold: 6
+    ignoreDefaultParameters: true # Ignores parameters with default values so no complaints for Compose
+
+  TooManyFunctions:
+    active: true
+    ignoreAnnotatedFunctions: [ 'Preview' ] # Ignores functions annotated with @Preview
+
+style:
+  MagicNumber:
+    active: true
+    ignoreCompanionObjectPropertyDeclaration: true
+    ignorePropertyDeclaration: true # Ignores ImageVector false positive
+
+  UnusedPrivateMember:
+    active: true
+    ignoreAnnotated: [ 'Preview' ] # Ignores functions annotated with @Preview
+
+formatting:
+  ImportOrdering:
+    active: false # FIXME fix code style to match expectation
+
+  Indentation:
+    active: false # FIXME fix code style to match expectation
+
+  TrailingCommaOnCallSite:
+    active: true
+
+  TrailingCommaOnDeclarationSite:
+    active: true
+Compose:
+  CompositionLocalAllowlist:
+    active: true
+    allowedCompositionLocals: [ "LocalBrandPalette", "LocalPaletteTone" ]

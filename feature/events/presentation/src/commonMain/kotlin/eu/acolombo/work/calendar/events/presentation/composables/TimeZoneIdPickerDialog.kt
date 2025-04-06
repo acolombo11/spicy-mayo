@@ -103,7 +103,7 @@ private fun TimeZoneIdSearchBar(
     }
 
     val expanded = true
-    val onExpandedChange : (Boolean) -> Unit = { }
+    val onExpandedChange: (Boolean) -> Unit = { }
 
     Box(modifier = modifier) { // Box to avoid SearchBar InputField to take up all height
         SearchBar(
@@ -136,7 +136,7 @@ private fun TimeZoneIdSearchBar(
                                     imageVector = Icons.Default.Close,
                                     contentDescription = stringResource(Res.string.button_dismiss),
                                 )
-                            }
+                            },
                         )
                     },
                 )
@@ -159,12 +159,14 @@ private fun TimeZoneIdList(
     timeZoneIds: List<String>,
     selectedZoneId: String?,
     lazyState: LazyListState,
-    modifier: Modifier = Modifier,
     onSelection: (String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    Box(contentAlignment = Alignment.BottomEnd) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.BottomEnd,
+    ) {
         LazyColumn(
-            modifier = modifier,
             state = lazyState,
         ) {
             itemsIndexed(

@@ -9,4 +9,3 @@ data class Update(
 ) {
     val time = latest.toLocalDateTime(TimeZone.currentSystemDefault()).time
 }
-

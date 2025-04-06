@@ -22,6 +22,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun LoadingIndicator(
+    modifier: Modifier = Modifier,
     circlesNumber: Int = 3,
     circleColor: Color = Color.Magenta,
     animationDelay: Int = 1500,
@@ -41,13 +42,13 @@ fun LoadingIndicator(
                         easing = LinearEasing,
                     ),
                     repeatMode = RepeatMode.Restart,
-                )
+                ),
             )
         }
     }
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .size(size = size)
             .background(color = Color.Transparent),
     ) {
@@ -62,4 +63,3 @@ fun LoadingIndicator(
         }
     }
 }
-

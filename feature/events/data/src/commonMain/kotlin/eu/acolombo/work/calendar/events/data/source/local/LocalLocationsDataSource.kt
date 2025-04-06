@@ -7,7 +7,6 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import eu.acolombo.work.calendar.events.data.source.LocationsDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 internal class LocalLocationsDataSource(
@@ -39,5 +38,4 @@ internal class LocalLocationsDataSource(
     companion object {
         private const val LOCATIONS_KEY: String = "locations"
     }
-
 }

@@ -86,7 +86,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(89.625f, 223.827f)
             curveToRelative(3.563f, -12.107f, 7.124f, -24.215f, 10.687f, -36.321f)
@@ -99,7 +99,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(79.345f, 221.818f)
             curveToRelative(3.531f, -13.993f, 7.709f, -27.823f, 12.519f, -41.429f)
@@ -113,7 +113,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(67.629f, 218.397f)
             curveToRelative(5.324f, -17.615f, 8.596f, -32.972f, 17.545f, -45.603f)
@@ -126,7 +126,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(136.108f, 376.331f)
             curveToRelative(-10.471f, -36.764f, -20.941f, -73.528f, -31.412f, -110.293f)
@@ -139,7 +139,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(238.72f, 264.597f)
             curveToRelative(9.772f, 45.072f, 15.013f, 94.961f, 24.037f, 140.828f)
@@ -154,7 +154,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(192.042f, 523.738f)
             curveToRelative(-10.412f, 12.642f, -19.177f, 26.636f, -26.007f, 41.52f)
@@ -168,7 +168,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(202.682f, 532.75f)
             curveToRelative(-7.265f, 10.28f, -13.988f, 20.944f, -20.129f, 31.932f)
@@ -182,7 +182,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(211.21f, 544.401f)
             curveToRelative(-7.885f, 11.16f, -14.789f, 23.012f, -20.608f, 35.375f)
@@ -197,7 +197,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(247.584f, 317.977f)
             horizontalLineToRelative(-72.191f)
@@ -209,7 +209,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(220.55f, 315.843f)
             curveToRelative(0.0f, 0.0f, -9.601f, -90.163f, 43.377f, -92.016f)
@@ -221,7 +221,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(296.64f, 256.109f)
             lineToRelative(40.779f, 162.424f)
@@ -234,7 +234,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(151.146f, 334.273f)
             lineToRelative(-3.707f, 90.443f)
@@ -275,7 +275,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(222.796f, 159.255f)
             curveToRelative(-5.568f, -8.364f, -15.04f, -14.007f, -25.047f, -14.92f)
@@ -313,7 +313,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(220.886f, 188.938f)
             curveToRelative(2.736f, -0.2f, 5.483f, 1.708f, 6.248f, 4.343f)
@@ -339,7 +339,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(177.646f, 197.702f)
             curveToRelative(-0.477f, 2.408f, -0.953f, 4.815f, -1.431f, 7.223f)
@@ -351,7 +351,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(174.404f, 213.847f)
             curveToRelative(1.925f, 1.387f, 4.433f, 1.936f, 6.763f, 1.48f)
@@ -369,7 +369,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(311.219f, 313.354f)
             lineToRelative(48.912f, -2.089f)
@@ -380,7 +380,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(106.96f, 214.714f)
             lineToRelative(5.579f, 29.353f)
@@ -393,7 +393,7 @@ val Illustrations.Phone
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(210.817f, 316.765f)
             curveToRelative(-2.023f, -24.925f, -2.167f, -52.673f, 9.876f, -75.347f)
@@ -403,6 +403,7 @@ val Illustrations.Phone
         }
     }.build()
 
+@Suppress("MagicNumber")
 @Composable
 @Preview
 private fun Preview() {
@@ -416,4 +417,3 @@ private fun Preview() {
         contentDescription = phone.name,
     )
 }
-

@@ -62,7 +62,7 @@ internal fun EventItem(
     ) {
         Column(modifier = Modifier.padding(horizontal = Spacing.L.dp, vertical = Spacing.M.dp)) {
             Text(
-                modifier = Modifier.fillMaxWidth(.6f),
+                modifier = Modifier.fillMaxWidth(TextWidth),
                 text = event.summary,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 2,
@@ -74,7 +74,7 @@ internal fun EventItem(
                 modifier = Modifier
                     .basicMarquee()
                     .padding(vertical = Spacing.S.dp)
-                    .alpha(.5f),
+                    .alpha(AlphaHalf),
                 text = event.attendees.joinToString(),
                 maxLines = 1,
                 color = colors.onContainerColor,
@@ -138,7 +138,7 @@ private fun LabeledTime(
             else -> TextAlign.Center
         }
         Text(
-            text = localTime.toString().substring(0, 5),
+            text = localTime.toString().substring(0, TimeLength),
             color = color,
             style = MaterialTheme.typography.headlineMedium,
             textAlign = textAlign,
@@ -161,7 +161,7 @@ data class EventItemColors(
 
 @Preview
 @Composable
-fun EventItemPreview() {
+private fun EventItemPreview() {
     WorkCalendarTheme {
         EventItem(
             Event(
@@ -174,8 +174,11 @@ fun EventItemPreview() {
                 attendees = listOf("Mark", "john"),
                 type = Event.Type.Default,
                 duration = 1L.toDuration(DurationUnit.HOURS),
-            )
+            ),
         )
     }
 }
 
+private const val AlphaHalf = .5f
+private const val TextWidth = .6f
+private const val TimeLength = 5

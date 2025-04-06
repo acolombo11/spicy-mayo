@@ -71,10 +71,10 @@ internal fun FiltersRow(
 
 @Composable
 private fun SpicyFilterChip(
+    onClick: () -> Unit,
     label: String,
     modifier: Modifier = Modifier,
     selected: Boolean = false,
-    onClick: () -> Unit,
     trailingIcon: @Composable (() -> Unit)? = null,
 ) {
     FilterChip(
@@ -94,4 +94,3 @@ private fun ActionRowPreview() {
         FiltersRow(EventsFilter.Today, {}, {}, {})
     }
 }
-

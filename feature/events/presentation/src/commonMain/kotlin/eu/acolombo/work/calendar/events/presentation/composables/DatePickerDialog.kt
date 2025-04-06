@@ -48,7 +48,7 @@ internal fun DatePickerDialog(
             TextButton(onClick = { hideDatePicker() }) {
                 Text(stringResource(Res.string.cancel))
             }
-        }
+        },
     ) {
         DatePicker(state = datePickerState)
     }
@@ -57,7 +57,7 @@ internal fun DatePickerDialog(
 @Composable
 fun rememberDatePicker(date: LocalDate): DatePickerState {
     val selectedMillis = date
-        .atTime(9, 0, 0, 0)
+        .atTime(StartOfDay, 0, 0, 0)
         .toInstant(TimeZone.currentSystemDefault())
         .toEpochMilliseconds()
     return rememberDatePickerState(
@@ -68,5 +68,4 @@ fun rememberDatePicker(date: LocalDate): DatePickerState {
     )
 }
 
-
-
+private const val StartOfDay = 9

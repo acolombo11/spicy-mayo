@@ -15,6 +15,7 @@ import org.koin.compose.KoinMultiplatformApplication
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.dsl.KoinConfiguration
 
+@Suppress("PreviewPublic")
 @Composable
 @Preview
 fun App() {

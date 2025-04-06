@@ -114,4 +114,3 @@ class EventsViewModel(
         setLocation(index, timeZoneId)
     }
 }
-

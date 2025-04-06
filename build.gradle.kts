@@ -1,15 +1,19 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.LibraryExtension
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.jetbrains.compose) apply false
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.kotlin.serialization) apply false
+    alias(libs.plugins.jetbrains.compose) apply false
+    alias(libs.plugins.detekt) apply false
 }
 
 val nameSpace = "eu.acolombo.work.calendar"
@@ -20,9 +24,10 @@ subprojects {
         path.count { it == ':' } >= 2 -> {
             androidLibrary()
             targets()
-            if (name  == "presentation" || rootName == "theme") compose()
+            if (name  == "presentation" || rootName == "design") compose()
             if (rootName in listOf("feature", "core")) koin()
             if (name == "presentation") composeFeature()
+            detekt()
         }
         name == "app" -> {
             androidApplication()
@@ -30,6 +35,7 @@ subprojects {
             composeApp()
             koin()
             composeFeature()
+            detekt()
         }
     }
 }
@@ -39,7 +45,7 @@ private fun Project.targets(targetName: String? = null) {
         alias(rootProject.libs.plugins.kotlin.multiplatform)
     }
 
-    the<KotlinMultiplatformExtension>().apply {
+    kotlin<KotlinMultiplatformExtension> {
         jvmToolchain(javaVersion.toInt())
         androidTarget {
             compilerOptions {
@@ -66,7 +72,7 @@ private fun Project.androidApplication() {
         alias(rootProject.libs.plugins.android.application)
     }
 
-    the<ApplicationExtension>().apply {
+    android<ApplicationExtension> {
         namespace = nameSpace
         compileSdk = rootProject.libs.versions.android.maxSdk.get().toInt()
         defaultConfig {
@@ -88,7 +94,7 @@ private fun Project.androidLibrary() {
         alias(rootProject.libs.plugins.android.library)
     }
 
-    the<LibraryExtension>().apply {
+    android<LibraryExtension> {
         namespace = nameSpace + path.replace(':','.')
         compileSdk = rootProject.libs.versions.android.maxSdk.get().toInt()
         defaultConfig {
@@ -103,7 +109,7 @@ private fun Project.compose() {
         alias(rootProject.libs.plugins.compose.compiler)
     }
 
-    the<KotlinMultiplatformExtension>().apply {
+    kotlin<KotlinMultiplatformExtension> {
         sourceSets {
             commonMain.dependencies {
                 val compose = org.jetbrains.compose.ComposePlugin.Dependencies(rootProject)
@@ -119,7 +125,7 @@ private fun Project.compose() {
 }
 
 private fun Project.koin() {
-    the<KotlinMultiplatformExtension>().apply {
+    kotlin<KotlinMultiplatformExtension> {
         sourceSets {
             commonMain.dependencies {
                 implementation(rootProject.libs.koin.core)
@@ -133,7 +139,7 @@ private fun Project.composeFeature() {
         alias(rootProject.libs.plugins.kotlin.serialization)
     }
 
-    the<KotlinMultiplatformExtension>().apply {
+    kotlin<KotlinMultiplatformExtension> {
         sourceSets {
             commonMain.dependencies {
                 implementation(rootProject.libs.kotlinx.serialization)
@@ -153,7 +159,7 @@ private fun Project.composeApp() {
         alias(rootProject.libs.plugins.compose.compiler)
     }
 
-    the<KotlinMultiplatformExtension>().apply {
+    kotlin<KotlinMultiplatformExtension> {
         sourceSets {
             commonMain.dependencies {
                 val compose = org.jetbrains.compose.ComposePlugin.Dependencies(rootProject)
@@ -168,6 +174,63 @@ private fun Project.composeApp() {
     }
 }
 
+private fun Project.detekt() {
+    plugins {
+        alias(rootProject.libs.plugins.detekt)
+    }
+
+    detekt {
+        buildUponDefaultConfig = true
+
+        val baselineFile = file("config/detekt/baseline.xml")
+        val configFile = "$rootDir/config/detekt/detekt.yml"
+        config.setFrom(configFile)
+        baseline = baselineFile
+
+        dependencies {
+            add("detektPlugins", rootProject.libs.detekt.formatting)
+            add("detektPlugins", rootProject.libs.detekt.compose.rules)
+        }
+
+        tasks.withType<Detekt> {
+            setSource(files(project.projectDir))
+            exclude("**/build/**")
+            exclude {
+                it.file.relativeTo(projectDir).startsWith(project.buildDir.relativeTo(projectDir))
+            }
+        }
+        val detektBaselines by tasks.registering(DetektCreateBaselineTask::class) {
+            description = "Overrides current baseline."
+            buildUponDefaultConfig = true
+            ignoreFailures = true
+            parallel = true
+            setSource(files(projectDir))
+            config.setFrom(files(configFile))
+            baseline.set(baselineFile)
+            include("**/*.kt")
+            include("**/*.kts")
+            exclude("**/resources/**")
+            exclude("**/build/**")
+        }
+        val detektAll by tasks.registering {
+            dependsOn(tasks.withType<Detekt>())
+        }
+    }
+}
+
+//region Project Extensions to write code in Project scope as if it was in module's build.gradle.kts
+private fun Project.detekt(block: DetektExtension.() -> Unit) {
+    the<DetektExtension>().apply(block)
+}
+
+private inline fun <reified T: com.android.build.api.dsl.CommonExtension<*,*,*,*,*,*>> Project.android(block: T.() -> Unit) {
+    the<T>().apply(block)
+}
+
+private inline fun <reified T: org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension> Project.kotlin(block: T.() -> Unit) {
+    the<T>().apply(block)
+}
+
 private fun Project.plugins(apply: ProjectPluginDependenciesSpecScope.() -> Unit) {
     apply(ProjectPluginDependenciesSpecScope(this))
 }
@@ -180,3 +243,4 @@ class ProjectPluginDependenciesSpecScope(private val project: Project) {
         project.apply(plugin = provider.get().pluginId)
     }
 }
+//endregion

@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import eu.acolombo.work.calendar.design.illustrations.Illustrations
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-
 /**
  * Illustration by Freepik
  * @see (https://www.freepik.com/serie/114133737)
@@ -128,7 +127,7 @@ val Illustrations.Flowers
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(73.948f, 209.793f)
             curveToRelative(-3.248f, -11.496f, -6.497f, -22.992f, -9.746f, -34.488f)
@@ -143,7 +142,7 @@ val Illustrations.Flowers
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveToRelative(85.731f, 201.873f)
             curveToRelative(-0.671f, -6.313f, -6.293f, -27.424f, -9.469f, -32.924f)
@@ -468,6 +467,7 @@ val Illustrations.Flowers
         }
     }.build()
 
+@Suppress("MagicNumber")
 @Composable
 @Preview
 private fun Preview() {

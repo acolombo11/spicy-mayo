@@ -352,6 +352,7 @@ val Illustrations.Computer
         }
     }.build()
 
+@Suppress("MagicNumber")
 @Composable
 @Preview
 private fun Preview() {
