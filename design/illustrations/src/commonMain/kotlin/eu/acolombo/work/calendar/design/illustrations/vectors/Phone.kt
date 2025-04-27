@@ -82,7 +82,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -95,7 +95,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -109,7 +109,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -122,7 +122,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -135,7 +135,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -150,7 +150,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -164,7 +164,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -178,7 +178,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -193,7 +193,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -205,7 +205,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -217,7 +217,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -230,7 +230,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -309,7 +309,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -335,7 +335,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -347,7 +347,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -365,7 +365,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -376,7 +376,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
@@ -389,7 +389,7 @@ val Illustrations.Phone
         }
         path(
             stroke = Colors.solidStroke,
-            strokeLineWidth = DefaultStrokeWidth,
+            strokeLineWidth = STROKE_WIDTH,
             strokeLineCap = Round,
             strokeLineJoin = StrokeJoin.Companion.Round,
             strokeLineMiter = 4.0f,
