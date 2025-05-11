@@ -1,20 +1,20 @@
 [versions]
-agp = "8.8.2"
+agp = "8.9.2"
 android-minSdk = "26"
 android-targetSdk = "35"
 java-jdk = "21"
-kotlin = "2.1.10"
+kotlin = "2.1.20"
 detekt = "1.23.8"
 detektComposeRules = "0.4.22"
 androidxActivityCompose = "1.10.1"
-composePlugin = "1.7.3"
+composeMultiplatform = "1.8.0"
 kotlinxCoroutines = "1.10.1"
 kotlinxDatetime = "0.6.1"
 kotlinxSerialization = "1.8.0"
 ktor = "3.0.3"
-datastore = "1.1.4"
-koin = "4.1.0-Beta5"
-navigationCompose = "2.8.0-alpha11"
+datastore = "1.1.6"
+koin = "4.1.0-Beta7"
+navigationCompose = "2.9.0-beta01"
 
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivityCompose" }
@@ -40,7 +40,7 @@ detekt-compose-rules = { group = "io.nlopez.compose.rules", name = "detekt", ver
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "composePlugin" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
