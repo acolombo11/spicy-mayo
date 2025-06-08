@@ -66,6 +66,7 @@ import spicy_mayo.feature.events.presentation.generated.resources.alert_done_for
 import spicy_mayo.feature.events.presentation.generated.resources.button_retry
 import spicy_mayo.feature.events.presentation.generated.resources.description_empty
 import spicy_mayo.feature.events.presentation.generated.resources.description_error
+import spicy_mayo.feature.events.presentation.generated.resources.error_search
 import spicy_mayo.feature.events.presentation.generated.resources.loading
 
 @Serializable
@@ -112,8 +113,10 @@ internal fun EventsScreen(
     }
     val timeZoneIdPickerState = rememberLazyListState()
     showTimeZonePickerIndex.value?.let { index ->
+        val searchError = stringResource(Res.string.error_search)
         TimeZoneIdPickerDialog(
-            modifier = Modifier.fillMaxHeight(DialogHeight)
+            modifier = Modifier
+                .fillMaxHeight(DialogHeight)
                 .clip(MaterialTheme.shapes.extraLarge),
             lazyState = timeZoneIdPickerState,
             selectedTimeZoneId = locations.getOrNull(index)?.timezone?.id,
@@ -122,9 +125,7 @@ internal fun EventsScreen(
             onSearchError = {
                 onLocationChange(index, null)
                 snackOwner.lifecycleScope.launch {
-                    snackHostState.showSnackbar(
-                        message = "No timezone found. Select one of the available timezones",
-                    )
+                    snackHostState.showSnackbar(message = searchError)
                 }
             },
         )

@@ -18,6 +18,7 @@
     <string name="label_duration_all_day">All day</string>
     <string name="label_set_location">Set location</string>
     <string name="label_search_timezone">Search your timezone</string>
+    <string name="error_search">No timezone found. Select one of the available timezones</string>
     <string name="error_connection">Error! Check your internet connection and try again</string>
     <string name="error_deployment">Error! Check if your project is using the correct DeployId</string>
 </resources>

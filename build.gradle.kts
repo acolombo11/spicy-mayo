@@ -17,7 +17,7 @@ plugins {
 }
 
 val nameSpace = "eu.acolombo.work.calendar"
-val javaVersion = libs.versions.java.jdk.get()
+val javaVersion = libs.versions.java.get()
 
 subprojects {
     when {
