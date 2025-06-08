@@ -31,7 +31,7 @@ subprojects {
         }
         name == "app" -> {
             androidApplication()
-            targets("SpicyMayoApp")
+            targets(name)
             composeApp()
             koin()
             composeFeature()

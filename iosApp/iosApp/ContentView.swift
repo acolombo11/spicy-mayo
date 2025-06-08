@@ -1,4 +1,4 @@
-import SpicyMayoApp
+import app
 import SwiftUI
 import UIKit
 
