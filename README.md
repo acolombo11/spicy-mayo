@@ -1,44 +1,54 @@
 # spicy-mayo
 
-iOs, Android and desktop app to check a Google Calendar without the need to add its Google account to the phone.
-Authentication and data retrieval are managed through a simple Google Apps Script backend.
+**spicy-mayo** is a simple iOS, Android, and Desktop app to view events from a Google Calendar—without needing to add your Google account to your device.
 
-Its main use-case is to check Today, Tomorrow or a specific day of your work calendar, without adding your Google work account to your phone.
+It’s ideal for quickly checking your work calendar for **Today**, **Tomorrow**, or a **specific date**, while keeping your work account off your phone.
 
-Since the backend needs to be setup on the account of the Google Calendar owner, and the app needs to be setup with the your own backend url, it can't be download but it needs to be built as explained in the next section.
+The app fetches calendar data through a lightweight [Google Apps Script](https://script.google.com/home) backend, which must be set up on the calendar owner's Google account. Since the backend and API key are specific to each setup, the app isn't available on app stores and must be built manually (see below).
 
-### Screenshots
+## 📸 Screenshots
 
-Android
+#### Android
+
 | Events                                      | Error                                        | Empty                                       |
 |---------------------------------------------|----------------------------------------------|---------------------------------------------|
 | ![Android-1](docs/screenshot-android-1.png) | ![Android-2](docs/screenshot-android-2.png)  | ![Android-3](docs/screenshot-android-3.png) |
 
-iOS
+#### iOS
 
 | Today                                       | Tomorrow                                     | Specific Date                               |
 |---------------------------------------------|----------------------------------------------|---------------------------------------------|
 | ![iOS-1](docs/screenshot-ios-1.png)         | ![iOS-2](docs/screenshot-ios-2.png)          | ![iOS-3](docs/screenshot-ios-3.png)         |
 
+> Screenshots showcase:
+> - Light and dark themes, following system preference (iOS, Android)
+> - Material You color theming (Android)
+> - Daily view types (today, tomorrow, specific date)
+> - UI states (events present, empty, error)
 
-The screenshots are displaying
-- the dark and light theme following the user's system preference (iOs, Android)
-- different themes following the Material You user colors (Android)
-- the three different types of day that can be shown (today, tomorrow or a specific date)
-- the three different states the screen can be in (w/ events, empty state, error state)
+## ⚙️ Setup
 
-## How to setup
+> You’ll need access to the Google account that owns the calendar.
 
-1. Using the Google account of the calendar to be accessed, create a new project on [Google Apps Script](https://script.google.com/home)
-2. In the **Services** tab, add **Google Calendar API** to the project
-3. Copy the content of [spicy-mayo.js](spicy-mayo.js) to the default file in the editor
-4. Generate a random string or use a password of choice to fill the `spicyApiKey` const, then save the project
-5. Deploy the script as **"type"** <i>Web App</i>, choosing to **"execute as"** <i>Me <sub><sup>(email)</sup></sub></i>, with **"Who has access"** to <i>Anyone</i>
-6. Copy the obtained Deployment ID, and the Api key generated previously, to the [secrets.template.properties](secrets.template.properties) file in the root of the project
-7. Remove the template extension from the file, so to have as result the `secrets.properties` file, which is ignored by git not to expose any secrets
-8. Build the app and enjoy it
+1. Go to [Google Apps Script](https://script.google.com/home) and create a new project.
+2. In the **Services** tab, add **Google Calendar API** to the project.
+3. Replace the default script with the content from [`spicy-mayo.js`](spicy-mayo.js).
+4. In the script, set a secure value for the `spicyApiKey` constant (e.g., a password or random string).
+5. Click **Deploy > Manage deployments** and deploy as a **Web App**:
+   - **Execute as**: Me <sub><sup>(your email)</sup></sub>
+   - **Who has access**: Anyone
+6. Copy the **Web App URL** and the `spicyApiKey` you set earlier.
+7. In the app project, copy [`secrets.template.properties`](secrets.template.properties) to a new file named `secrets.properties`.
+8. Paste the Web App URL and API key into `secrets.properties`.
+9. Build and run the app.
 
-## Contribute
+> 🛡️ `secrets.properties` is ignored by Git to keep your data private.
 
-The project is very specific to my requirements, it could be a lot more generic, so if you need any feature feel free to fork the project and continue by yourself or open a Pull Request.
-Check the repo's [issues](/../../issues) to find some good first issues and other ideas.
+## 🤝 Contributing
+
+This project was built for a very specific use-case and kept intentionally minimal.  
+However, contributions are welcome!
+
+- Check [issues](/../../issues) for ideas or beginner-friendly tasks.
+- Feel free to fork the repo and adapt it to your needs.
+- Submit a pull request if you have improvements to share.
