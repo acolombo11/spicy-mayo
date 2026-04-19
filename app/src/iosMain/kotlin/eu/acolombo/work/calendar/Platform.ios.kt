@@ -1,3 +1,5 @@
+package eu.acolombo.work.calendar
+
 import platform.UIKit.UIDevice
 
 class IOSPlatform : Platform {

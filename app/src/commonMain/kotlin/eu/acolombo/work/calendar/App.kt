@@ -9,8 +9,8 @@ import eu.acolombo.work.calendar.di.koinModules
 import eu.acolombo.work.calendar.events.presentation.EventsRoute
 import eu.acolombo.work.calendar.events.presentation.EventsRouteDestination
 import eu.acolombo.work.calendar.events.presentation.EventsViewModel
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.compose.KoinMultiplatformApplication
+import androidx.compose.ui.tooling.preview.Preview
+import org.koin.compose.KoinApplication
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.dsl.KoinConfiguration
@@ -20,7 +20,7 @@ import org.koin.dsl.KoinConfiguration
 @Composable
 @Preview
 fun App() {
-    KoinMultiplatformApplication(
+    KoinApplication(
         KoinConfiguration { modules(koinModules) },
     ) {
         WorkCalendarTheme {

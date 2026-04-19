@@ -1,14 +1,13 @@
-import com.android.build.api.dsl.ApplicationExtension
-import com.android.build.api.dsl.LibraryExtension
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryExtension
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 plugins {
     alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.android.kotlin.multiplatform.library) apply false
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.kotlin.serialization) apply false
@@ -16,42 +15,51 @@ plugins {
     alias(libs.plugins.detekt) apply false
 }
 
-val nameSpace = "eu.acolombo.work.calendar"
+val nameSpace by extra("eu.acolombo.work.calendar")
 val javaVersion = libs.versions.java.get()
 
 subprojects {
     when {
         path.count { it == ':' } >= 2 -> {
-            androidLibrary()
+            plugins()
             targets()
-            if (name  == "presentation" || rootName == "design") compose()
+            if (name == "presentation" || rootName == "design") compose()
             if (rootName in listOf("feature", "core")) koin()
             if (name == "presentation") composeFeature()
             detekt()
         }
+
         name == "app" -> {
-            androidApplication()
+            plugins()
             targets(name)
-            composeApp()
             koin()
+            compose()
             composeFeature()
             detekt()
         }
     }
 }
 
-private fun Project.targets(targetName: String? = null) {
+private fun Project.plugins() {
     plugins {
+        alias(rootProject.libs.plugins.android.kotlin.multiplatform.library)
         alias(rootProject.libs.plugins.kotlin.multiplatform)
     }
+}
 
+private fun Project.targets(targetName: String? = null) {
     kotlin<KotlinMultiplatformExtension> {
         jvmToolchain(javaVersion.toInt())
-        androidTarget {
-            compilerOptions {
-                jvmTarget.set(JvmTarget.fromTarget(javaVersion))
+
+        if (pluginManager.hasPlugin(rootProject.libs.plugins.android.kotlin.multiplatform.library.get().pluginId)) {
+            extensions.configure<KotlinMultiplatformAndroidLibraryExtension> {
+                namespace = nameSpace + path.replace(':', '.')
+                compileSdk = rootProject.libs.versions.android.targetSdk.get().toInt()
+                minSdk = rootProject.libs.versions.android.minSdk.get().toInt()
+                androidResources.enable = true
             }
         }
+
         listOf(
             iosX64(),
             iosArm64(),
@@ -67,42 +75,6 @@ private fun Project.targets(targetName: String? = null) {
     }
 }
 
-private fun Project.androidApplication() {
-    plugins {
-        alias(rootProject.libs.plugins.android.application)
-    }
-
-    android<ApplicationExtension> {
-        namespace = nameSpace
-        compileSdk = rootProject.libs.versions.android.targetSdk.get().toInt()
-        defaultConfig {
-            minSdk = rootProject.libs.versions.android.minSdk.get().toInt()
-            targetSdk = rootProject.libs.versions.android.targetSdk.get().toInt()
-            applicationId = nameSpace
-        }
-
-        compileOptions {
-            val javaVersion = JavaVersion.toVersion(javaVersion.toInt())
-            sourceCompatibility = javaVersion
-            targetCompatibility = javaVersion
-        }
-    }
-}
-
-private fun Project.androidLibrary() {
-    plugins {
-        alias(rootProject.libs.plugins.android.library)
-    }
-
-    android<LibraryExtension> {
-        namespace = nameSpace + path.replace(':','.')
-        compileSdk = rootProject.libs.versions.android.targetSdk.get().toInt()
-        defaultConfig {
-            minSdk = rootProject.libs.versions.android.minSdk.get().toInt()
-        }
-    }
-}
-
 private fun Project.compose() {
     plugins {
         alias(rootProject.libs.plugins.jetbrains.compose)
@@ -112,13 +84,12 @@ private fun Project.compose() {
     kotlin<KotlinMultiplatformExtension> {
         sourceSets {
             commonMain.dependencies {
-                val compose = org.jetbrains.compose.ComposePlugin.Dependencies(rootProject)
-                implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(compose.material3)
-                implementation(compose.ui)
-                implementation(compose.components.resources)
-                implementation(compose.components.uiToolingPreview)
+                implementation(rootProject.libs.compose.runtime)
+                implementation(rootProject.libs.compose.foundation)
+                implementation(rootProject.libs.compose.material3)
+                implementation(rootProject.libs.compose.ui)
+                implementation(rootProject.libs.compose.components.resources)
+                implementation(rootProject.libs.compose.tooling.preview)
             }
         }
     }
@@ -145,30 +116,11 @@ private fun Project.composeFeature() {
                 implementation(rootProject.libs.kotlinx.serialization)
 
                 implementation(rootProject.projects.design.theme)
-                implementation(rootProject.libs.navigation.compose)
                 implementation(rootProject.libs.koin.compose)
                 implementation(rootProject.libs.koin.compose.viewmodel)
-            }
-        }
-    }
-}
-
-private fun Project.composeApp() {
-    plugins {
-        alias(rootProject.libs.plugins.jetbrains.compose)
-        alias(rootProject.libs.plugins.compose.compiler)
-    }
-
-    kotlin<KotlinMultiplatformExtension> {
-        sourceSets {
-            commonMain.dependencies {
-                val compose = org.jetbrains.compose.ComposePlugin.Dependencies(rootProject)
-                implementation(compose.runtime)
-                implementation(compose.components.uiToolingPreview)
-            }
-
-            androidMain.dependencies {
-                implementation(rootProject.libs.androidx.activity.compose)
+                implementation(rootProject.libs.lifecycle.runtime.compose)
+                implementation(rootProject.libs.lifecycle.viewmodel.compose)
+                implementation(rootProject.libs.navigation.compose)
             }
         }
     }
@@ -192,7 +144,10 @@ private fun Project.detekt() {
             add("detektPlugins", rootProject.libs.detekt.compose.rules)
         }
 
-        tasks.withType<Detekt> {
+        tasks.withType<Detekt>().configureEach {
+            // Clearing classpath to avoid variant ambiguity in KMP Android modules
+            // Type-safe analysis will be disabled for these tasks as a workaround for resolution issues
+            classpath.setFrom(files())
             setSource(files(project.projectDir))
             exclude("**/build/**")
             exclude { it.file.toPath().startsWith(layout.buildDirectory.get().asFile.toPath()) }
@@ -202,6 +157,7 @@ private fun Project.detekt() {
             buildUponDefaultConfig = true
             ignoreFailures = true
             parallel = true
+            classpath.setFrom(files())
             setSource(files(projectDir))
             config.setFrom(files(configFile))
             baseline.set(baselineFile)
@@ -221,11 +177,9 @@ private fun Project.detekt(block: DetektExtension.() -> Unit) {
     the<DetektExtension>().apply(block)
 }
 
-private inline fun <reified T: com.android.build.api.dsl.CommonExtension<*,*,*,*,*,*>> Project.android(block: T.() -> Unit) {
-    the<T>().apply(block)
-}
-
-private inline fun <reified T: org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension> Project.kotlin(block: T.() -> Unit) {
+private inline fun <reified T : org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension> Project.kotlin(
+    block: T.() -> Unit
+) {
     the<T>().apply(block)
 }
 

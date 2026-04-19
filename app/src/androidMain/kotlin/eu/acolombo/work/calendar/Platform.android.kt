@@ -1,3 +1,5 @@
+package eu.acolombo.work.calendar
+
 import android.os.Build
 
 class AndroidPlatform : Platform {

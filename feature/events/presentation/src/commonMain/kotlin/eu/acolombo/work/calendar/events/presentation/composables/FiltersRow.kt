@@ -18,7 +18,7 @@ import eu.acolombo.work.calendar.design.theme.Spacing
 import eu.acolombo.work.calendar.design.theme.WorkCalendarTheme
 import eu.acolombo.work.calendar.events.presentation.EventsFilter
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import spicy_mayo.feature.events.presentation.generated.resources.Res
 import spicy_mayo.feature.events.presentation.generated.resources.button_today
 import spicy_mayo.feature.events.presentation.generated.resources.button_tomorrow

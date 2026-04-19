@@ -28,14 +28,15 @@ import spicy_mayo.feature.events.presentation.generated.resources.Res
 import spicy_mayo.feature.events.presentation.generated.resources.label_duration_all_day
 import spicy_mayo.feature.events.presentation.generated.resources.label_end
 import spicy_mayo.feature.events.presentation.generated.resources.label_start
-import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
+import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
+import kotlin.time.Duration.Companion.hours
 import kotlin.time.toDuration
 
 @Composable
@@ -169,7 +170,7 @@ private fun EventItemPreview() {
                 start = Clock.System.now()
                     .toLocalDateTime(TimeZone.UTC).time,
                 end = Clock.System.now()
-                    .plus(1L.toDuration(DurationUnit.HOURS))
+                    .plus(1.hours)
                     .toLocalDateTime(TimeZone.UTC).time,
                 attendees = listOf("Mark", "john"),
                 type = Event.Type.Default,

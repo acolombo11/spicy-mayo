@@ -29,6 +29,7 @@ dependencyResolutionManagement {
 }
 
 include(":app")
+include(":androidApp")
 
 include("core:storage")
 include("core:network")

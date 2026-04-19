@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import spicy_mayo.feature.events.presentation.generated.resources.Res
 import spicy_mayo.feature.events.presentation.generated.resources.error_connection
 import spicy_mayo.feature.events.presentation.generated.resources.error_deployment
