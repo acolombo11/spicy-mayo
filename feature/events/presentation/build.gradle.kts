@@ -5,7 +5,7 @@ kotlin {
             implementation(projects.core.network) { because("Error mapping") }
             implementation(projects.design.illustrations)
 
-            implementation(compose.materialIconsExtended)
+            implementation(rootProject.libs.compose.materialIconsExtended)
 
             implementation(libs.kotlinx.datetime)
         }
