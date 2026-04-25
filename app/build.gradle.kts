@@ -12,9 +12,5 @@ kotlin {
 
             implementation(libs.koin.compose.viewmodel.navigation)
         }
-
-        androidMain.dependencies {
-            implementation(libs.androidx.activity.compose)
-        }
     }
 }
