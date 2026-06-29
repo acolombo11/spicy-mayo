@@ -4,35 +4,42 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-val secretsGenerator by tasks.registering(Sync::class) {
-    val secrets = Properties()
-    secrets.load(project.rootProject.file("secrets.properties").inputStream())
+abstract class GenerateSecretsTask : DefaultTask() {
+    @get:InputFile
+    abstract val secretsFile: RegularFileProperty
 
-    val spicyApiKey: String by secrets
-    val spicyDeployId: String by secrets
+    @get:OutputDirectory
+    abstract val outputDirectory: DirectoryProperty
 
-    from(
-        resources.text.fromString(
+    @TaskAction
+    fun generate() {
+        val secrets = Properties()
+        secrets.load(secretsFile.get().asFile.inputStream())
+
+        val packageDir = outputDirectory.get().asFile.resolve("eu/acolombo/work/calendar/events/data")
+        packageDir.mkdirs()
+        packageDir.resolve("Secrets.kt").writeText(
             """
             package eu.acolombo.work.calendar.events.data
 
             object Secrets {
-                internal const val ApiKey = "$spicyApiKey"
-                internal const val DeployId = "$spicyDeployId"
+                internal const val ApiKey = "${secrets.getProperty("spicyApiKey")}"
+                internal const val DeployId = "${secrets.getProperty("spicyDeployId")}"
             }
             """.trimIndent(),
-        ),
-    ) {
-        rename { "Secrets.kt" }
-        into("eu/acolombo/work/calendar/events/data/")
+        )
     }
-    into(layout.buildDirectory.dir("generated-src/kotlin"))
+}
+
+val secretsGenerator = tasks.register<GenerateSecretsTask>("secretsGenerator") {
+    secretsFile = rootProject.file("secrets.properties")
+    outputDirectory = layout.buildDirectory.dir("generated-src/kotlin")
 }
 
 kotlin {
     sourceSets {
         commonMain {
-            kotlin.srcDir(secretsGenerator.map { it.destinationDir })
+            kotlin.srcDir(secretsGenerator.flatMap { it.outputDirectory })
         }
         commonMain.dependencies {
             implementation(projects.core.network)
