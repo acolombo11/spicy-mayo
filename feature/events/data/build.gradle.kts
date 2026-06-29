@@ -4,18 +4,6 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-kotlin {
-    sourceSets {
-        commonMain.dependencies {
-            implementation(projects.core.network)
-            implementation(projects.core.storage)
-
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization)
-        }
-    }
-}
-
 val secretsGenerator by tasks.registering(Sync::class) {
     val secrets = Properties()
     secrets.load(project.rootProject.file("secrets.properties").inputStream())
@@ -26,13 +14,13 @@ val secretsGenerator by tasks.registering(Sync::class) {
     from(
         resources.text.fromString(
             """
-        |package eu.acolombo.work.calendar.events.data
-        |
-        |object Secrets {
-        |  internal const val ApiKey = "$spicyApiKey"
-        |  internal const val DeployId = "$spicyDeployId"
-        |}
-            """.trimMargin(),
+            package eu.acolombo.work.calendar.events.data
+
+            object Secrets {
+                internal const val ApiKey = "$spicyApiKey"
+                internal const val DeployId = "$spicyDeployId"
+            }
+            """.trimIndent(),
         ),
     ) {
         rename { "Secrets.kt" }
@@ -43,10 +31,15 @@ val secretsGenerator by tasks.registering(Sync::class) {
 
 kotlin {
     sourceSets {
-        val commonMain by getting {
-            kotlin.srcDir(
-                secretsGenerator.map { it.destinationDir },
-            )
+        commonMain {
+            kotlin.srcDir(secretsGenerator.map { it.destinationDir })
+        }
+        commonMain.dependencies {
+            implementation(projects.core.network)
+            implementation(projects.core.storage)
+
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.kotlinx.serialization)
         }
     }
 }
