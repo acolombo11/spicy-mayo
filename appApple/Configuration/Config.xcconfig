@@ -1,3 +1,6 @@
 TEAM_ID=
 BUNDLE_ID=eu.acolombo.work.calendar
 APP_NAME=spicy-mayo
+
+// Personal overrides (git-ignored): put TEAM_ID=<your team> in Local.xcconfig
+#include? "Local.xcconfig"
