@@ -19,23 +19,26 @@ val nameSpace by extra("eu.acolombo.work.calendar")
 val javaVersion = libs.versions.java.get()
 
 subprojects {
-    when {
-        path.count { it == ':' } >= 2 -> {
-            plugins()
-            targets()
-            if (name == "presentation" || rootName == "design") compose()
-            if (rootName in listOf("feature", "core")) koin()
-            if (name == "presentation") composeFeature()
-            detekt()
-        }
+    // Deferred so the Android settings plugin (which hands out the SDK levels in `beforeProject`) runs first.
+    beforeEvaluate {
+        when {
+            path.count { it == ':' } >= 2 -> {
+                plugins()
+                targets()
+                if (name == "presentation" || rootName == "design") compose()
+                if (rootName in listOf("feature", "core")) koin()
+                if (name == "presentation") composeFeature()
+                detekt()
+            }
 
-        name == "app" -> {
-            plugins()
-            targets(name)
-            koin()
-            compose()
-            composeFeature()
-            detekt()
+            name == "app" -> {
+                plugins()
+                targets(name)
+                koin()
+                compose()
+                composeFeature()
+                detekt()
+            }
         }
     }
 }
@@ -54,14 +57,11 @@ private fun Project.targets(targetName: String? = null) {
         if (pluginManager.hasPlugin(rootProject.libs.plugins.android.kotlin.multiplatform.library.get().pluginId)) {
             extensions.configure<KotlinMultiplatformAndroidLibraryExtension> {
                 namespace = nameSpace + path.replace(':', '.')
-                compileSdk = rootProject.libs.versions.android.targetSdk.get().toInt()
-                minSdk = rootProject.libs.versions.android.minSdk.get().toInt()
                 androidResources.enable = true
             }
         }
 
         listOf(
-            iosX64(),
             iosArm64(),
             iosSimulatorArm64(),
         ).forEach { iosTarget ->
