@@ -1,7 +1,5 @@
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryExtension
-import io.gitlab.arturbosch.detekt.Detekt
-import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
-import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+import dev.detekt.gradle.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 plugins {
@@ -13,6 +11,8 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.kover)
+    alias(libs.plugins.roborazzi) apply false
 }
 
 val nameSpace by extra("eu.acolombo.work.calendar")
@@ -25,15 +25,20 @@ subprojects {
             path.count { it == ':' } >= 2 -> {
                 plugins()
                 targets()
+                tests()
                 if (name == "presentation" || rootName == "design") compose()
                 if (rootName in listOf("feature", "core")) koin()
-                if (name == "presentation") composeFeature()
+                if (name == "presentation") {
+                    composeFeature()
+                    screenshots()
+                }
                 detekt()
             }
 
             name == "app" -> {
                 plugins()
                 targets(name)
+                tests()
                 koin()
                 compose()
                 composeFeature()
@@ -53,6 +58,7 @@ private fun Project.plugins() {
 private fun Project.targets(targetName: String? = null) {
     kotlin<KotlinMultiplatformExtension> {
         jvmToolchain(javaVersion.toInt())
+        jvm()
 
         if (pluginManager.hasPlugin(rootProject.libs.plugins.android.kotlin.multiplatform.library.get().pluginId)) {
             extensions.configure<KotlinMultiplatformAndroidLibraryExtension> {
@@ -131,52 +137,73 @@ private fun Project.detekt() {
         alias(rootProject.libs.plugins.detekt)
     }
 
-    detekt {
+    the<DetektExtension>().apply {
         buildUponDefaultConfig = true
+        config.setFrom(rootProject.file("config/detekt/detekt.yml"))
+        // Findings of the code that predates detekt: new code has to be clean.
+        baseline.set(file("detekt-baseline.xml"))
+        source.setFrom(files("src").asFileTree.matching { include("**/*.kt") })
+    }
 
-        val baselineFile = file("config/detekt/baseline.xml")
-        val configFile = "$rootDir/config/detekt/detekt.yml"
-        config.setFrom(configFile)
-        baseline = baselineFile
+    dependencies {
+        add("detektPlugins", rootProject.libs.detekt.compose.rules)
+    }
+}
 
-        dependencies {
-            add("detektPlugins", rootProject.libs.detekt.formatting)
-            add("detektPlugins", rootProject.libs.detekt.compose.rules)
-        }
+/** Kotest specs (`src/jvmTest`) and coverage: every module's report is merged into the root's `koverXmlReport`. */
+private fun Project.tests() {
+    plugins {
+        alias(rootProject.libs.plugins.kover)
+    }
+    rootProject.dependencies.add("kover", this)
 
-        tasks.withType<Detekt>().configureEach {
-            // Clearing classpath to avoid variant ambiguity in KMP Android modules
-            // Type-safe analysis will be disabled for these tasks as a workaround for resolution issues
-            classpath.setFrom(files())
-            setSource(files(project.projectDir))
-            exclude("**/build/**")
-            exclude { it.file.toPath().startsWith(layout.buildDirectory.get().asFile.toPath()) }
+    kotlin<KotlinMultiplatformExtension> {
+        sourceSets.getByName("jvmTest").dependencies {
+            implementation(rootProject.libs.kotest.runner.junit5)
+            implementation(rootProject.libs.kotest.assertions.core)
         }
-        val detektBaselines by tasks.registering(DetektCreateBaselineTask::class) {
-            description = "Overrides current baseline."
-            buildUponDefaultConfig = true
-            ignoreFailures = true
-            parallel = true
-            classpath.setFrom(files())
-            setSource(files(projectDir))
-            config.setFrom(files(configFile))
-            baseline.set(baselineFile)
-            include("**/*.kt")
-            include("**/*.kts")
-            exclude("**/resources/**")
-            exclude("**/build/**")
+    }
+
+    tasks.withType<Test>().configureEach { useJUnitPlatform() }
+}
+
+/**
+ * Roborazzi screenshots of every `@Preview` of the module: one shared test renders them on the desktop target and
+ * records/verifies them (`./gradlew recordRoborazziJvm`).
+ */
+private fun Project.screenshots() {
+    plugins {
+        alias(rootProject.libs.plugins.roborazzi)
+    }
+
+    kotlin<KotlinMultiplatformExtension> {
+        sourceSets.getByName("jvmTest") {
+            kotlin.srcDir(rootProject.file("config/screenshot"))
+            dependencies {
+                implementation(rootProject.libs.compose.ui.test)
+                implementation(rootProject.libs.composable.preview.scanner.jvm)
+                implementation(rootProject.libs.junit)
+                // The screenshot test is JUnit 4, the specs are Kotest: both run on the JUnit Platform.
+                runtimeOnly(rootProject.libs.junit.vintage.engine)
+                implementation(rootProject.libs.roborazzi.compose.desktop)
+            }
         }
-        val detektAll by tasks.registering {
-            dependsOn(tasks.withType<Detekt>())
+    }
+
+    // The package of the module's sources (their common directory) holds the previews to render.
+    tasks.withType<Test>().configureEach {
+        val sources = fileTree("src/commonMain/kotlin").files.filter { it.extension == "kt" }
+        val common = sources.map { it.parentFile.toPath() }.reduceOrNull { a, b ->
+            var p = a
+            while (!b.startsWith(p)) p = p.parent
+            p
         }
+        val root = file("src/commonMain/kotlin").toPath()
+        systemProperty("screenshot.package", common?.let { root.relativize(it).joinToString(".") }.orEmpty())
     }
 }
 
 //region Project Extensions to write code in Project scope as if it was in module's build.gradle.kts
-private fun Project.detekt(block: DetektExtension.() -> Unit) {
-    the<DetektExtension>().apply(block)
-}
-
 private inline fun <reified T : org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension> Project.kotlin(
     block: T.() -> Unit
 ) {

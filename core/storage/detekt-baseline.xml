@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>MaxLineLength:DataStoreModule.kt:createDataStore(producePath = { File(System.getProperty("java.io.tmpdir"), "spicy-mayo.preferences_pb").absolutePath })</ID>
+  </CurrentIssues>
+</SmellBaseline>

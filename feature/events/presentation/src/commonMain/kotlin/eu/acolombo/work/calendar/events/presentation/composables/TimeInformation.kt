@@ -23,7 +23,7 @@ import eu.acolombo.work.calendar.design.theme.Spacing
 import eu.acolombo.work.calendar.events.domain.model.Location
 import eu.acolombo.work.calendar.events.util.TimeZoneFormatter
 import kotlinx.datetime.DatePeriod
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.minus
 import kotlinx.datetime.toLocalDateTime

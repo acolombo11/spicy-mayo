@@ -1,42 +1,101 @@
+# Extends detekt's default ruleset (buildUponDefaultConfig = true).
+Compose:
+  ComposableAnnotationNaming:
+    active: true
+  ComposableNaming:
+    active: true
+  ComposableParamOrder:
+    active: true
+  CompositionLocalAllowlist:
+    active: true
+    allowedCompositionLocals: LocalColors, LocalSpacing, LocalRadius, LocalTypography
+  CompositionLocalNaming:
+    active: true
+  ContentEmitterReturningValues:
+    active: true
+  ContentTrailingLambda:
+    active: true
+  ContentSlotReused:
+    active: true
+  DefaultsVisibility:
+    active: true
+  LambdaParameterEventTrailing:
+    active: true
+  LambdaParameterInRestartableEffect:
+    active: true
+  Material2:
+    active: false
+  ModifierClickableOrder:
+    active: true
+  ModifierComposable:
+    active: true
+  ModifierComposed:
+    active: true
+  ModifierMissing:
+    active: true
+  ModifierNaming:
+    active: true
+  ModifierNotUsedAtRoot:
+    active: true
+  ModifierReused:
+    active: true
+  ModifierWithoutDefault:
+    active: true
+  MultipleEmitters:
+    active: true
+  MutableParams:
+    active: true
+  MutableStateAutoboxing:
+    active: true
+  MutableStateParam:
+    active: true
+  PreviewAnnotationNaming:
+    active: true
+  PreviewPublic:
+    active: true
+  RememberMissing:
+    active: true
+  RememberContentMissing:
+    active: true
+  # Kotlin 2.x enables strong skipping, so List parameters no longer hurt skippability.
+  UnstableCollections:
+    active: false
+  ViewModelForwarding:
+    active: true
+  ViewModelInjection:
+    active: true
+
 naming:
   FunctionNaming:
-    active: true
-    functionPattern: '[a-z][a-zA-Z0-9]*'
     ignoreAnnotated: ['Composable']
-
+    excludes: ['**/MainViewController.kt']
+  MatchingDeclarationName:
+    # expect/actual platform files and design files grouping related declarations
+    excludes: ['**/design/**']
   TopLevelPropertyNaming:
-    active: true
-    constantPattern: '[A-Z][A-Za-z0-9]*' # Allows PascalCase for top-level constants for Compose
-
-complexity:
-  LongParameterList:
-    active: true
-    functionThreshold: 6
-    ignoreDefaultParameters: true # Ignores parameters with default values so no complaints for Compose
-
-  TooManyFunctions:
-    active: true
-    ignoreAnnotatedFunctions: [ 'Preview' ] # Ignores functions annotated with @Preview
-
+    constantPattern: '[A-Z][A-Za-z0-9_]*'
 style:
   MagicNumber:
-    active: true
+    ignorePropertyDeclaration: true
     ignoreCompanionObjectPropertyDeclaration: true
-    ignorePropertyDeclaration: true # Ignores ImageVector false positive
-
-  UnusedPrivateMember:
-    active: true
-    ignoreAnnotated: [ 'Preview' ] # Ignores functions annotated with @Preview
-
-formatting:
-  ImportOrdering:
-    active: false # FIXME fix code style to match expectation
-
-  Indentation:
-    active: false # FIXME fix code style to match expectation
-
-  TrailingCommaOnCallSite:
-    active: true
-
-  TrailingCommaOnDeclarationSite:
-    active: true
+    excludes:
+      - '**/design/**'
+  UnusedPrivateFunction:
+    ignoreAnnotated: ['Preview']
+  ReturnCount:
+    excludeGuardClauses: true
+    ignoreAnnotated: ['Composable']
+complexity:
+  LongMethod:
+    ignoreAnnotated: ['Composable']
+  LongParameterList:
+    ignoreAnnotated: ['Composable']
+  CyclomaticComplexMethod:
+    ignoreAnnotated: ['Composable']
+  TooManyFunctions:
+    ignoreAnnotated: ['Composable']
+    excludes: ['**/*Screen.kt', '**/*ViewModel.kt']
+exceptions:
+  TooGenericExceptionCaught:
+    # ViewModels turn any failure into UI state.
+    excludes: ['**/*ViewModel.kt']

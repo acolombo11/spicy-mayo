@@ -33,7 +33,7 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import kotlin.time.Clock
+import kotlin.time.Instant
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.Duration.Companion.hours
@@ -167,11 +167,9 @@ private fun EventItemPreview() {
         EventItem(
             Event(
                 summary = "Lorem ipsum dolor sit amet",
-                start = Clock.System.now()
-                    .toLocalDateTime(TimeZone.UTC).time,
-                end = Clock.System.now()
-                    .plus(1.hours)
-                    .toLocalDateTime(TimeZone.UTC).time,
+                // Fixed, so the screenshot of the preview is the same on every run.
+                start = Instant.fromEpochSeconds(PreviewEpochSeconds).toLocalDateTime(TimeZone.UTC).time,
+                end = Instant.fromEpochSeconds(PreviewEpochSeconds).plus(1.hours).toLocalDateTime(TimeZone.UTC).time,
                 attendees = listOf("Mark", "john"),
                 type = Event.Type.Default,
                 duration = 1L.toDuration(DurationUnit.HOURS),
@@ -180,6 +178,7 @@ private fun EventItemPreview() {
     }
 }
 
+private const val PreviewEpochSeconds = 1_700_000_000L
 private const val AlphaHalf = .5f
 private const val TextWidth = .6f
 private const val TimeLength = 5

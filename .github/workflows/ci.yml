@@ -1,0 +1,125 @@
+name: CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+# A new push to a pull request cancels the run it makes obsolete: saves Actions minutes.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # detekt, unit tests, screenshots and coverage share one job: they all need the same Gradle setup and compilation.
+  quality:
+    name: Quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          lfs: true # the Roborazzi baselines are Git LFS files
+          fetch-depth: 0 # diff-cover compares against the base branch
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: detekt
+        run: ./gradlew detekt
+
+      # Runs the Kotest specs and the screenshot tests, then merges all modules' coverage into one report.
+      - name: Roborazzi screenshots, unit tests and coverage
+        run: ./gradlew verifyRoborazziJvm jvmTest koverXmlReport
+
+      - name: Upload screenshot diffs
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: roborazzi-diffs
+          path: "**/build/outputs/roborazzi"
+          if-no-files-found: ignore
+
+      # Only the lines this pull request adds or changes have to be covered, not the whole project.
+      - name: Coverage of new code (at least 80%)
+        if: github.event_name == 'pull_request'
+        run: |
+          pip install --quiet diff-cover
+          # The report only has package paths: the source roots let diff-cover find the changed files.
+          SRC_ROOTS=$(find . -type d -path '*/src/*Main/kotlin' -not -path '*/build/*' | sed 's|^\./||')
+          diff-cover build/reports/kover/report.xml \
+              --src-roots $SRC_ROOTS \
+              --compare-branch="origin/${{ github.base_ref }}" \
+              --fail-under=80 \
+              --format markdown:diff-coverage.md
+          cat diff-coverage.md >> "$GITHUB_STEP_SUMMARY"
+
+  android:
+    name: Android
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      - run: ./gradlew :appAndroid:assembleDebug :appAndroid:lintDebug
+
+  # macOS minutes cost 10x: only when something that can break iOS changed.
+  changes:
+    name: Changed files
+    runs-on: ubuntu-latest
+    outputs:
+      ios: ${{ steps.filter.outputs.ios }}
+    steps:
+      - uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          filters: |
+            ios:
+              - 'app/**'
+              - 'appAndroid/**'
+              - 'appApple/**'
+              - 'core/**'
+              - 'design/**'
+              - 'feature/**'
+              - 'gradle/**'
+              - '*.gradle.kts'
+
+  ios:
+    name: iOS
+    needs: changes
+    if: needs.changes.outputs.ios == 'true'
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      # Links the framework that Xcode embeds: catches iOS-only compile and link errors without a full Xcode build.
+      - run: ./gradlew :app:linkDebugFrameworkIosSimulatorArm64
+
+  # The only check branch protection has to require: it also passes when `ios` is skipped by the path filter.
+  ci-success:
+    name: CI success
+    if: always()
+    needs: [quality, android, ios]
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo '${{ toJSON(needs) }}'
+          [ "${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}" = "false" ]

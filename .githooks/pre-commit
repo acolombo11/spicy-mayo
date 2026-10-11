@@ -1,0 +1,18 @@
+#!/bin/sh
+# Runs detekt when Kotlin or detekt config files are staged.
+if git diff --cached --name-only --diff-filter=ACMR | grep -qE '\.kts?$|^config/detekt/|libs\.versions\.toml$'; then
+    echo "Running detekt..."
+    ./gradlew detekt --quiet || {
+        echo "detekt failed: fix the findings above (reports are in each module's build/reports/detekt)." >&2
+        exit 1
+    }
+fi
+
+# Verifies Roborazzi screenshots when Kotlin, Gradle or screenshot files are staged.
+if git diff --cached --name-only --diff-filter=ACMR | grep -qE '\.kts?$|/src/jvmTest/screenshots/|libs\.versions\.toml$'; then
+    echo "Running Roborazzi verification..."
+    ./gradlew verifyRoborazziJvm --quiet || {
+        echo "Roborazzi failed: review diffs in each module's build/outputs/roborazzi, then run ./gradlew recordRoborazziJvm if the changes are intended." >&2
+        exit 1
+    }
+fi
