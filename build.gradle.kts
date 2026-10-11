@@ -120,7 +120,7 @@ private fun Project.composeFeature() {
                 implementation(rootProject.libs.koin.compose.viewmodel)
                 implementation(rootProject.libs.lifecycle.runtime.compose)
                 implementation(rootProject.libs.lifecycle.viewmodel.compose)
-                implementation(rootProject.libs.navigation.compose)
+                implementation(rootProject.libs.navigation3.ui)
             }
         }
     }

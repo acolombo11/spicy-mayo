@@ -1,9 +1,10 @@
 package eu.acolombo.work.calendar
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.ui.NavDisplay
 import eu.acolombo.work.calendar.design.theme.WorkCalendarTheme
 import eu.acolombo.work.calendar.di.koinModules
 import eu.acolombo.work.calendar.events.presentation.EventsRoute
@@ -24,16 +25,18 @@ fun App() {
         KoinConfiguration { modules(koinModules) },
     ) {
         WorkCalendarTheme {
-            NavHost(
-                navController = rememberNavController(),
-                startDestination = EventsRouteDestination,
-            ) {
-                composable<EventsRouteDestination> {
-                    EventsRoute(
-                        viewModel = koinViewModel<EventsViewModel>(),
-                    )
-                }
-            }
+            val backStack = remember { mutableStateListOf<Any>(EventsRouteDestination) }
+            NavDisplay(
+                backStack = backStack,
+                onBack = { backStack.removeLastOrNull() },
+                entryProvider = entryProvider {
+                    entry<EventsRouteDestination> {
+                        EventsRoute(
+                            viewModel = koinViewModel<EventsViewModel>(),
+                        )
+                    }
+                },
+            )
         }
     }
 }
